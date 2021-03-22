@@ -11,7 +11,9 @@ const headingLevels = {
   h6: 'h6',
 };
 
-const Heading = ({ children, variant, ...props }) => {
+const Heading = (props) => {
+  const { children, variant, classes } = props;
+
   return React.createElement(headingLevels[variant], props, children);
 };
 

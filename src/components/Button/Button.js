@@ -2,11 +2,21 @@ import React from 'react';
 
 import './Button.scss';
 
-const Button = () => {
+const Button = ({ children, disabled, size }) => {
+  let className = '';
+
+  if (size === 'sm') {
+    className += 'btn-sm';
+  } else if (size === 'lg') {
+    className += 'btn-lg';
+  } else {
+    className += 'btn-md';
+  }
+
   return (
-    <div>
-      <button data-testid='ok-button'>New Invoice</button>
-    </div>
+    <button className={className} disabled={disabled} size={size}>
+      {children}
+    </button>
   );
 };
 
