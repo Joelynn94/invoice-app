@@ -12,7 +12,7 @@ const headingLevels = {
 };
 
 const Heading = (props) => {
-  const { children, variant, classes } = props;
+  const { children, variant } = props;
 
   return React.createElement(headingLevels[variant], props, children);
 };
