@@ -1,0 +1,16 @@
+@import '../../app.global.scss';
+
+.logo {
+  height: 72px;
+  width: 72px;
+  background-color: $dark-purple;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  display: flex;
+  justify-content: center;
+
+  &__img {
+    align-self: center;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,13 @@
+.avatar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 24px;
+
+  &__img {
+    height: 32px;
+    width: 32px;
+    align-self: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+}
