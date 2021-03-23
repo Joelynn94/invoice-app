@@ -5,6 +5,7 @@ const InvoicesBar = () => {
   return (
     <div>
       <InvoicesTotal />
+      <p>Filter</p>
     </div>
   );
 };
