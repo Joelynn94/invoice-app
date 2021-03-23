@@ -1,1 +1,13 @@
+.themeToggle {
+  flex: 2;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 8px;
+  border-right: 1px solid #494e6e;
 
+  &__btn {
+    align-self: center;
+    justify-content: center;
+    padding: 1em;
+  }
+}

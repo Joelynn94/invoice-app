@@ -7,7 +7,7 @@ import './Sidebar.scss';
 
 const Sidebar = () => {
   return (
-    <div>
+    <div className='sidebar'>
       <Logo />
       <ThemeToggle />
       <Avatar />

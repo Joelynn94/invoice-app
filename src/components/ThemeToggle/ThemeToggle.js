@@ -5,11 +5,13 @@ import './ThemeToggle.scss';
 const ThemeToggle = () => {
   return (
     <div className='themeToggle'>
-      <img
-        className='themeToggle__img'
-        src='./assets/icon-sun.svg'
-        alt='theme toggle icon'
-      />
+      <button className='themeToggle__btn'>
+        <img
+          className='themeToggle__img'
+          src='./assets/icon-sun.svg'
+          alt='theme toggle icon'
+        />
+      </button>
     </div>
   );
 };
