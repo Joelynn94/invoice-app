@@ -1,10 +1,10 @@
 import React from 'react';
-import Heading from '../Heading/Heading';
+import InvoicesBar from '../InvoicesBar/InvoicesBar';
 
 const Dashboard = () => {
   return (
     <div>
-      <Heading variant='h1' />
+      <InvoicesBar />
     </div>
   );
 };

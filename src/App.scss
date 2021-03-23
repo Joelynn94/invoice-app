@@ -135,6 +135,8 @@ button {
   width: auto;
   overflow: visible;
   background: transparent;
+  outline: none;
+  border-radius: 0;
   /* inherit font & color from ancestor */
   color: inherit;
   font: inherit;
