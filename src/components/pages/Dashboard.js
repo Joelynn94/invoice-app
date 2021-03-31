@@ -3,9 +3,9 @@ import InvoicesBar from '../InvoicesBar/InvoicesBar';
 
 const Dashboard = () => {
   return (
-    <div>
+    <main>
       <InvoicesBar />
-    </div>
+    </main>
   );
 };
 
