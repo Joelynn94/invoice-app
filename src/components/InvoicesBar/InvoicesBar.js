@@ -12,7 +12,7 @@ const InvoicesBar = () => {
       <InvoiceFilter />
       <InvoicePopover />
       <NewInvoiceButton />
-      <Button type='button' variant='secondary' size='lg' icon='sun'>
+      <Button type='button' variant='secondary' size='lg' icon='moon'>
         Testing button
       </Button>
     </div>

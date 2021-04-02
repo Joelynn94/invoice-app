@@ -21,7 +21,7 @@ const Button = ({ children, type, variant, disabled, size, onClick, icon }) => {
 
   const checkButtonSize = SIZES.includes(size) ? size : SIZES[0];
 
-  const checkButtonIcon = ICONS.includes(icon) ? icon : ICONS[0];
+  const checkButtonIcon = ICONS.includes(icon) ? icon : false;
 
   return (
     <button

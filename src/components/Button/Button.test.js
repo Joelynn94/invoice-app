@@ -15,7 +15,7 @@ it('should render a button with a size prop', () => {
 
   const button = screen.getByRole('button');
 
-  expect(button).toHaveClass('btn-sm');
+  expect(button).toHaveClass('sm');
 });
 
 it('should render a button with a disabled attribute', () => {
@@ -24,4 +24,22 @@ it('should render a button with a disabled attribute', () => {
   const button = screen.getByRole('button');
 
   expect(button).toBeDisabled();
+});
+
+it('should render a button with a variant attribute', () => {
+  render(<Button variant='secondary' />);
+
+  const button = screen.getByRole('button');
+
+  expect(button).toHaveClass('secondary');
+});
+
+it('should render a button with an icon', () => {
+  render(<Button icon='moon' />);
+
+  const button = screen.getByRole('button');
+  const img = screen.getByRole('img');
+
+  expect(button).toBeInTheDocument();
+  expect(img).toBeInTheDocument();
 });
