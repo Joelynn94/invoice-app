@@ -2,7 +2,15 @@ import React from 'react';
 
 import './Button.scss';
 
-const VARIANTS = ['primary', 'secondary', 'light', 'dark'];
+const VARIANTS = [
+  'default',
+  'primary',
+  'danger',
+  'dark',
+  'light',
+  'edit-light',
+  'edit-dark',
+];
 const SIZES = ['sm', 'md', 'lg'];
 const ICONS = [
   'arrow-down',
@@ -25,9 +33,9 @@ const Button = ({ children, type, variant, disabled, size, onClick, icon }) => {
 
   return (
     <button
-      className={`btn ${checkButtonVariant} ${checkButtonSize} ${
-        checkButtonIcon ? 'btn-icon' : ''
-      }`}
+      className={`btn ${checkButtonVariant} ${checkButtonSize} 
+        ${checkButtonIcon ? 'btn-icon' : ''}
+      `}
       disabled={disabled}
       type={type}
       onClick={onClick}

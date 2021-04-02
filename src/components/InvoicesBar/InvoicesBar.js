@@ -22,6 +22,12 @@ const InvoicesBar = () => {
       <Button type='button' variant='dark' size='lg'>
         Mark as Paid
       </Button>
+      <Button type='button' variant='edit-dark' size='lg'>
+        Mark as Paid
+      </Button>
+      <Button type='button' variant='edit-light' size='lg'>
+        Mark as Paid
+      </Button>
     </div>
   );
 };

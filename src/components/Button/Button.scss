@@ -8,6 +8,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: $default-btn-bg;
+  color: $default-btn-txt;
 }
 
 .btn-icon {
@@ -29,9 +31,18 @@
   width: 10px;
 }
 
+.default {
+  background-color: $default-btn-bg;
+  color: $default-btn-txt;
+}
+
+.default:hover {
+  background-color: $default-btn-hover;
+}
+
 .primary {
-  color: $light-accent;
-  background-color: $dark-purple;
+  color: $primary-btn-txt;
+  background-color: $primary-btn-bg;
 }
 
 .primary:hover {
@@ -40,19 +51,38 @@
 }
 
 .light {
-  background-color: $default-light-btn;
-  color: $default-light-text-btn;
+  background-color: $light-btn-bg;
+  color: $light-btn-txt;
 }
 
 .light:hover {
-  background-color: $dark-text-accent;
+  background-color: $light-btn-hover;
 }
 
 .dark {
-  background-color: $default-dark-btn;
-  color: $default-dark-text-btn;
+  background-color: $dark-btn-bg;
+  color: $dark-btn-txt;
 }
 
 .dark:hover {
-  background-color: $light-accent;
+  background-color: $dark-btn-hover;
+}
+
+.edit-light {
+  background-color: $default-btn-bg;
+  color: $default-btn-txt;
+}
+
+.edit-light:hover {
+  background-color: $default-btn-hover;
+}
+
+.edit-dark {
+  background-color: $dark-edit-btn-bg;
+  color: $dark-edit-btn-txt;
+}
+
+.edit-dark:hover {
+  opacity: 0.7;
+  background-color: $default-btn-bg;
 }

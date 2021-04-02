@@ -11,8 +11,6 @@ $light-accent-dark: #373b53;
 *********************************/
 $dark-purple: #7c5dfa;
 $light-purple: #9277ff;
-$default-light-btn: #f9fafe;
-$default-dark-btn: #252945;
 $error: #ec5757;
 $error-hover: #ff9797;
 /********************************
@@ -22,8 +20,24 @@ $dark-text: #0c0e16;
 $light-text: #ffffff;
 $dark-text-accent: #dfe3fa;
 $light-text-accent: #858bb2;
-$default-light-text-btn: #7e88c3;
-$default-dark-text-btn: #dfe3fa;
+/********************************
+  BUTTON COLORS
+*********************************/
+$default-btn-bg: #f9fafe;
+$default-btn-txt: #7e88c3;
+$default-btn-hover: #dfe3fa;
+$primary-btn-bg: #7c5dfa;
+$primary-btn-txt: #ffffff;
+$light-btn-bg: #373b53;
+$light-btn-txt: #888eb0;
+$light-btn-hover: #0c0e16;
+$dark-btn-bg: #373b53;
+$dark-btn-txt: #dfe3fa;
+$dark-btn-hover: #1e2139;
+$dark-edit-btn-bg: #252945;
+$dark-edit-btn-txt: #dfe3fa;
+$danger-btn-bg: #ec5757;
+$danger-btn-txt: #ffffff;
 /********************************
   STATE COLORS
 *********************************/
