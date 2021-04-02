@@ -21,17 +21,23 @@ const Button = ({ children, type, variant, disabled, size, onClick, icon }) => {
 
   const checkButtonSize = SIZES.includes(size) ? size : SIZES[0];
 
-  const checkButtonIcon = ICONS.includes(icon) ? icon : false;
+  const checkButtonIcon = ICONS.includes(icon) ? icon : '';
 
   return (
     <button
-      className={`btn ${checkButtonVariant} ${checkButtonSize}`}
+      className={`btn ${checkButtonVariant} ${checkButtonSize} ${
+        checkButtonIcon ? 'btn-icon' : ''
+      }`}
       disabled={disabled}
       type={type}
       onClick={onClick}
       icon={icon}
     >
-      {icon && <img src={`./assets/icon-${checkButtonIcon}.svg`} alt='icon' />}
+      {icon && (
+        <div>
+          <img src={`./assets/icon-${checkButtonIcon}.svg`} alt='icon' />
+        </div>
+      )}
       {children}
     </button>
   );

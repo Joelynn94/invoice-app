@@ -3,7 +3,6 @@ import Button from '../Button/Button';
 import InvoiceFilter from '../InvoiceFilter/InvoiceFilter';
 import InvoicePopover from '../InvoicePopover/InvoicePopover';
 import InvoicesTotal from '../InvoicesTotal/InvoicesTotal';
-import NewInvoiceButton from '../NewInvoiceButton/NewInvoiceButton';
 
 const InvoicesBar = () => {
   return (
@@ -11,9 +10,17 @@ const InvoicesBar = () => {
       <InvoicesTotal />
       <InvoiceFilter />
       <InvoicePopover />
-      <NewInvoiceButton />
-      <Button type='button' variant='secondary' size='lg' icon='moon'>
-        Testing button
+      <Button type='button' variant='primary' size='lg' icon='plus'>
+        New Invoice
+      </Button>
+      <Button type='button' variant='primary' size='lg'>
+        Mark as Paid
+      </Button>
+      <Button type='button' variant='light' size='lg'>
+        Mark as Paid
+      </Button>
+      <Button type='button' variant='dark' size='lg'>
+        Mark as Paid
       </Button>
     </div>
   );

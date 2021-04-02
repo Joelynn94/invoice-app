@@ -1,14 +1,58 @@
-.secondary {
-  color: red;
-  background-color: white;
-}
+@import '../../app.global.scss';
 
 .btn {
-  border-radius: 5px;
+  padding: 16px 24px;
+  border-radius: 35px;
   cursor: pointer;
   transition: transform 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.lg {
-  padding: 2rem;
+.btn-icon {
+  padding: 8px 16px 8px 8px;
+}
+
+.btn > div {
+  background-color: $light-accent;
+  margin-right: 16px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.btn > div > img {
+  height: 10px;
+  width: 10px;
+}
+
+.primary {
+  color: $light-accent;
+  background-color: $dark-purple;
+}
+
+.primary:hover {
+  opacity: 0.8;
+  background-color: $light-purple;
+}
+
+.light {
+  background-color: $default-light-btn;
+  color: $default-light-text-btn;
+}
+
+.light:hover {
+  background-color: $dark-text-accent;
+}
+
+.dark {
+  background-color: $default-dark-btn;
+  color: $default-dark-text-btn;
+}
+
+.dark:hover {
+  background-color: $light-accent;
 }
