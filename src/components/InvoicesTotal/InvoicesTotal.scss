@@ -3,6 +3,7 @@
 .invoices-total {
   flex: 2;
   &__sub {
+    margin-top: 4px;
     color: $light-text-accent;
   }
 }

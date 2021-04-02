@@ -23,12 +23,14 @@ h1 {
 }
 
 h2 {
+  font-weight: bold;
   font-size: 20px;
   line-height: 22px;
   letter-spacing: -0.63px;
 }
 
 h3 {
+  font-weight: bold;
   font-size: 12px;
   line-height: 15px;
   letter-spacing: -0.25px;
@@ -38,11 +40,4 @@ h3 {
     line-height: 24px;
     letter-spacing: -0.8px;
   }
-}
-
-body {
-  font-family: $font-family;
-  font-size: 12px;
-  line-height: 15px;
-  letter-spacing: -0.25px;
 }

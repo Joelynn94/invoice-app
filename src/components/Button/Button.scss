@@ -3,11 +3,10 @@
 .btn {
   padding: 16px 24px;
   border-radius: 35px;
-  cursor: pointer;
   transition: transform 0.3s ease;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;
   background-color: $default-btn-bg;
   color: $default-btn-txt;
 }
@@ -18,7 +17,7 @@
 
 .btn > div {
   background-color: $light-accent;
-  margin-right: 16px;
+  margin-right: 8px;
   border-radius: 50%;
   display: flex;
   justify-content: center;

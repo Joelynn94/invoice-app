@@ -148,3 +148,24 @@ button {
   /* Corrects inability to style clickable `input` types in iOS */
   -webkit-appearance: none;
 }
+
+/********************************
+  CUSTOM BASE STYLES
+*********************************/
+
+$font-family: 'Spartan', sans-serif;
+
+main {
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 2em;
+  padding-left: 2em;
+}
+
+body {
+  font-family: $font-family;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+  font-weight: 500;
+}
