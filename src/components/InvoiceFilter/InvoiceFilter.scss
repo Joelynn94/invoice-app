@@ -1,0 +1,12 @@
+.invoices-filter {
+  display: flex;
+
+  &__btn {
+    display: flex;
+    padding: 1rem;
+  }
+
+  &__arrow {
+    margin-left: 1rem;
+  }
+}

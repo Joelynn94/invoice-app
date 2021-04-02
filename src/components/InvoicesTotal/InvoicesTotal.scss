@@ -1,6 +1,7 @@
 @import '../../app.global.scss';
 
 .invoices-total {
+  flex: 2;
   &__sub {
     color: $light-text-accent;
   }

@@ -4,7 +4,6 @@ import Button from './Button';
 it('should render a button', () => {
   render(<Button />);
 
-  // const invoiceButton = screen.getByTestId('ok-button');
   const button = screen.getByRole('button');
 
   expect(button).toBeInTheDocument();
