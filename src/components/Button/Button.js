@@ -33,7 +33,7 @@ const Button = ({ children, type, variant, disabled, size, onClick, icon }) => {
 
   return (
     <button
-      className={`btn ${checkButtonVariant} ${checkButtonSize} 
+      className={`btn btn-${checkButtonVariant} btn-${checkButtonSize} 
         ${checkButtonIcon ? 'btn-icon' : ''}
       `}
       disabled={disabled}

@@ -9,10 +9,66 @@
   align-items: baseline;
   background-color: $default-btn-bg;
   color: $default-btn-txt;
-}
 
-.btn-icon {
-  padding: 8px 16px 8px 8px;
+  &-default {
+    background-color: $default-btn-bg;
+    color: $default-btn-txt;
+
+    &:hover {
+      background-color: $default-btn-hover;
+    }
+  }
+
+  &-primary {
+    color: $primary-btn-txt;
+    background-color: $primary-btn-bg;
+
+    &:hover {
+      opacity: 0.8;
+      background-color: $light-purple;
+    }
+  }
+
+  &-light {
+    background-color: $light-btn-bg;
+    color: $light-btn-txt;
+
+    &:hover {
+      background-color: $light-btn-hover;
+    }
+  }
+
+  &-dark {
+    background-color: $dark-btn-bg;
+    color: $dark-btn-txt;
+
+    &:hover {
+      background-color: $dark-btn-hover;
+    }
+  }
+
+  &-edit-light {
+    background-color: $default-btn-bg;
+    color: $default-btn-txt;
+
+    &:hover {
+      background-color: $default-btn-hover;
+    }
+  }
+
+  &-edit-dark {
+    background-color: $dark-edit-btn-bg;
+    color: $dark-edit-btn-txt;
+
+    &:hover {
+      opacity: 0.7;
+      background-color: $default-btn-bg;
+    }
+  }
+
+  &-icon {
+    padding: 8px 16px 8px 8px;
+  }
 }
 
 .btn > div {
@@ -28,60 +84,4 @@
 .btn > div > img {
   height: 10px;
   width: 10px;
-}
-
-.default {
-  background-color: $default-btn-bg;
-  color: $default-btn-txt;
-}
-
-.default:hover {
-  background-color: $default-btn-hover;
-}
-
-.primary {
-  color: $primary-btn-txt;
-  background-color: $primary-btn-bg;
-}
-
-.primary:hover {
-  opacity: 0.8;
-  background-color: $light-purple;
-}
-
-.light {
-  background-color: $light-btn-bg;
-  color: $light-btn-txt;
-}
-
-.light:hover {
-  background-color: $light-btn-hover;
-}
-
-.dark {
-  background-color: $dark-btn-bg;
-  color: $dark-btn-txt;
-}
-
-.dark:hover {
-  background-color: $dark-btn-hover;
-}
-
-.edit-light {
-  background-color: $default-btn-bg;
-  color: $default-btn-txt;
-}
-
-.edit-light:hover {
-  background-color: $default-btn-hover;
-}
-
-.edit-dark {
-  background-color: $dark-edit-btn-bg;
-  color: $dark-edit-btn-txt;
-}
-
-.edit-dark:hover {
-  opacity: 0.7;
-  background-color: $default-btn-bg;
 }
