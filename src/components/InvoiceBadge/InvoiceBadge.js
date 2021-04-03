@@ -9,9 +9,7 @@ const getDefaultStatus = (arr) => {
 };
 
 const InvoiceBadge = ({ status }) => {
-  const checkBadgeStatus = STATUS.includes(status)
-    ? status
-    : getDefaultStatus(STATUS);
+  const checkBadgeStatus = STATUS.includes(status) ? status : STATUS[0];
 
   return (
     <span className={`badge ${checkBadgeStatus}`}>

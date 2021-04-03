@@ -27,10 +27,6 @@
     &.draft {
       background-color: $draft-color;
     }
-
-    &.Draft {
-      background-color: $draft-color;
-    }
   }
 }
 
@@ -45,11 +41,6 @@
 }
 
 .draft {
-  background-color: $draft-color-bg;
-  color: $draft-color;
-}
-
-.Draft {
   background-color: $draft-color-bg;
   color: $draft-color;
 }
