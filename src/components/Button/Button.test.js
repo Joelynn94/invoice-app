@@ -14,7 +14,7 @@ it('should render a button with a size prop', () => {
 
   const button = screen.getByRole('button');
 
-  expect(button).toHaveClass('sm');
+  expect(button).toHaveClass('btn-sm');
 });
 
 it('should render a button with a disabled attribute', () => {
@@ -30,7 +30,7 @@ it('should render a button with a variant prop', () => {
 
   const button = screen.getByRole('button');
 
-  expect(button).toHaveClass('primary');
+  expect(button).toHaveClass('btn-primary');
 });
 
 it('should render a button with an icon', () => {
