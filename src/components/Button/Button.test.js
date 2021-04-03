@@ -25,12 +25,12 @@ it('should render a button with a disabled attribute', () => {
   expect(button).toBeDisabled();
 });
 
-it('should render a button with a variant attribute', () => {
-  render(<Button variant='secondary' />);
+it('should render a button with a variant prop', () => {
+  render(<Button variant='primary' />);
 
   const button = screen.getByRole('button');
 
-  expect(button).toHaveClass('secondary');
+  expect(button).toHaveClass('primary');
 });
 
 it('should render a button with an icon', () => {

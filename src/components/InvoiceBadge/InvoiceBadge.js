@@ -10,7 +10,7 @@ const InvoiceBadge = ({ status }) => {
   return (
     <span className={`badge ${checkBadgeStatus}`}>
       <span className={`badge__dot ${checkBadgeStatus}`}></span>
-      {status[0].toUpperCase() + status.substring(1).toLowerCase()}
+      {status && status[0].toUpperCase() + status.substring(1).toLowerCase()}
     </span>
   );
 };
