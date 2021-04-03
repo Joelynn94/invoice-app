@@ -1,0 +1,46 @@
+@import '../../app.global.scss';
+
+.badge {
+  display: inline-block;
+  padding: 13px 18px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 6px;
+
+  &__dot {
+    display: inline-block;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+
+    &.paid {
+      background-color: $paid-color;
+    }
+
+    &.pending {
+      background-color: $pending-color;
+    }
+
+    &.draft {
+      background-color: $draft-color;
+    }
+  }
+}
+
+.paid {
+  background-color: $paid-color-bg;
+  color: $paid-color;
+}
+
+.pending {
+  background-color: $pending-color-bg;
+  color: $pending-color;
+}
+
+.draft {
+  background-color: $draft-color-bg;
+  color: $draft-color;
+}
