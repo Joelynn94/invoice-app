@@ -27,6 +27,7 @@ const InvoiceSummary = () => {
       <InvoiceBadge status='paid' />
       <InvoiceBadge status='pending' />
       <InvoiceBadge status='draft' />
+      <InvoiceBadge />
     </div>
   );
 };
