@@ -9,6 +9,21 @@
   white-space: nowrap;
   border-radius: 6px;
 
+  &-paid {
+    background-color: $paid-color-bg;
+    color: $paid-color;
+  }
+
+  &-pending {
+    background-color: $pending-color-bg;
+    color: $pending-color;
+  }
+
+  &-draft {
+    background-color: $draft-color-bg;
+    color: $draft-color;
+  }
+
   &__dot {
     display: inline-block;
     height: 8px;
@@ -28,19 +43,4 @@
       background-color: $draft-color;
     }
   }
-}
-
-.paid {
-  background-color: $paid-color-bg;
-  color: $paid-color;
-}
-
-.pending {
-  background-color: $pending-color-bg;
-  color: $pending-color;
-}
-
-.draft {
-  background-color: $draft-color-bg;
-  color: $draft-color;
 }
