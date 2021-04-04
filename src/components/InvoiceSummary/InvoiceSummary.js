@@ -14,20 +14,19 @@ const InvoiceSummary = () => {
       <div className='invoice-summary__client-name'>
         <p>Jensen Huang</p>
       </div>
-      <div className='invoice-summary__due-date'>
-        <p>
-          <span className='invoice-summary__due-txt'>Due</span>19 Aug 2021
-        </p>
-      </div>
-      <div className='invoice-summary__total'>
-        <h3>
-          <span className='invoice-summary__symbol'>$</span>1,800.90
-        </h3>
+      <div className='invoice-summary__wrap'>
+        <div className='invoice-summary__due-date'>
+          <p>
+            <span className='invoice-summary__due-txt'>Due</span>19 Aug 2021
+          </p>
+        </div>
+        <div className='invoice-summary__total'>
+          <h3>
+            <span className='invoice-summary__symbol'>$</span>1,800.90
+          </h3>
+        </div>
       </div>
       <InvoiceBadge status='paid' />
-      <InvoiceBadge status='pending' />
-      <InvoiceBadge status='draft' />
-      <InvoiceBadge />
     </div>
   );
 };
