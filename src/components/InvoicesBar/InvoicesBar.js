@@ -1,17 +1,15 @@
 import React from 'react';
 import Button from '../Button/Button';
 import InvoiceFilter from '../InvoiceFilter/InvoiceFilter';
-// import InvoicePopover from '../InvoicePopover/InvoicePopover';
 import InvoicesTotal from '../InvoicesTotal/InvoicesTotal';
 
 import './InvoicesBar.scss';
 
-const InvoicesBar = () => {
+const InvoicesBar = ({ invoices }) => {
   return (
     <div className='invoices-bar'>
-      <InvoicesTotal />
-      <InvoiceFilter />
-      {/* <InvoicePopover /> */}
+      <InvoicesTotal invoices={invoices} />
+      <InvoiceFilter invoices={invoices} />
       <Button type='button' variant='primary' size='lg' icon='plus'>
         New
       </Button>

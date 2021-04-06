@@ -1,13 +1,20 @@
 import React from 'react';
-// import Button from '../Button/Button';
+// import invoices from '../../data.json';
+
 import InvoicesBar from '../InvoicesBar/InvoicesBar';
 import InvoiceSummary from '../InvoiceSummary/InvoiceSummary';
+import NoInvoices from '../NoInvoices/NoInvoices';
 
 const Dashboard = () => {
+  const invoices = 1;
   return (
     <main>
-      <InvoicesBar />
-      <InvoiceSummary />
+      <InvoicesBar invoices={invoices} />
+      {invoices.length > 0 ? (
+        <InvoiceSummary invoices={invoices} />
+      ) : (
+        <NoInvoices />
+      )}
     </main>
   );
 };
