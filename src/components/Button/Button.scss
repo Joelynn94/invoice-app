@@ -9,6 +9,7 @@
   align-items: baseline;
   background-color: $default-btn-bg;
   color: $default-btn-txt;
+  transition: all 0.3s ease;
 
   &-default {
     background-color: $default-btn-bg;

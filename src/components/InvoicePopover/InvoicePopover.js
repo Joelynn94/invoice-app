@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
 
 import './InvoicePopover.scss';
 
 const InvoicePopover = () => {
+  const { isLightTheme, light, dark, toggleTheme } = useContext(ThemeContext);
+  const theme = isLightTheme ? light : dark;
+
   return (
-    <div className='invoices-popover'>
+    <div className='invoices-popover' style={{ backgroundColor: theme.cardBg }}>
       <ul>
         <li>
           <label className='invoices-popover__label'>
