@@ -3,7 +3,12 @@
   padding: 24px;
   box-shadow: 0 10px 20px rgba(72, 84, 159, 0.25);
   border-radius: 8px;
-  min-width: 192px;
+  width: 100px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(0px, 40px);
+  transition: all 0.3s ease;
 
   &__label {
     display: flex;

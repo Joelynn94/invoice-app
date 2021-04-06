@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import InvoicePopover from '../InvoicePopover/InvoicePopover';
 
 import './InvoiceFilter.scss';
 
 const InvoiceFilter = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className='invoices-filter'>
       <button
         className='invoices-filter__btn'
         type='button'
         aria-expanded='false'
+        onClick={() => setIsOpen(!isOpen)}
       >
         Filter
         <div className='invoices-filter__arrow'>
@@ -23,6 +27,7 @@ const InvoiceFilter = () => {
           </svg>
         </div>
       </button>
+      {isOpen && <InvoicePopover />}
     </div>
   );
 };
