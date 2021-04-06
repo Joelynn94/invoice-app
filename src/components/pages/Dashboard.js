@@ -10,7 +10,9 @@ const Dashboard = () => {
     <main>
       <InvoicesBar invoices={invoices} />
       {invoices.length > 0 ? (
-        <InvoiceSummary invoices={invoices} />
+        invoices.map((invoice) => (
+          <InvoiceSummary invoice={invoice} key={invoice.id} />
+        ))
       ) : (
         <NoInvoices />
       )}
