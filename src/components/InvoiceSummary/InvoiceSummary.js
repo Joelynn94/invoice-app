@@ -26,7 +26,9 @@ const InvoiceSummary = () => {
           </h3>
         </div>
       </div>
-      <InvoiceBadge status='paid' />
+      <div className='invoice-summary__badge'>
+        <InvoiceBadge status='paid' />
+      </div>
     </div>
   );
 };

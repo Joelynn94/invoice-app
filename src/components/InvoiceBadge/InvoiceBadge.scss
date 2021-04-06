@@ -2,12 +2,13 @@
 
 .badge {
   display: inline-block;
-  padding: 13px 18px;
+  padding: 13px 15px;
   font-weight: 700;
   line-height: 1;
   text-align: center;
   white-space: nowrap;
   border-radius: 6px;
+  width: 90px;
 
   &-paid {
     background-color: $paid-color-bg;
