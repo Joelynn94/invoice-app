@@ -152,7 +152,7 @@ button {
 /********************************
   CUSTOM BASE STYLES
 *********************************/
-
+@import './app.global.scss';
 $font-family: 'Spartan', sans-serif;
 
 main {
@@ -168,4 +168,17 @@ body {
   line-height: 15px;
   letter-spacing: -0.25px;
   font-weight: 500;
+}
+
+/********************************
+  DARK THEME COLORS
+*********************************/
+.dark {
+  background-color: $dark-bg;
+  color: $light-text;
+}
+
+.light {
+  background-color: $light-bg;
+  color: $dark-text;
 }
