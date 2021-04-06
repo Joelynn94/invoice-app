@@ -1,12 +1,11 @@
 import React from 'react';
-// import invoices from '../../data.json';
+import invoices from '../../data.json';
 
 import InvoicesBar from '../InvoicesBar/InvoicesBar';
 import InvoiceSummary from '../InvoiceSummary/InvoiceSummary';
 import NoInvoices from '../NoInvoices/NoInvoices';
 
 const Dashboard = () => {
-  const invoices = 1;
   return (
     <main>
       <InvoicesBar invoices={invoices} />
