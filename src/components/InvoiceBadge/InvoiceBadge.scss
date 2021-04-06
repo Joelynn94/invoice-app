@@ -23,6 +23,10 @@
   &-draft {
     background-color: $draft-color-bg;
     color: $draft-color;
+
+    &.dark {
+      color: #dfe3fa;
+    }
   }
 
   &__dot {
@@ -42,6 +46,10 @@
 
     &.draft {
       background-color: $draft-color;
+
+      &.dark {
+        background-color: #dfe3fa;
+      }
     }
   }
 }

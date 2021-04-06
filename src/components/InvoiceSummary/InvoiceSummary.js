@@ -8,6 +8,8 @@ const InvoiceSummary = ({ invoice }) => {
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
 
+  console.log(theme);
+
   return (
     <div className='invoice-summary' style={{ backgroundColor: theme.cardBg }}>
       <div className='invoice-summary__id'>
@@ -42,7 +44,10 @@ const InvoiceSummary = ({ invoice }) => {
         </div>
       </div>
       <div className='invoice-summary__badge'>
-        <InvoiceBadge status={invoice.status} />
+        <InvoiceBadge
+          status={invoice.status}
+          theme={isLightTheme ? 'light' : 'dark'}
+        />
       </div>
     </div>
   );
