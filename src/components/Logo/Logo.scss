@@ -8,8 +8,13 @@
   border-bottom-right-radius: 20px;
   display: flex;
   justify-content: center;
-
   &__img {
+    align-self: center;
+    justify-content: center;
+  }
+
+  a {
+    padding: 1rem;
     align-self: center;
     justify-content: center;
   }

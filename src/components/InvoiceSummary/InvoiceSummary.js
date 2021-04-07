@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { ThemeContext } from '../../context/ThemeContext';
 import InvoiceBadge from '../InvoiceBadge/InvoiceBadge';
 import Button from '../Button/Button';
@@ -8,8 +9,6 @@ import './InvoiceSummary.scss';
 const InvoiceSummary = ({ invoice }) => {
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
-
-  console.log(theme);
 
   return (
     <div className='invoice-summary' style={{ backgroundColor: theme.cardBg }}>
@@ -69,9 +68,9 @@ const InvoiceSummary = ({ invoice }) => {
       </div>
       <div className='invoice-summary__arrow'>
         <Button>
-          <a href='/invoice'>
+          <Link to='view-inovice'>
             <img src='./assets/icon-arrow-right.svg' alt='' />
-          </a>
+          </Link>
         </Button>
       </div>
     </div>
