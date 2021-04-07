@@ -89,6 +89,11 @@
     @media (min-width: 768px) {
       display: flex;
       order: 6;
+
+      button {
+        padding: 1em;
+        background-color: transparent;
+      }
     }
   }
 }
