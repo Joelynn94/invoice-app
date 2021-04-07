@@ -1,0 +1,14 @@
+.go-back {
+  margin-top: 16px;
+  text-decoration: none;
+  padding: 16px 24px;
+  border-radius: 35px;
+  display: inline-block;
+  justify-content: center;
+  align-items: baseline;
+  transition: all 0.3s ease;
+
+  &__arrow {
+    margin-right: 24px;
+  }
+}

@@ -1,11 +1,11 @@
 import React from 'react';
+import GoBack from '../GoBack/GoBack';
 
 const ViewInvoice = () => {
   return (
-    <div>
-      Hello
-      <p>yes</p>
-    </div>
+    <main>
+      <GoBack />
+    </main>
   );
 };
 

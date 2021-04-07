@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import ThemeContextProvider from './context/ThemeContext';
 import Layout from './components/Layout';
+import Sidebar from './components/Sidebar/Sidebar';
+import Dashboard from './components/pages/Dashboard';
+import ViewInvoice from './components/pages/ViewInvoice';
 
 import './app.global.scss';
 import './App.scss';
-import Dashboard from './components/pages/Dashboard';
-import Sidebar from './components/Sidebar/Sidebar';
-import ViewInvoice from './components/pages/ViewInvoice';
 
 function App() {
   return (
@@ -18,8 +18,7 @@ function App() {
           <Sidebar />
           <Switch>
             <Route exact path='/' component={Dashboard} />
-            <Route path='/dashboard' component={Dashboard} />
-            <Route path='/view-invoice' component={ViewInvoice} />
+            <Route exact path='/invoice' component={ViewInvoice} />
           </Switch>
         </Router>
       </Layout>

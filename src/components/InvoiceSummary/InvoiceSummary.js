@@ -68,7 +68,7 @@ const InvoiceSummary = ({ invoice }) => {
       </div>
       <div className='invoice-summary__arrow'>
         <Button>
-          <Link to='view-inovice'>
+          <Link to='/invoice'>
             <img src='./assets/icon-arrow-right.svg' alt='' />
           </Link>
         </Button>

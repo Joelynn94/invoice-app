@@ -13,16 +13,41 @@
   &--paid {
     background-color: $paid-color-bg;
     color: $paid-color;
+
+    &.light {
+      background-color: $paid-color-bg;
+      color: $paid-color;
+    }
+
+    &.dark {
+      background-color: $paid-color-bg;
+      color: $paid-color;
+    }
   }
 
   &--pending {
     background-color: $pending-color-bg;
     color: $pending-color;
+
+    &.light {
+      background-color: $pending-color-bg;
+      color: $pending-color;
+    }
+
+    &.dark {
+      background-color: $pending-color-bg;
+      color: $pending-color;
+    }
   }
 
   &--draft {
     background-color: $draft-color-bg;
     color: $draft-color;
+
+    &.light {
+      background-color: $draft-color-bg;
+      color: $draft-color;
+    }
 
     &.dark {
       color: #dfe3fa;
