@@ -15,7 +15,7 @@ const InvoiceBadge = ({ status, theme }) => {
   const checkThemeStatus = THEME.includes(theme) ? theme : THEME[0];
 
   return (
-    <span className={`badge badge-${checkBadgeStatus} ${checkThemeStatus}`}>
+    <span className={`badge badge--${checkBadgeStatus} ${checkThemeStatus}`}>
       <span
         className={`badge__dot ${checkBadgeStatus} ${checkThemeStatus}`}
       ></span>

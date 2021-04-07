@@ -10,17 +10,17 @@
   border-radius: 6px;
   width: 90px;
 
-  &-paid {
+  &--paid {
     background-color: $paid-color-bg;
     color: $paid-color;
   }
 
-  &-pending {
+  &--pending {
     background-color: $pending-color-bg;
     color: $pending-color;
   }
 
-  &-draft {
+  &--draft {
     background-color: $draft-color-bg;
     color: $draft-color;
 
