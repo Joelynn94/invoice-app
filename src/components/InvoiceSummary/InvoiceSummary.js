@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import InvoiceBadge from '../InvoiceBadge/InvoiceBadge';
+import Button from '../Button/Button';
 
 import './InvoiceSummary.scss';
 
@@ -43,11 +44,35 @@ const InvoiceSummary = ({ invoice }) => {
           </h3>
         </div>
       </div>
+      <div
+        className='invoice-summary__due-date'
+        style={{ color: theme.textAccent }}
+      >
+        <p>
+          <span className='invoice-summary__due-txt'>Due</span>
+          {invoice.paymentDue}
+        </p>
+      </div>
+      <div className='invoice-summary__total'>
+        <h3>
+          <span className='invoice-summary__symbol'>$</span>
+          {invoice.total.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+          })}
+        </h3>
+      </div>
       <div className='invoice-summary__badge'>
         <InvoiceBadge
           status={invoice.status}
           theme={isLightTheme ? 'light' : 'dark'}
         />
+      </div>
+      <div className='invoice-summary__arrow'>
+        <Button>
+          <a href='/invoice'>
+            <img src='./assets/icon-arrow-right.svg' alt='' />
+          </a>
+        </Button>
       </div>
     </div>
   );

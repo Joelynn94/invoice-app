@@ -4,7 +4,7 @@ import { ThemeContext } from '../../context/ThemeContext';
 import './InvoicePopover.scss';
 
 const InvoicePopover = () => {
-  const { isLightTheme, light, dark, toggleTheme } = useContext(ThemeContext);
+  const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
 
   return (
