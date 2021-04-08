@@ -6,32 +6,40 @@ import './InvoiceDetails.scss';
 
 const InvoiceDetails = ({ invoice }) => {
   return (
-    <div className='inovice-details'>
+    <div className='invoice-details'>
       <Heading variant='h3'>
-        <span className='inovice-details__hash'>#</span>
+        <span className='invoice-details--hash'>#</span>
         {invoice.id}
       </Heading>
-      <Heading variant='h3'>{invoice.description}</Heading>
+      <Heading className='invoice-details--alt-txt' variant='h3'>
+        {invoice.description}
+      </Heading>
       <div className='invoice-details__address'>
-        <address>
+        <address className='invoice-details--alt-txt'>
           <p>{invoice.senderAddress.street}</p>
           <p>{invoice.senderAddress.city}</p>
           <p>{invoice.senderAddress.postCode}</p>
           <p>{invoice.senderAddress.country}</p>
         </address>
       </div>
-      <div className='invoice-details__invoice-date'>
-        <Heading variant='h3'>Invoice Date</Heading>
+      <div className='invoice-details__date'>
+        <Heading variant='h3' className='invoice-details--alt-txt'>
+          Invoice Date
+        </Heading>
         <Heading variant='h2'>{invoice.createdAt}</Heading>
       </div>
       <div className='invoice-details__payment-date'>
-        <Heading variant='h3'>Payment Due</Heading>
+        <Heading variant='h3' className='invoice-details--alt-txt'>
+          Payment Due
+        </Heading>
         <Heading variant='h2'>{invoice.paymentDue}</Heading>
       </div>
       <div className='invoice-details__bill-to'>
-        <Heading variant='h3'>Bill To</Heading>
+        <Heading variant='h3' className='invoice-details--alt-txt'>
+          Bill To
+        </Heading>
         <Heading variant='h2'>{invoice.clientName}</Heading>
-        <address>
+        <address className='invoice-details--alt-txt'>
           <p>{invoice.clientAddress.street}</p>
           <p>{invoice.clientAddress.city}</p>
           <p>{invoice.clientAddress.postCode}</p>
@@ -39,7 +47,9 @@ const InvoiceDetails = ({ invoice }) => {
         </address>
       </div>
       <div className='invoice-details__sent-to'>
-        <Heading variant='h3'>Sent to</Heading>
+        <Heading variant='h3' className='invoice-details--alt-txt'>
+          Sent to
+        </Heading>
         <p>{invoice.clientEmail}</p>
       </div>
       <div className='invoice-details__items'>
