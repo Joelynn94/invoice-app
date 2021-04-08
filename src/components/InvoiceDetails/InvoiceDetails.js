@@ -85,7 +85,10 @@ const InvoiceDetails = ({ invoice }) => {
           Grand Total
         </Heading>
         <Heading variant='h2' className='invoice-details--invoice-total'>
-          ${invoice.total}
+          $
+          {invoice.total.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+          })}
         </Heading>
       </div>
     </div>
