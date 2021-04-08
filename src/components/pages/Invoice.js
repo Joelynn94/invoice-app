@@ -4,7 +4,7 @@ import GoBack from '../GoBack/GoBack';
 import StatusCard from '../StatusCard/StatusCard';
 import InvoiceDetails from '../InvoiceDetails/InvoiceDetails';
 
-const ViewInvoice = ({ match }) => {
+const Invoice = ({ match }) => {
   const invoice = invoices.find((invoice) => invoice.id === match.params.id);
   return (
     <main>
@@ -15,4 +15,4 @@ const ViewInvoice = ({ match }) => {
   );
 };
 
-export default ViewInvoice;
+export default Invoice;

@@ -7,7 +7,7 @@ import Layout from './components/Layout';
 import ThemeContextProvider from './context/ThemeContext';
 import Sidebar from './components/Sidebar/Sidebar';
 import Dashboard from './components/pages/Dashboard';
-import ViewInvoice from './components/pages/ViewInvoice';
+import Invoice from './components/pages/Invoice';
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
           <Sidebar />
           <Switch>
             <Route exact path='/' component={Dashboard} />
-            <Route exact path='/invoice/:id' component={ViewInvoice} />
+            <Route path='/invoice/:id' component={Invoice} />
           </Switch>
         </Router>
       </Layout>

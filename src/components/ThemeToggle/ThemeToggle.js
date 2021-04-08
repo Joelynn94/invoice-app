@@ -13,13 +13,13 @@ const ThemeToggle = () => {
         {theme === light ? (
           <img
             className='themeToggle__img'
-            src='./assets/icon-moon.svg'
+            src='../assets/icon-moon.svg'
             alt='theme dark icon'
           />
         ) : (
           <img
             className='themeToggle__img'
-            src='./assets/icon-sun.svg'
+            src='../assets/icon-sun.svg'
             alt='theme light icon'
           />
         )}

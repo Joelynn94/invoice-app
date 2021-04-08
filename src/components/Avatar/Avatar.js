@@ -7,7 +7,7 @@ const Avatar = () => {
     <div className='avatar'>
       <img
         className='avatar__img'
-        src='./assets/image-avatar.jpg'
+        src='../assets/image-avatar.jpg'
         alt='user avatar'
       />
     </div>

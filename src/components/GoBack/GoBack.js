@@ -12,7 +12,7 @@ const GoBack = () => {
     <Link to='/' className='go-back' style={{ color: theme.text }}>
       <img
         className='go-back__arrow'
-        src='./assets/icon-arrow-left.svg'
+        src='../assets/icon-arrow-left.svg'
         alt=''
       />
       Go back
