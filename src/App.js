@@ -17,7 +17,7 @@ function App() {
           <Sidebar />
           <Switch>
             <Route exact path='/' component={Dashboard} />
-            <Route exact path='/invoice' component={ViewInvoice} />
+            <Route exact path='/invoice/:id' component={ViewInvoice} />
           </Switch>
         </Router>
       </Layout>

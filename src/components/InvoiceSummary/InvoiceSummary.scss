@@ -15,6 +15,10 @@
     grid-template-columns: 1fr 1.5fr 1.5fr 1fr 1fr 40px;
   }
 
+  &__link {
+    text-decoration: none;
+  }
+
   &__wrap {
     @media (min-width: 768px) {
       display: none;
@@ -87,7 +91,7 @@
     display: none;
 
     @media (min-width: 768px) {
-      display: flex;
+      display: inline-block;
       order: 6;
 
       button {

@@ -1,19 +1,16 @@
 import React from 'react';
 import invoices from '../../data.json';
 import GoBack from '../GoBack/GoBack';
-import InvoiceDetails from '../InvoiceDetails/InvoiceDetails';
 import StatusCard from '../StatusCard/StatusCard';
+import InvoiceDetails from '../InvoiceDetails/InvoiceDetails';
 
-const ViewInvoice = () => {
+const ViewInvoice = ({ match }) => {
+  const invoice = invoices.find((invoice) => invoice.id === match.params.id);
   return (
     <main>
       <GoBack />
-      {invoices.map((invoice) => (
-        <div key={invoice.id}>
-          <StatusCard invoice={invoice} />
-          <InvoiceDetails invoice={invoice} />
-        </div>
-      ))}
+      <StatusCard invoice={invoice} />
+      <InvoiceDetails invoice={invoice} />
     </main>
   );
 };
