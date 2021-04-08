@@ -9,7 +9,7 @@ const InvoiceItem = ({ invoice }) => {
       {invoice.items.map((item, index) => (
         <div className='invoice-details__item' key={index}>
           <div className='invoice-details__breakdown'>
-            <Heading variant='h3'>{item.name}</Heading>
+            <Heading variant='h4'>{item.name}</Heading>
             <p className='invoice-details--alt-txt'>{`${
               item.quantity
             } x ${item.price.toLocaleString(undefined, {
@@ -17,7 +17,7 @@ const InvoiceItem = ({ invoice }) => {
             })}`}</p>
           </div>
           <div className='invoice-details__total'>
-            <Heading variant='h3'>
+            <Heading variant='h4'>
               $
               {item.total.toLocaleString(undefined, {
                 minimumFractionDigits: 2,

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ThemeContext } from '../../context/ThemeContext';
 import InvoiceBadge from '../InvoiceBadge/InvoiceBadge';
 import Button from '../Button/Button';
+import Heading from '../Heading/Heading';
 
 import './InvoiceSummary.scss';
 
@@ -21,10 +22,10 @@ const InvoiceSummary = ({ invoice }) => {
         style={{ backgroundColor: theme.cardBg }}
       >
         <div className='invoice-summary__id'>
-          <h3>
+          <Heading variant='h4'>
             <span className='invoice-summary__hash'>#</span>
             {invoice.id}
-          </h3>
+          </Heading>
         </div>
         <div
           className='invoice-summary__client-name'
@@ -43,12 +44,12 @@ const InvoiceSummary = ({ invoice }) => {
             </p>
           </div>
           <div className='invoice-summary__total'>
-            <h3>
+            <Heading variant='h3'>
               <span className='invoice-summary__symbol'>$</span>
               {invoice.total.toLocaleString(undefined, {
                 minimumFractionDigits: 2,
               })}
-            </h3>
+            </Heading>
           </div>
         </div>
         <div
@@ -61,12 +62,12 @@ const InvoiceSummary = ({ invoice }) => {
           </p>
         </div>
         <div className='invoice-summary__total'>
-          <h3>
+          <Heading variant='h3'>
             <span className='invoice-summary__symbol'>$</span>
             {invoice.total.toLocaleString(undefined, {
               minimumFractionDigits: 2,
             })}
-          </h3>
+          </Heading>
         </div>
         <div className='invoice-summary__badge'>
           <InvoiceBadge
@@ -76,7 +77,7 @@ const InvoiceSummary = ({ invoice }) => {
         </div>
         <div className='invoice-summary__arrow'>
           <Button>
-            <img src='./assets/icon-arrow-right.svg' alt='' />
+            <img src='./assets/icon-arrow-right.svg' alt='right arrow icon' />
           </Button>
         </div>
       </div>
