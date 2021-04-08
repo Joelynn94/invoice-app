@@ -4,12 +4,15 @@ import { ThemeContext } from '../context/ThemeContext';
 const Layout = (props) => {
   const { isLightTheme } = useContext(ThemeContext);
 
-  isLightTheme
-    ? document.body.classList.add('light')
-    : document.body.classList.add('dark');
-  isLightTheme
-    ? document.body.classList.remove('dark')
-    : document.body.classList.remove('light');
+  if (isLightTheme) {
+    document.body.classList.remove('dark');
+    document.body.classList.add('light');
+    localStorage.setItem('theme', 'light');
+  } else {
+    document.body.classList.remove('light');
+    document.body.classList.add('dark');
+    localStorage.setItem('theme', 'dark');
+  }
 
   return <div>{props.children}</div>;
 };
