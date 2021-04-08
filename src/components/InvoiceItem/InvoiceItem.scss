@@ -1,2 +1,18 @@
-.invoice-details {
+.invoice-details__item {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  &:nth-child(1) {
+    margin: 0;
+  }
+
+  p {
+    margin-top: 8px;
+  }
+}
+
+.invoice-details__item .invoice-details__total {
+  align-self: center;
+  justify-self: end;
 }

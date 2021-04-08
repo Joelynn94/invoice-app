@@ -10,16 +10,20 @@ const ThemeContextProvider = (props) => {
     isLightTheme: true,
     light: {
       body: '#f8f8fb',
+      altBody: '#373B53',
       text: '#0c0e16',
       textAccent: '#858BB2',
       cardBg: '#FFFFFF',
+      altCardBg: '#F9FAFE',
       navBarBg: '#373B53',
     },
     dark: {
       body: '#141625',
+      altBody: '#0C0E16',
       text: '#ffffff',
       textAccent: '#DFE3FA',
       cardBg: '#1E2139',
+      altCardBg: '#252945',
       navBarBg: '#1E2139',
     },
   });

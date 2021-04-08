@@ -5,21 +5,25 @@ import './InvoiceItem.scss';
 
 const InvoiceItem = ({ invoice }) => {
   return (
-    <div className='invoice-details__item'>
+    <div>
       {invoice.items.map((item, index) => (
-        <div key={index}>
-          <Heading variant='h3'>{item.name}</Heading>
-          <p className='invoice-details--alt-txt'>{`${
-            item.quantity
-          } x ${item.price.toLocaleString(undefined, {
-            minimumFractionDigits: 2,
-          })}`}</p>
-          <Heading variant='h3'>
-            $
-            {item.total.toLocaleString(undefined, {
+        <div className='invoice-details__item' key={index}>
+          <div className='invoice-details__breakdown'>
+            <Heading variant='h3'>{item.name}</Heading>
+            <p className='invoice-details--alt-txt'>{`${
+              item.quantity
+            } x ${item.price.toLocaleString(undefined, {
               minimumFractionDigits: 2,
-            })}
-          </Heading>
+            })}`}</p>
+          </div>
+          <div className='invoice-details__total'>
+            <Heading variant='h3'>
+              $
+              {item.total.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+              })}
+            </Heading>
+          </div>
         </div>
       ))}
     </div>
