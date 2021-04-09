@@ -1,9 +1,9 @@
 import React from 'react';
-import invoices from '../../data.json';
+import invoices from '../data.json';
 
-import InvoicesBar from '../InvoicesBar/InvoicesBar';
-import InvoiceSummary from '../InvoiceSummary/InvoiceSummary';
-import NoInvoices from '../NoInvoices/NoInvoices';
+import InvoicesBar from '../components/InvoicesBar/InvoicesBar';
+import InvoiceSummary from '../components/InvoiceSummary/InvoiceSummary';
+import NoInvoices from '../components/NoInvoices/NoInvoices';
 
 const Dashboard = () => {
   return (

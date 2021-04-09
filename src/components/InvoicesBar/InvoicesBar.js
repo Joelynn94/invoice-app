@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import Button from '../Button/Button';
 import InvoiceFilter from '../InvoiceFilter/InvoiceFilter';
 import InvoicesTotal from '../InvoicesTotal/InvoicesTotal';
@@ -10,9 +12,11 @@ const InvoicesBar = ({ invoices }) => {
     <div className='invoices-bar'>
       <InvoicesTotal invoices={invoices} />
       <InvoiceFilter invoices={invoices} />
-      <Button type='button' variant='primary' size='lg' icon='plus'>
-        New
-      </Button>
+      <Link to='/create'>
+        <Button type='button' variant='primary' size='lg' icon='plus'>
+          New
+        </Button>
+      </Link>
     </div>
   );
 };

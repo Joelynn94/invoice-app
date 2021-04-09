@@ -1,8 +1,8 @@
 import React from 'react';
-import invoices from '../../data.json';
-import GoBack from '../GoBack/GoBack';
-import StatusCard from '../StatusCard/StatusCard';
-import InvoiceDetails from '../InvoiceDetails/InvoiceDetails';
+import invoices from '../data.json';
+import GoBack from '../components/GoBack/GoBack';
+import StatusCard from '../components/StatusCard/StatusCard';
+import InvoiceDetails from '../components/InvoiceDetails/InvoiceDetails';
 
 const Invoice = ({ match }) => {
   const invoice = invoices.find((invoice) => invoice.id === match.params.id);
