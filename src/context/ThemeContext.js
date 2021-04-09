@@ -16,6 +16,7 @@ const ThemeContextProvider = (props) => {
       cardBg: '#FFFFFF',
       altCardBg: '#F9FAFE',
       navBarBg: '#373B53',
+      borderColor: '#DFE3FA',
     },
     dark: {
       body: '#141625',
@@ -25,6 +26,7 @@ const ThemeContextProvider = (props) => {
       cardBg: '#1E2139',
       altCardBg: '#252945',
       navBarBg: '#1E2139',
+      borderColor: '#252945',
     },
   });
 

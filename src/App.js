@@ -8,7 +8,7 @@ import Layout from './components/Layout';
 import Sidebar from './components/Sidebar/Sidebar';
 import Dashboard from './pages/Dashboard';
 import Invoice from './pages/Invoice';
-import InvoiceForm from './pages/InvoiceForm';
+import InvoiceForm from './pages/InvoiceForm/InvoiceForm';
 
 function App() {
   return (
