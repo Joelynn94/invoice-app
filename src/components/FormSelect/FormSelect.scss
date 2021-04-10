@@ -1,58 +1,37 @@
 $active-border: #9277ff;
 
-select {
-  // A reset of styles, including removing the default dropdown arrow
-  appearance: none;
-  // Additional resets for further consistency
-  background-color: transparent;
-  border: none;
-  padding: 0 1em 0 0;
-  margin: 0;
-  width: 100%;
-  font-family: inherit;
-  font-size: inherit;
-  cursor: inherit;
-  line-height: inherit;
-  outline: none;
-}
-
 .form__select {
-  display: grid;
-  grid-template-areas: 'select';
-  align-items: center;
+  display: flex;
   width: 100%;
   border-radius: 4px;
   padding: 15px 20px;
   margin: 10px 0;
   font-weight: bold;
   cursor: pointer;
-  line-height: 1.1;
+  // A reset of styles, including removing the default dropdown arrow
+  // appearance: none;
+  // -webkit-appearance: none;
+  // -moz-appearance: none;
 
   &:active {
     border: 1px solid $active-border !important;
   }
 
-  &:focus {
+  &:focus,
+  &:hover {
     outline: none;
     border: 1px solid $active-border !important;
   }
-}
 
-.form__select:after {
-  grid-area: select;
-  justify-self: end;
-}
-
-.form__select::after {
-  content: '\25bc';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 0.8em;
-  height: 0.5em;
-  background-color: #9277ff;
-  color: #9277ff;
-  clip-path: polygon(100% 0%, 0 0%, 50% 100%);
-  padding: 0 10px;
-  line-height: 40px; /* Vertical center text */
+  &::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border: 2px solid transparent;
+    border-bottom: black;
+  }
 }
