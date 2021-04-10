@@ -155,6 +155,10 @@ button {
 @import './app.global.scss';
 $font-family: 'Spartan', sans-serif;
 
+* {
+  box-sizing: border-box;
+}
+
 main {
   margin-right: auto;
   margin-left: auto;

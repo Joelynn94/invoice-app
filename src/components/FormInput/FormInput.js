@@ -5,7 +5,6 @@ import './FormInput.scss';
 const FormInput = ({ handleChange, label, ...otherProps }) => {
   return (
     <div className='form__group'>
-      <input className='form__input' onClick={handleChange} {...otherProps} />
       {label ? (
         <label
           className={`form__input-label ${
@@ -15,6 +14,7 @@ const FormInput = ({ handleChange, label, ...otherProps }) => {
           {label}
         </label>
       ) : null}
+      <input className='form__input' onChange={handleChange} {...otherProps} />
     </div>
   );
 };
