@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import FormInput from '../../components/FormInput/FormInput';
 import Heading from '../../components/Heading/Heading';
+import FormSelect from '../FormSelect/FormSelect';
+import FormOption from '../FormOption/FormOption';
 
 const BillTo = () => {
   const { isLightTheme, light, dark } = useContext(ThemeContext);
@@ -37,6 +39,8 @@ const BillTo = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+
+    console.log({ [name]: value });
 
     setForm({
       ...form,
@@ -131,9 +135,8 @@ const BillTo = () => {
           color: theme.text,
         }}
       />
-      <FormInput
+      <FormSelect
         name='paymentTerms'
-        type='text'
         onChange={handleChange}
         value={form.paymentTerms}
         label='Payment Terms'
@@ -142,7 +145,18 @@ const BillTo = () => {
           border: `1px solid ${theme.borderColor}`,
           color: theme.text,
         }}
-      />
+        option='Net 1 Day'
+      >
+        <FormOption value='1' item='Net 1 day' />
+        <FormOption value='7' item='Net 7 days' />
+        <FormOption value='14' item='Net 14 days' />
+        <FormOption value='30' item='Net 30 days' />
+      </FormSelect>
+      {/* <option value={1}>Net 1 Day</option>
+      <option value={7}>Net 7 Days</option>
+      <option value={14}>Net 14 Days</option>
+      <option value={30}>Net 30 Days</option> */}
+
       <FormInput
         name='projectDescription'
         type='text'

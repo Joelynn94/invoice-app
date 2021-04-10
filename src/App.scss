@@ -155,7 +155,9 @@ button {
 @import './app.global.scss';
 $font-family: 'Spartan', sans-serif;
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
