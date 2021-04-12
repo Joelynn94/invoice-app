@@ -152,10 +152,6 @@ const BillTo = () => {
         <FormOption value='14' item='Net 14 days' />
         <FormOption value='30' item='Net 30 days' />
       </FormSelect>
-      {/* <option value={1}>Net 1 Day</option>
-      <option value={7}>Net 7 Days</option>
-      <option value={14}>Net 14 Days</option>
-      <option value={30}>Net 30 Days</option> */}
 
       <FormInput
         name='projectDescription'
