@@ -36,17 +36,13 @@ const BillItem = () => {
 
     console.log({
       [name]:
-        type === 'number'
-          ? Number.parseFloat(value, 10).toFixed(2)
-          : value.trim(),
+        type === 'number' ? Number.parseFloat(value).toFixed(2) : value.trim(),
     });
 
     setItem({
       ...item,
       [name]:
-        type === 'number'
-          ? Number.parseFloat(value, 10).toFixed(2)
-          : value.trim(),
+        type === 'number' ? Number.parseFloat(value).toFixed(2) : value.trim(),
     });
   };
 
