@@ -6,12 +6,12 @@ const FormSelect = ({
   children,
   label,
   value,
+  className,
   handleChange,
   ...otherProps
 }) => {
-  console.log(value);
   return (
-    <div className='form__group'>
+    <div className={`form__group ${className}`}>
       {label ? <label className='form__input-label'>{label}</label> : null}
       <select
         className='form__select'

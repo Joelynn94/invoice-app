@@ -3,6 +3,8 @@ import { ThemeContext } from '../../context/ThemeContext';
 import FormInput from '../../components/FormInput/FormInput';
 import Heading from '../../components/Heading/Heading';
 
+import './BillFrom.scss';
+
 const BillFrom = () => {
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
@@ -37,57 +39,61 @@ const BillFrom = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <>
       <Heading variant='h4'>Bill From</Heading>
-      <FormInput
-        name='streetAddress'
-        type='text'
-        onChange={handleChange}
-        value={form.streetAddress}
-        label='Street Address'
-        style={{
-          backgroundColor: theme.cardBg,
-          border: `1px solid ${theme.borderColor}`,
-          color: theme.text,
-        }}
-      />
-      <FormInput
-        name='city'
-        type='text'
-        onChange={handleChange}
-        value={form.city}
-        label='City'
-        style={{
-          backgroundColor: theme.cardBg,
-          border: `1px solid ${theme.borderColor}`,
-          color: theme.text,
-        }}
-      />
-      <FormInput
-        name='postCode'
-        type='text'
-        onChange={handleChange}
-        value={form.postCode}
-        label='Post Code'
-        style={{
-          backgroundColor: theme.cardBg,
-          border: `1px solid ${theme.borderColor}`,
-          color: theme.text,
-        }}
-      />
-      <FormInput
-        name='country'
-        type='text'
-        onChange={handleChange}
-        value={form.country}
-        label='Country'
-        style={{
-          backgroundColor: theme.cardBg,
-          border: `1px solid ${theme.borderColor}`,
-          color: theme.text,
-        }}
-      />
-    </form>
+      <form className='bill-from' onSubmit={handleSubmit}>
+        <FormInput
+          className='grid-span2'
+          name='streetAddress'
+          type='text'
+          onChange={handleChange}
+          value={form.streetAddress}
+          label='Street Address'
+          style={{
+            backgroundColor: theme.cardBg,
+            border: `1px solid ${theme.borderColor}`,
+            color: theme.text,
+          }}
+        />
+        <FormInput
+          name='city'
+          type='text'
+          onChange={handleChange}
+          value={form.city}
+          label='City'
+          style={{
+            backgroundColor: theme.cardBg,
+            border: `1px solid ${theme.borderColor}`,
+            color: theme.text,
+          }}
+        />
+        <FormInput
+          name='postCode'
+          type='text'
+          onChange={handleChange}
+          value={form.postCode}
+          label='Post Code'
+          style={{
+            backgroundColor: theme.cardBg,
+            border: `1px solid ${theme.borderColor}`,
+            color: theme.text,
+          }}
+        />
+        <FormInput
+          className='grid-span2'
+          name='country'
+          type='text'
+          onChange={handleChange}
+          value={form.country}
+          label='Country'
+          style={{
+            backgroundColor: theme.cardBg,
+            border: `1px solid ${theme.borderColor}`,
+            color: theme.text,
+          }}
+        />
+      </form>
+    </>
   );
 };
 

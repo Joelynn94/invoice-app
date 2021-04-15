@@ -1,40 +1,33 @@
-$sub-color: #888eb0;
-$main-color: #0c0e16;
-$border-color: #dfe3fa;
-$active-border: #9277ff;
-
-// @mixin shrinkLabel {
-//   display: inline-block;
-//   top: -14px;
-//   font-size: 12px;
-//   color: $sub-color;
-//   left: 0;
-//   margin-bottom: 10px;
-// }
+@import '../../app.global.scss';
 
 .form__group {
   position: relative;
-  margin: 24px 0;
+  margin-bottom: 24px;
 
   .form__input {
     background: none;
-    color: $main-color;
+    color: $dark-text;
     padding: 15px 20px;
     display: block;
     width: 100%;
     border: none;
     border-radius: 4px;
-    border: 1px solid $border-color;
+    border: 1px solid $dark-text-accent;
     margin: 10px 0;
     font-weight: bold;
 
     &:active {
-      border: 1px solid $active-border !important;
+      border: 1px solid $light-purple !important;
     }
 
     &:focus {
       outline: none;
-      border: 1px solid $active-border !important;
+      border: 1px solid $light-purple !important;
+    }
+
+    &:disabled {
+      background: none !important;
+      outline: none !important;
     }
   }
 
@@ -42,8 +35,13 @@ $active-border: #9277ff;
     letter-spacing: 0.3em;
   }
 
+  input[type='date'] {
+    padding-inline-start: 20px;
+    padding: 13px 20px;
+  }
+
   .form__input-label {
-    color: $sub-color;
+    color: $light-grey;
     font-weight: normal;
     pointer-events: none;
     transition: 300ms ease all;
