@@ -13,7 +13,7 @@ const InvoiceForm = ({ invoice }) => {
   return (
     <main className='invoice-form'>
       <GoBack></GoBack>
-      <Heading variant='h2'>New Invoice</Heading>
+      <Heading variant='h1'>New Invoice</Heading>
       <BillFrom />
       <BillTo />
       <BillItem />
