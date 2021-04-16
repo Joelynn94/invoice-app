@@ -7,6 +7,11 @@ const AppReducer = (state, action) => {
         ...state,
         invoices: [...state.invoices, action.payload],
       };
+    case 'TOGGLE_DARK_MODE':
+      localStorage.setItem('isLightTheme', !state.isLightTheme);
+      return {
+        isLightTheme: !state.isLightTheme,
+      };
     default:
       return state;
   }
