@@ -21,6 +21,15 @@
     }
   }
 
+  &-danger {
+    background-color: $danger-btn-bg;
+    color: $danger-btn-txt;
+
+    &:hover {
+      background-color: $danger-btn-hover;
+    }
+  }
+
   &-primary {
     color: $primary-btn-txt;
     background-color: $primary-btn-bg;

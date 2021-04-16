@@ -7,9 +7,9 @@ import GoBack from '../../components/GoBack/GoBack';
 import BillFrom from '../../components/BillFrom/BillFrom';
 import BillTo from '../../components/BillTo/BillTo';
 import BillItem from '../../components/BillItem/BillItem';
+import Button from '../../components/Button/Button';
 
 import './InvoiceForm.scss';
-import Button from '../../components/Button/Button';
 
 const InvoiceForm = () => {
   const { invoices } = useContext(AppContext);
