@@ -3,6 +3,10 @@
   grid-template-columns: repeat(3, 1fr);
   column-gap: 16px;
 
+  .btn > div {
+    background: none;
+  }
+
   &__button {
     margin-bottom: 90px;
     button {
