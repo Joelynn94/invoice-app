@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '../Button/Button';
 import Heading from '../Heading/Heading';
+import changeToCurrency from '../../utils/changeToCurrency';
 
 import './BillTotal.scss';
 
@@ -10,10 +11,7 @@ const BillTotal = ({ item }) => {
       <div>
         <Heading variant='h5'>Total</Heading>
         <span>
-          {parseFloat(item.itemQty * item.itemPrice).toLocaleString(undefined, {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })}
+          {changeToCurrency(parseFloat(item.itemQty * item.itemPrice))}
         </span>
       </div>
       <Button icon='delete'></Button>

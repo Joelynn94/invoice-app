@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import Heading from '../Heading/Heading';
 import InvoiceItem from '../InvoiceItem/InvoiceItem';
+import changeToCurrency from '../../utils/changeToCurrency';
 
 import './InvoiceDetails.scss';
 
@@ -85,10 +86,7 @@ const InvoiceDetails = ({ invoice }) => {
           Grand Total
         </Heading>
         <Heading variant='h3' className='invoice-details--invoice-total'>
-          $
-          {invoice.total.toLocaleString(undefined, {
-            minimumFractionDigits: 2,
-          })}
+          ${changeToCurrency(invoice.total)}
         </Heading>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Heading from '../Heading/Heading';
+import changeToCurrency from '../../utils/changeToCurrency';
 
 import './InvoiceItem.scss';
 
@@ -12,17 +13,10 @@ const InvoiceItem = ({ invoice }) => {
             <Heading variant='h4'>{item.name}</Heading>
             <p className='invoice-details--alt-txt'>{`${
               item.quantity
-            } x ${item.price.toLocaleString(undefined, {
-              minimumFractionDigits: 2,
-            })}`}</p>
+            } x ${changeToCurrency(item.price)}`}</p>
           </div>
           <div className='invoice-details__total'>
-            <Heading variant='h4'>
-              $
-              {item.total.toLocaleString(undefined, {
-                minimumFractionDigits: 2,
-              })}
-            </Heading>
+            <Heading variant='h4'>${changeToCurrency(item.total)}</Heading>
           </div>
         </div>
       ))}

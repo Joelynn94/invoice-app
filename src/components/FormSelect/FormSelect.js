@@ -36,7 +36,7 @@ const FormSelect = ({
         {children}
       </select>
       {icon && (
-        <span class='span-with-icon'>
+        <span className='span-with-icon'>
           <img src={`./assets/icon-${checkSelectIcon}.svg`} alt='icon' />
         </span>
       )}

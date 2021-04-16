@@ -4,6 +4,7 @@ import { ThemeContext } from '../../context/ThemeContext';
 import InvoiceBadge from '../InvoiceBadge/InvoiceBadge';
 import Button from '../Button/Button';
 import Heading from '../Heading/Heading';
+import changeToCurrency from '../../utils/changeToCurrency';
 
 import './InvoiceSummary.scss';
 
@@ -46,9 +47,7 @@ const InvoiceSummary = ({ invoice }) => {
           <div className='invoice-summary__total'>
             <Heading variant='h3'>
               <span className='invoice-summary__symbol'>$</span>
-              {invoice.total.toLocaleString(undefined, {
-                minimumFractionDigits: 2,
-              })}
+              {changeToCurrency(invoice.total)}
             </Heading>
           </div>
         </div>
@@ -64,9 +63,7 @@ const InvoiceSummary = ({ invoice }) => {
         <div className='invoice-summary__total'>
           <Heading variant='h3'>
             <span className='invoice-summary__symbol'>$</span>
-            {invoice.total.toLocaleString(undefined, {
-              minimumFractionDigits: 2,
-            })}
+            {changeToCurrency(invoice.total)}
           </Heading>
         </div>
         <div className='invoice-summary__badge'>
