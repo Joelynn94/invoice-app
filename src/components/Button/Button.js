@@ -33,7 +33,6 @@ const Button = ({
   onClick,
   icon,
   style,
-  className,
 }) => {
   const checkButtonVariant = VARIANTS.includes(variant) ? variant : VARIANTS[0];
 

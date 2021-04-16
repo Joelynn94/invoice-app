@@ -149,6 +149,7 @@ const BillTo = () => {
           onChange={handleChange}
           value={form.paymentTerms}
           label='Payment Terms'
+          icon={'arrow-down'}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
