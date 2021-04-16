@@ -1,6 +1,12 @@
 .bill-item {
-  margin-bottom: 48px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 16px;
+
+  &__button {
+    margin-bottom: 90px;
+    button {
+      width: 100%;
+    }
+  }
 }

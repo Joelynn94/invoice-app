@@ -1,6 +1,8 @@
 @import '../../app.global.scss';
 
 .invoice-form {
+  position: relative;
+
   h1,
   h2,
   h3,
@@ -23,5 +25,16 @@
 
   .grid-span3 {
     grid-column: 1 / span 3;
+  }
+
+  &__buttons {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 22px 24px;
+    display: flex;
+    justify-content: center;
+    gap: 7px;
   }
 }

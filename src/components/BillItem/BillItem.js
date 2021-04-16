@@ -3,10 +3,9 @@ import { ThemeContext } from '../../context/ThemeContext';
 import { AppContext } from '../../context/AppContext';
 import FormInput from '../FormInput/FormInput';
 import Heading from '../Heading/Heading';
+import BillTotal from '../BillTotal/BillTotal';
 
 import './BillItem.scss';
-import Button from '../Button/Button';
-import BillTotal from '../BillTotal/BillTotal';
 
 const BillItem = () => {
   const { dispatch } = useContext(AppContext);
@@ -23,33 +22,29 @@ const BillItem = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    setItem({
+    const billItem = {
+      ...item,
       itemName: item.itemName,
-      itemQty: parseInt(item.itemQty),
-      itemPrice: parseFloat(item.itemPrice).toFixed(2),
-      itemTotal: parseFloat(item.itemTotal).toFixed(2),
-    });
-  };
+      itemQty: item.itemQty,
+      itemPrice: item.itemPrice,
+      itemTotal: item.itemTotal,
+    };
 
-  const formatCurrencyValue = (str) => {
-    return str.toString().replace(/,/g, '');
+    dispatch({
+      type: 'ADD_INVOICE',
+      payload: billItem,
+    });
+
+    setItem({
+      itemName: '',
+      itemQty: '',
+      itemPrice: '',
+      itemTotal: '',
+    });
   };
 
   const handleChange = (event) => {
     const { name, value, type } = event.target;
-
-    console.log({
-      ...item,
-      [name]:
-        name === 'itemPrice' || name === 'itemTotal'
-          ? parseFloat(
-              formatCurrencyValue(value).toLocaleString(undefined, {
-                style: 'decimal',
-                maximumFractionDigits: 2,
-              })
-            )
-          : value.trim(),
-    });
 
     setItem({
       ...item,

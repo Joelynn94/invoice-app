@@ -24,7 +24,17 @@ const ICONS = [
   'sun',
 ];
 
-const Button = ({ children, type, variant, disabled, size, onClick, icon }) => {
+const Button = ({
+  children,
+  type,
+  variant,
+  disabled,
+  size,
+  onClick,
+  icon,
+  style,
+  className,
+}) => {
   const checkButtonVariant = VARIANTS.includes(variant) ? variant : VARIANTS[0];
 
   const checkButtonSize = SIZES.includes(size) ? size : SIZES[0];
@@ -40,6 +50,7 @@ const Button = ({ children, type, variant, disabled, size, onClick, icon }) => {
       type={type}
       onClick={onClick}
       icon={icon}
+      style={style}
     >
       {icon && (
         <div>
