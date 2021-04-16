@@ -20,7 +20,6 @@ const InvoiceForm = () => {
     <main className='invoice-form'>
       <GoBack></GoBack>
       <Heading variant='h1'>New Invoice</Heading>
-
       <BillFrom invoices={invoices} />
       <BillTo invoices={invoices} />
       <BillItem invoices={invoices} />

@@ -7,7 +7,9 @@ export const ThemeContext = createContext();
 // create a context provder to wrap the entire application
 const ThemeContextProvider = (props) => {
   const [theme, setTheme] = useState({
-    isLightTheme: true,
+    isLightTheme: localStorage.getItem('isLightTheme')
+      ? JSON.parse(localStorage.getItem('isLightTheme'))
+      : false,
     light: {
       body: '#f8f8fb',
       altBody: '#373B53',
@@ -31,6 +33,7 @@ const ThemeContextProvider = (props) => {
   });
 
   const toggleTheme = () => {
+    localStorage.setItem('isLightTheme', !theme.isLightTheme);
     setTheme({ ...theme, isLightTheme: !theme.isLightTheme });
   };
 

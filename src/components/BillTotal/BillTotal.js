@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from '../Button/Button';
 import Heading from '../Heading/Heading';
 
 import './BillTotal.scss';
 
 const BillTotal = ({ item }) => {
-  const [itemTotal, setItemTotal] = useState(0);
   return (
     <div className='bill-total'>
       <div>

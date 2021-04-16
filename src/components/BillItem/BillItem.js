@@ -55,7 +55,7 @@ const BillItem = () => {
   return (
     <>
       <Heading variant='h2'>Item List</Heading>
-      <form className='bill-item' onSubmit={handleSubmit}>
+      <section className='bill-item' onSubmit={handleSubmit}>
         <FormInput
           className='grid-span3'
           name='itemName'
@@ -97,7 +97,7 @@ const BillItem = () => {
           }}
         />
         <BillTotal item={item} />
-      </form>
+      </section>
     </>
   );
 };

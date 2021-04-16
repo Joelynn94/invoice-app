@@ -41,7 +41,7 @@ const BillFrom = () => {
   return (
     <>
       <Heading variant='h4'>Bill From</Heading>
-      <form className='bill-from' onSubmit={handleSubmit}>
+      <section className='bill-from' onSubmit={handleSubmit}>
         <FormInput
           className='grid-span2'
           name='streetAddress'
@@ -92,7 +92,7 @@ const BillFrom = () => {
             color: theme.text,
           }}
         />
-      </form>
+      </section>
     </>
   );
 };

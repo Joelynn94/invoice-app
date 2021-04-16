@@ -246,7 +246,7 @@ const intitalState = {
   ],
 };
 
-export const AppContext = createContext();
+export const AppContext = createContext(intitalState);
 
 export const AppProvider = (props) => {
   const [state, dispatch] = useReducer(AppReducer, intitalState);

@@ -3,7 +3,10 @@ import { useReducer } from 'react';
 const reducer = (state, action) => {
   switch (action.type) {
     case 'TOGGLE_DARK_MODE':
-      return {};
+      localStorage.setItem('isDark', !state.isDark);
+      return {
+        isDark: !state.isDark,
+      };
     default: {
       return state;
     }
@@ -12,7 +15,9 @@ const reducer = (state, action) => {
 
 const useGlobalState = () => {
   const [state, dispatch] = useReducer(reducer, {
-    isDark: false,
+    isDark: localStorage.getItem('isDark')
+      ? JSON.parse(localStorage.getItem('isDark'))
+      : false,
   });
 
   return { state, dispatch };

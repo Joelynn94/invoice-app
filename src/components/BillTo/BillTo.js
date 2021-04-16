@@ -53,7 +53,7 @@ const BillTo = () => {
   return (
     <>
       <Heading variant='h4'>Bill To</Heading>
-      <form className='bill-to' onSubmit={handleSubmit}>
+      <section className='bill-to' onSubmit={handleSubmit}>
         <FormInput
           className='grid-span2'
           name='clientName'
@@ -175,7 +175,7 @@ const BillTo = () => {
             color: theme.text,
           }}
         />
-      </form>
+      </section>
     </>
   );
 };
