@@ -7,6 +7,8 @@
   display: flex;
   justify-content: center;
   gap: 7px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 
   @media (min-width: 768px) {
     position: relative;
