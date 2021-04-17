@@ -12,23 +12,27 @@ const InvoiceDetails = ({ invoice }) => {
 
   return (
     <div className='invoice-details' style={{ backgroundColor: theme.cardBg }}>
-      <Heading variant='h4'>
-        <span className='invoice-details--hash'>#</span>
-        {invoice.id}
-      </Heading>
-      <Heading
-        className='invoice-details--alt-txt invoice-details--desc'
-        variant='h4'
-      >
-        {invoice.description}
-      </Heading>
-      <div className='invoice-details__address'>
-        <address className='invoice-details--alt-txt'>
-          <p>{invoice.senderAddress.street}</p>
-          <p>{invoice.senderAddress.city}</p>
-          <p>{invoice.senderAddress.postCode}</p>
-          <p>{invoice.senderAddress.country}</p>
-        </address>
+      <div className='invoice-details__top-grid'>
+        <div>
+          <Heading variant='h3'>
+            <span className='invoice-details--hash'>#</span>
+            {invoice.id}
+          </Heading>
+          <Heading
+            className='invoice-details--alt-txt invoice-details--desc'
+            variant='h4'
+          >
+            {invoice.description}
+          </Heading>
+        </div>
+        <div className='invoice-details__address'>
+          <address className='invoice-details--alt-txt'>
+            <p>{invoice.senderAddress.street}</p>
+            <p>{invoice.senderAddress.city}</p>
+            <p>{invoice.senderAddress.postCode}</p>
+            <p>{invoice.senderAddress.country}</p>
+          </address>
+        </div>
       </div>
       <div className='invoice-details__detail-grid'>
         <div className='invoice-details__dates'>
@@ -63,15 +67,16 @@ const InvoiceDetails = ({ invoice }) => {
             <p>{invoice.clientAddress.country}</p>
           </address>
         </div>
+        <div className='invoice-details__sent-to'>
+          <Heading variant='h4' className='invoice-details--alt-txt'>
+            Sent to
+          </Heading>
+          <Heading variant='h3' className='invoice-details--client-email'>
+            {invoice.clientEmail}
+          </Heading>
+        </div>
       </div>
-      <div className='invoice-details__sent-to'>
-        <Heading variant='h4' className='invoice-details--alt-txt'>
-          Sent to
-        </Heading>
-        <Heading variant='h3' className='invoice-details--client-email'>
-          {invoice.clientEmail}
-        </Heading>
-      </div>
+
       <div
         className='invoice-details__items'
         style={{ backgroundColor: theme.altCardBg }}

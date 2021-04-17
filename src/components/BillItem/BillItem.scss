@@ -1,7 +1,15 @@
 .bill-item {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   column-gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    'item-name item-name item-name'
+    'item-qty item-price item-total';
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-areas: 'item-name item-name item-qty item-price item-total';
+  }
 
   .btn > div {
     background: none;
@@ -12,5 +20,21 @@
     button {
       width: 100%;
     }
+  }
+
+  .item-name {
+    grid-area: item-name;
+  }
+
+  .item-qty {
+    grid-area: item-qty;
+  }
+
+  .item-price {
+    grid-area: item-price;
+  }
+
+  .item-total {
+    grid-area: item-total;
   }
 }

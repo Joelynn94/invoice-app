@@ -30,6 +30,7 @@ const Button = ({
   variant,
   disabled,
   size,
+  text,
   onClick,
   icon,
   style,
@@ -56,6 +57,7 @@ const Button = ({
           <img src={`./assets/icon-${checkButtonIcon}.svg`} alt='icon' />
         </div>
       )}
+      {text}
       {children}
     </button>
   );

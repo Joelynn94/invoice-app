@@ -55,7 +55,7 @@ const BillTo = () => {
       <Heading variant='h4'>Bill To</Heading>
       <section className='bill-to' onSubmit={handleSubmit}>
         <FormInput
-          className='grid-span2'
+          className='client-name'
           name='clientName'
           type='text'
           onChange={handleChange}
@@ -68,7 +68,7 @@ const BillTo = () => {
           }}
         />
         <FormInput
-          className='grid-span2'
+          className='client-email'
           name='clientEmail'
           type='text'
           onChange={handleChange}
@@ -81,7 +81,7 @@ const BillTo = () => {
           }}
         />
         <FormInput
-          className='grid-span2'
+          className='client-street'
           name='clientStreetAddress'
           type='text'
           onChange={handleChange}
@@ -94,6 +94,7 @@ const BillTo = () => {
           }}
         />
         <FormInput
+          className='client-city'
           name='clientCity'
           type='text'
           onChange={handleChange}
@@ -106,6 +107,7 @@ const BillTo = () => {
           }}
         />
         <FormInput
+          className='client-post-code'
           name='clientPostCode'
           type='text'
           onChange={handleChange}
@@ -118,7 +120,7 @@ const BillTo = () => {
           }}
         />
         <FormInput
-          className='grid-span2'
+          className='client-country'
           name='clientCountry'
           type='text'
           onChange={handleChange}
@@ -131,7 +133,7 @@ const BillTo = () => {
           }}
         />
         <FormInput
-          className='grid-span2'
+          className='invoice-date'
           name='invoiceDate'
           type='date'
           onChange={handleChange}
@@ -144,7 +146,7 @@ const BillTo = () => {
           }}
         />
         <FormSelect
-          className='grid-span2'
+          className='payment-terms'
           name='paymentTerms'
           onChange={handleChange}
           value={form.paymentTerms}
@@ -163,7 +165,7 @@ const BillTo = () => {
           <FormOption value='30' item='Net 30 days' />
         </FormSelect>
         <FormInput
-          className='grid-span2'
+          className='project-description'
           name='projectDescription'
           type='text'
           onChange={handleChange}

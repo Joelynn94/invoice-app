@@ -4,9 +4,9 @@ import { AppContext } from '../../context/AppContext';
 import GoBack from '../../components/GoBack/GoBack';
 import StatusCard from '../../components/StatusCard/StatusCard';
 import InvoiceDetails from '../../components/InvoiceDetails/InvoiceDetails';
-import Button from '../../components/Button/Button';
 
 import './Invoice.scss';
+import InvoiceViewButtons from '../../components/InvoiceViewButtons/InvoiceViewButtons';
 
 const Invoice = ({ match }) => {
   const { invoices } = useContext(AppContext);
@@ -19,17 +19,6 @@ const Invoice = ({ match }) => {
       <GoBack />
       <StatusCard invoice={invoice} />
       <InvoiceDetails invoice={invoice} />
-      <div
-        className='invoice__buttons'
-        style={{
-          backgroundColor: theme.cardBg,
-          color: theme.text,
-        }}
-      >
-        <Button variant={'edit-dark'}>Edit</Button>
-        <Button variant={'danger'}>Delete</Button>
-        <Button variant={'primary'}>Mark as Paid</Button>
-      </div>
     </main>
   );
 };

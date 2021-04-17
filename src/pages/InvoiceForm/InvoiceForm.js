@@ -10,6 +10,7 @@ import BillItem from '../../components/BillItem/BillItem';
 import Button from '../../components/Button/Button';
 
 import './InvoiceForm.scss';
+import InvoiceButtons from '../../components/InvoiceCreateButtons/InvoiceCreateButtons';
 
 const InvoiceForm = () => {
   const { invoices } = useContext(AppContext);
@@ -23,7 +24,7 @@ const InvoiceForm = () => {
       <BillFrom invoices={invoices} />
       <BillTo invoices={invoices} />
       <BillItem invoices={invoices} />
-      <div className='bill-item__button grid-span3'>
+      <div className='bill-item__button'>
         <Button
           type='submit'
           style={{
@@ -33,17 +34,12 @@ const InvoiceForm = () => {
           + Add New Item
         </Button>
       </div>
-      <div
-        className='invoice-form__buttons'
+      <InvoiceButtons
         style={{
           backgroundColor: theme.cardBg,
           color: theme.text,
         }}
-      >
-        <Button variant={'edit-dark'}>Discard</Button>
-        <Button variant={'dark'}>Save as Draft</Button>
-        <Button variant={'primary'}>Save & Send</Button>
-      </div>
+      />
     </main>
   );
 };

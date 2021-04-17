@@ -1,6 +1,33 @@
 .bill-from {
   margin-bottom: 40px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
   column-gap: 24px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    'street street'
+    'city post-code'
+    'country country';
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas:
+      'street street street'
+      'city post-code country';
+  }
+
+  .street {
+    grid-area: street;
+  }
+
+  .city {
+    grid-area: city;
+  }
+
+  .post-code {
+    grid-area: post-code;
+  }
+
+  .country {
+    grid-area: country;
+  }
 }

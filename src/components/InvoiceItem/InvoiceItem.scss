@@ -2,6 +2,10 @@
   margin-top: 24px;
   display: grid;
   grid-template-columns: 2fr 1fr;
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr;
+    margin-top: 32px;
+  }
 
   &:nth-child(1) {
     margin: 0;
@@ -9,10 +13,57 @@
 
   p {
     margin-top: 8px;
-  }
-}
 
-.invoice-details__item .invoice-details__total {
-  align-self: center;
-  justify-self: end;
+    @media (min-width: 768px) {
+      margin: 0;
+    }
+  }
+
+  &--breakdown {
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  &--total {
+    align-self: center;
+    justify-self: end;
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  &--breakdown-lg {
+    display: none;
+    @media (min-width: 768px) {
+      display: grid;
+      grid-template-columns: 5fr 1fr 3fr 3fr;
+      align-items: center;
+      justify-items: end;
+      .justify-start {
+        justify-self: start;
+      }
+
+      .justify-center {
+        justify-self: center;
+      }
+    }
+  }
+
+  &--breakdown-lg-headings {
+    display: none;
+    @media (min-width: 768px) {
+      display: grid;
+      grid-template-columns: 5fr 1fr 3fr 3fr;
+      align-items: center;
+      justify-items: end;
+      .justify-start {
+        justify-self: start;
+      }
+
+      .justify-center {
+        justify-self: center;
+      }
+    }
+  }
 }

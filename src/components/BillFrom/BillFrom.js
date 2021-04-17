@@ -43,7 +43,7 @@ const BillFrom = () => {
       <Heading variant='h4'>Bill From</Heading>
       <section className='bill-from' onSubmit={handleSubmit}>
         <FormInput
-          className='grid-span2'
+          className='street'
           name='streetAddress'
           type='text'
           onChange={handleChange}
@@ -56,6 +56,7 @@ const BillFrom = () => {
           }}
         />
         <FormInput
+          className='city'
           name='city'
           type='text'
           onChange={handleChange}
@@ -68,6 +69,7 @@ const BillFrom = () => {
           }}
         />
         <FormInput
+          className='post-code'
           name='postCode'
           type='text'
           onChange={handleChange}
@@ -80,7 +82,7 @@ const BillFrom = () => {
           }}
         />
         <FormInput
-          className='grid-span2'
+          className='country'
           name='country'
           type='text'
           onChange={handleChange}

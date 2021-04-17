@@ -57,7 +57,7 @@ const BillItem = () => {
       <Heading variant='h2'>Item List</Heading>
       <section className='bill-item' onSubmit={handleSubmit}>
         <FormInput
-          className='grid-span3'
+          className='item-name'
           name='itemName'
           type='text'
           onChange={handleChange}
@@ -70,6 +70,7 @@ const BillItem = () => {
           }}
         />
         <FormInput
+          className='item-qty'
           name='itemQty'
           type='number'
           min='1'
@@ -83,6 +84,7 @@ const BillItem = () => {
           }}
         />
         <FormInput
+          className='item-price'
           name='itemPrice'
           step='.01'
           type='text'
@@ -96,7 +98,7 @@ const BillItem = () => {
             color: theme.text,
           }}
         />
-        <BillTotal item={item} />
+        <BillTotal className='item-total' item={item} />
       </section>
     </>
   );
