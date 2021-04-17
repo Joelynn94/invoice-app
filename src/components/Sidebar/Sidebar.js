@@ -11,11 +11,11 @@ const Sidebar = () => {
   const theme = isLightTheme ? light : dark;
 
   return (
-    <div className='sidebar' style={{ backgroundColor: theme.navBarBg }}>
+    <nav className='sidebar' style={{ backgroundColor: theme.navBarBg }}>
       <Logo />
       <ThemeToggle />
       <Avatar />
-    </div>
+    </nav>
   );
 };
 

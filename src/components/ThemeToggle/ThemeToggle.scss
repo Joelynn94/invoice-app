@@ -10,4 +10,14 @@
     justify-content: center;
     padding: 1em;
   }
+
+  @media (min-width: 1400px) {
+    flex-direction: column;
+    justify-content: flex-end;
+    border-right: none;
+    border-bottom: 1px solid #494e6e;
+    width: 100px;
+    padding-bottom: 12px;
+    padding-right: 0;
+  }
 }

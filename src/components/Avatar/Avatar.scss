@@ -1,7 +1,7 @@
 .avatar {
   display: flex;
   justify-content: flex-end;
-  padding: 20px 24px;
+  padding: 24px;
 
   &__img {
     height: 32px;
@@ -9,5 +9,10 @@
     align-self: center;
     justify-content: center;
     border-radius: 50%;
+
+    @media (min-width: 1400px) {
+      height: 40px;
+      width: 40px;
+    }
   }
 }
