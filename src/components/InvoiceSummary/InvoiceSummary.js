@@ -13,72 +13,79 @@ const InvoiceSummary = ({ invoice }) => {
   const theme = isLightTheme ? light : dark;
 
   return (
-    <Link
-      className='invoice-summary__link'
-      to={`/invoice/${invoice.id}`}
-      style={{ color: theme.text }}
-    >
-      <div
-        className='invoice-summary'
-        style={{ backgroundColor: theme.cardBg }}
-      >
-        <div className='invoice-summary__id'>
-          <Heading variant='h4'>
-            <span className='invoice-summary__hash'>#</span>
-            {invoice.id}
-          </Heading>
-        </div>
-        <div
-          className='invoice-summary__client-name'
-          style={{ color: theme.textAccent }}
+    <>
+      {invoice && (
+        <Link
+          className='invoice-summary__link'
+          to={`/invoice/${invoice.id}`}
+          style={{ color: theme.text }}
         >
-          <p>{invoice.clientName}</p>
-        </div>
-        <div className='invoice-summary__wrap'>
           <div
-            className='invoice-summary__due-date'
-            style={{ color: theme.textAccent }}
+            className='invoice-summary'
+            style={{ backgroundColor: theme.cardBg }}
           >
-            <p>
-              <span className='invoice-summary__due-txt'>Due</span>
-              {invoice.paymentDue}
-            </p>
+            <div className='invoice-summary__id'>
+              <Heading variant='h4'>
+                <span className='invoice-summary__hash'>#</span>
+                {invoice.id}
+              </Heading>
+            </div>
+            <div
+              className='invoice-summary__client-name'
+              style={{ color: theme.textAccent }}
+            >
+              <p>{invoice.clientName}</p>
+            </div>
+            <div className='invoice-summary__wrap'>
+              <div
+                className='invoice-summary__due-date'
+                style={{ color: theme.textAccent }}
+              >
+                <p>
+                  <span className='invoice-summary__due-txt'>Due</span>
+                  {invoice.paymentDue}
+                </p>
+              </div>
+              <div className='invoice-summary__total'>
+                <Heading variant='h3'>
+                  <span className='invoice-summary__symbol'>$</span>
+                  {changeToCurrency(invoice.total)}
+                </Heading>
+              </div>
+            </div>
+            <div
+              className='invoice-summary__due-date'
+              style={{ color: theme.textAccent }}
+            >
+              <p>
+                <span className='invoice-summary__due-txt'>Due</span>
+                {invoice.paymentDue}
+              </p>
+            </div>
+            <div className='invoice-summary__total'>
+              <Heading variant='h3'>
+                <span className='invoice-summary__symbol'>$</span>
+                {changeToCurrency(invoice.total)}
+              </Heading>
+            </div>
+            <div className='invoice-summary__badge'>
+              <InvoiceBadge
+                status={invoice.status}
+                theme={isLightTheme ? 'light' : 'dark'}
+              />
+            </div>
+            <div className='invoice-summary__arrow'>
+              <Button>
+                <img
+                  src='./assets/icon-arrow-right.svg'
+                  alt='right arrow icon'
+                />
+              </Button>
+            </div>
           </div>
-          <div className='invoice-summary__total'>
-            <Heading variant='h3'>
-              <span className='invoice-summary__symbol'>$</span>
-              {changeToCurrency(invoice.total)}
-            </Heading>
-          </div>
-        </div>
-        <div
-          className='invoice-summary__due-date'
-          style={{ color: theme.textAccent }}
-        >
-          <p>
-            <span className='invoice-summary__due-txt'>Due</span>
-            {invoice.paymentDue}
-          </p>
-        </div>
-        <div className='invoice-summary__total'>
-          <Heading variant='h3'>
-            <span className='invoice-summary__symbol'>$</span>
-            {changeToCurrency(invoice.total)}
-          </Heading>
-        </div>
-        <div className='invoice-summary__badge'>
-          <InvoiceBadge
-            status={invoice.status}
-            theme={isLightTheme ? 'light' : 'dark'}
-          />
-        </div>
-        <div className='invoice-summary__arrow'>
-          <Button>
-            <img src='./assets/icon-arrow-right.svg' alt='right arrow icon' />
-          </Button>
-        </div>
-      </div>
-    </Link>
+        </Link>
+      )}
+    </>
   );
 };
 

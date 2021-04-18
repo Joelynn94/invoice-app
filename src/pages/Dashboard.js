@@ -7,6 +7,7 @@ import NoInvoices from '../components/NoInvoices/NoInvoices';
 
 const Dashboard = () => {
   const { invoices } = useContext(AppContext);
+
   return (
     <main>
       <InvoicesBar invoices={invoices} />

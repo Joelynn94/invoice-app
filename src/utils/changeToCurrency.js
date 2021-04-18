@@ -4,7 +4,10 @@ const currencyOptions = {
 };
 
 const formatToCurrency = (num) => {
-  return num.toLocaleString(undefined, currencyOptions);
+  if (num) {
+    return num.toLocaleString(undefined, currencyOptions);
+  }
+  return;
 };
 
 export default formatToCurrency;

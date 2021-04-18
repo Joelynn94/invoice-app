@@ -5,7 +5,14 @@ const AppReducer = (state, action) => {
     case 'ADD_INVOICE':
       return {
         ...state,
-        invoices: [...state.invoices, action.payload],
+        invoices: [action.payload, ...state.invoices],
+      };
+    case 'FILTER_STATUS':
+      return {
+        ...state,
+        filtered: state.invoices.filter(
+          (invoice) => invoice.status === action.payload
+        ),
       };
     case 'TOGGLE_DARK_MODE':
       localStorage.setItem('isLightTheme', !state.isLightTheme);
@@ -18,6 +25,7 @@ const AppReducer = (state, action) => {
 };
 
 const intitalState = {
+  filtered: [],
   invoices: [
     {
       id: 'RT3080',
@@ -256,8 +264,11 @@ export const AppContext = createContext(intitalState);
 export const AppProvider = (props) => {
   const [state, dispatch] = useReducer(AppReducer, intitalState);
 
+  const filterInvoices = (status) =>
+    dispatch({ type: 'FILTER_STATUS', payload: status });
+
   return (
-    <AppContext.Provider value={{ invoices: state.invoices, dispatch }}>
+    <AppContext.Provider value={{ invoices: state.invoices, filterInvoices }}>
       {props.children}
     </AppContext.Provider>
   );
