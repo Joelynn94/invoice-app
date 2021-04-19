@@ -6,12 +6,14 @@ import InvoiceSummary from '../components/InvoiceSummary/InvoiceSummary';
 import NoInvoices from '../components/NoInvoices/NoInvoices';
 
 const Dashboard = () => {
-  const { invoices } = useContext(AppContext);
+  const { invoices, filtered } = useContext(AppContext);
 
   return (
     <main>
       <InvoicesBar invoices={invoices} />
-      {invoices.length > 0 ? (
+      {filtered.length > 0 ? (
+        filtered.map((item) => <InvoiceSummary invoice={item} key={item.id} />)
+      ) : invoices.length > 0 ? (
         invoices.map((invoice) => (
           <InvoiceSummary invoice={invoice} key={invoice.id} />
         ))

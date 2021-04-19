@@ -8,17 +8,35 @@ const InvoicePopover = () => {
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
 
-  const { filterInvoices } = useContext(AppContext);
+  const { filterInvoices, clearFilter, filtered } = useContext(AppContext);
 
-  const [statusFilter, setStatusFilter] = useState('');
+  const [statusFilter, setStatusFilter] = useState([]);
 
   const handleCheckbox = (event) => {
-    const { name } = event.target;
+    // get the name and check status from the event object
+    const { name, checked } = event.target;
 
-    filterInvoices(name);
+    // spread out the current state into a new array
+    const newChecked = [...statusFilter];
+    let index;
 
-    setStatusFilter(name);
-    setStatusFilter('');
+    // check from the target if the item is checked
+    if (checked) {
+      // push the name of checkbox to the new array
+      filtered.push(name);
+      filterInvoices({ filtered: newChecked });
+      console.log(newChecked);
+    } else {
+      // get the position of the item in the array
+      index = newChecked.indexOf(name);
+      // remove the item if the checkbox is not checked
+      newChecked.splice(index, 1);
+      filterInvoices({ filtered: newChecked });
+      console.log(newChecked);
+    }
+
+    // set the state of the filter
+    setStatusFilter(newChecked);
   };
 
   return (
