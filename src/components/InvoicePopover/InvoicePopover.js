@@ -17,26 +17,27 @@ const InvoicePopover = () => {
     const { name, checked } = event.target;
 
     // spread out the current state into a new array
-    const newChecked = [...statusFilter];
+    const newCheckedArray = [...statusFilter];
     let index;
 
     // check from the target if the item is checked
     if (checked) {
       // push the name of checkbox to the new array
-      filtered.push(name);
-      filterInvoices({ filtered: newChecked });
-      console.log(newChecked);
+      newCheckedArray.push(name);
+      console.log(filtered);
+      filterInvoices(newCheckedArray);
+      console.log(newCheckedArray);
     } else {
       // get the position of the item in the array
-      index = newChecked.indexOf(name);
+      index = newCheckedArray.indexOf(name);
       // remove the item if the checkbox is not checked
-      newChecked.splice(index, 1);
-      filterInvoices({ filtered: newChecked });
-      console.log(newChecked);
+      newCheckedArray.splice(index, 1);
+      filterInvoices(newCheckedArray);
+      console.log(newCheckedArray);
     }
 
     // set the state of the filter
-    setStatusFilter(newChecked);
+    setStatusFilter(newCheckedArray);
   };
 
   return (
