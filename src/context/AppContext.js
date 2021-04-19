@@ -5,14 +5,16 @@ const AppReducer = (state, action) => {
     case 'ADD_INVOICE':
       return {
         ...state,
-        invoices: [action.payload, ...state.invoices],
+        invoices: [action.payload, state.invoices],
       };
     case 'FILTER_STATUS':
+      let value = action.payload;
+      const filteredInvocies = state.invoices.filter((invoice) => {
+        return invoice.status.includes(value);
+      });
       return {
         ...state,
-        filtered: state.invoices.filter(
-          (invoice) => invoice.status === action.payload
-        ),
+        filtered: filteredInvocies,
       };
     case 'CLEAR_FILTER':
       return {

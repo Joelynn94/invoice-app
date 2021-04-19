@@ -3,7 +3,7 @@ import InvoicePopover from '../InvoicePopover/InvoicePopover';
 
 import './InvoiceFilter.scss';
 
-const InvoiceFilter = ({ invoices }) => {
+const InvoiceFilter = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -27,7 +27,7 @@ const InvoiceFilter = ({ invoices }) => {
           </svg>
         </div>
       </button>
-      {isOpen && <InvoicePopover invoices={invoices} />}
+      {isOpen && <InvoicePopover />}
     </div>
   );
 };

@@ -10,35 +10,42 @@ const InvoicePopover = () => {
 
   const { filterInvoices, clearFilter, filtered } = useContext(AppContext);
 
-  const [statusFilter, setStatusFilter] = useState([]);
+  const [statusFiltered, setFiltered] = useState('');
 
   const handleCheckbox = (event) => {
-    // get the name and check status from the event object
     const { name, checked } = event.target;
 
-    // spread out the current state into a new array
-    const newCheckedArray = [...statusFilter];
-    let index;
-
-    // check from the target if the item is checked
     if (checked) {
-      // push the name of checkbox to the new array
-      newCheckedArray.push(name);
+      filterInvoices(name);
       console.log(filtered);
-      filterInvoices(newCheckedArray);
-      console.log(newCheckedArray);
     } else {
-      // get the position of the item in the array
-      index = newCheckedArray.indexOf(name);
-      // remove the item if the checkbox is not checked
-      newCheckedArray.splice(index, 1);
-      filterInvoices(newCheckedArray);
-      console.log(newCheckedArray);
+      clearFilter();
     }
-
-    // set the state of the filter
-    setStatusFilter(newCheckedArray);
   };
+
+  // const handleCheckbox = (event) => {
+  //   // get the name and check status from the event object
+  //   const { name, checked } = event.target;
+
+  //   // spread out the current state into a new array
+  //   const newCheckedArray = [...filtered];
+  //   let index;
+
+  //   // check from the target if the item is checked
+  //   if (checked) {
+  //     // push the name of checkbox to the new array
+  //     newCheckedArray.push(name);
+  //     console.log(newCheckedArray);
+  //     filterInvoices(newCheckedArray);
+  //   } else {
+  //     // get the position of the item in the array
+  //     index = newCheckedArray.indexOf(name);
+  //     // remove the item if the checkbox is not checked
+  //     newCheckedArray.splice(index, 1);
+  //     filterInvoices(newCheckedArray);
+  //     console.log(newCheckedArray);
+  //   }
+  // };
 
   return (
     <div className='invoices-popover' style={{ backgroundColor: theme.cardBg }}>
@@ -49,7 +56,7 @@ const InvoicePopover = () => {
               type='checkbox'
               name='draft'
               id='draft'
-              value={statusFilter}
+              value={filtered}
               onClick={handleCheckbox}
             />
             <div>
@@ -63,7 +70,7 @@ const InvoicePopover = () => {
               type='checkbox'
               name='pending'
               id='pending'
-              value={statusFilter}
+              value={filtered}
               onClick={handleCheckbox}
             />
             <div>
@@ -77,7 +84,7 @@ const InvoicePopover = () => {
               type='checkbox'
               name='paid'
               id='paid'
-              value={statusFilter}
+              value={filtered}
               onClick={handleCheckbox}
             />
             <div>
