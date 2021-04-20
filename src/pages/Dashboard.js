@@ -13,8 +13,8 @@ const Dashboard = () => {
     <main>
       <InvoicesBar invoices={invoices} />
       {filtered.length > 0 ? (
-        filtered.map((filtered) => (
-          <InvoiceSummary invoice={filtered} key={filtered.id} />
+        filtered.map((filter) => (
+          <InvoiceSummary invoice={filter} key={filter.id} />
         ))
       ) : invoices.length > 0 ? (
         invoices.map((invoice) => (

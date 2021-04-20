@@ -1,11 +1,13 @@
 import { createContext, useReducer } from 'react';
+import formatRandomId from '../utils/formatRandomId';
 
 const AppReducer = (state, action) => {
   switch (action.type) {
-    case 'ADD_INVOICE':
+    case 'CREATE_INVOICE':
       return {
         ...state,
         invoices: [action.payload, state.invoices],
+        loading: false,
       };
     case 'FILTER_STATUS':
       let value = action.payload;
@@ -264,12 +266,17 @@ const intitalState = {
     },
   ],
   filtered: [],
+  loading: false,
 };
 
 export const AppContext = createContext(intitalState);
 
 export const AppProvider = (props) => {
   const [state, dispatch] = useReducer(AppReducer, intitalState);
+
+  const createInvoice = (invoice) => {
+    dispatch({ type: 'CREATE_INVOICE', payload: invoice });
+  };
 
   const filterInvoices = (status) =>
     dispatch({ type: 'FILTER_STATUS', payload: status });
@@ -283,6 +290,7 @@ export const AppProvider = (props) => {
       value={{
         invoices: state.invoices,
         filtered: state.filtered,
+        createInvoice,
         filterInvoices,
         clearFilter,
       }}
