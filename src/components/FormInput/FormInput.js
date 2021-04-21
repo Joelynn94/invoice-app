@@ -4,6 +4,7 @@ import './FormInput.scss';
 
 const FormInput = ({
   label,
+  htmlFor,
   className,
   name,
   type = 'text',
@@ -12,18 +13,13 @@ const FormInput = ({
   onChange = () => {},
   ...otherProps
 }) => {
-  const id = label
-    .toLowerCase()
-    .split(' ')
-    .map((word) => word.replace(/[^a-z]+/g, ''))
-    .join('-');
   return (
     <div className={`form__group ${className ? className : ''}`}>
-      <label className={`form__input-label`} htmlFor={id}>
+      <label className={`form__input-label`} htmlFor={htmlFor}>
         {label}
       </label>
       <input
-        id={id}
+        id={htmlFor}
         className='form__input'
         name={name}
         type={type}

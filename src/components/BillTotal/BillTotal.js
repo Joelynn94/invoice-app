@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '../Button/Button';
 import Heading from '../Heading/Heading';
 import changeToCurrency from '../../utils/changeToCurrency';
+import formatRandomId from '../../utils/formatRandomId';
 
 import './BillTotal.scss';
 

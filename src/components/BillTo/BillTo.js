@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import FormInput from '../../components/FormInput/FormInput';
 import Heading from '../../components/Heading/Heading';
@@ -7,60 +7,38 @@ import FormOption from '../FormOption/FormOption';
 
 import './BillTo.scss';
 
-const BillTo = () => {
+const BillTo = ({
+  setInvoice,
+  clientName,
+  clientEmail,
+  street,
+  city,
+  postCode,
+  country,
+  paymentDue,
+  paymentTerms,
+  description,
+}) => {
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
-
-  const [form, setForm] = useState({
-    clientName: '',
-    clientEmail: '',
-    clientStreetAddress: '',
-    clientCity: '',
-    clientPostCode: '',
-    clientCountry: '',
-    invoiceDate: '',
-    paymentTerms: '',
-    projectDescription: '',
-  });
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    setForm({
-      clientName: '',
-      clientEmail: '',
-      clientStreetAddress: '',
-      clientCity: '',
-      clientPostCode: '',
-      clientCountry: '',
-      invoiceDate: '',
-      paymentTerms: '',
-      projectDescription: '',
-    });
-  };
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    console.log({ [name]: value });
-
-    setForm({
-      ...form,
-      [name]: value,
-    });
-  };
 
   return (
     <>
       <Heading variant='h4'>Bill To</Heading>
-      <section className='bill-to' onSubmit={handleSubmit}>
+      <section className='bill-to'>
         <FormInput
+          label="Client's Name"
           className='client-name'
           name='clientName'
           type='text'
-          onChange={handleChange}
-          value={form.clientName}
-          label="Client's Name"
+          value={clientName}
+          onChange={(clientName) =>
+            setInvoice((prev) => ({
+              // spread out previous state
+              ...prev,
+              clientName,
+            }))
+          }
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -68,12 +46,18 @@ const BillTo = () => {
           }}
         />
         <FormInput
+          label="Client's Email"
           className='client-email'
           name='clientEmail'
           type='text'
-          onChange={handleChange}
-          value={form.clientEmail}
-          label="Client's Email"
+          value={clientEmail}
+          onChange={(clientEmail) =>
+            setInvoice((prev) => ({
+              // spread out previous state
+              ...prev,
+              clientEmail,
+            }))
+          }
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -81,12 +65,22 @@ const BillTo = () => {
           }}
         />
         <FormInput
-          className='client-street'
-          name='clientStreetAddress'
-          type='text'
-          onChange={handleChange}
-          value={form.clientStreetAddress}
           label='Street Address'
+          className='client-street'
+          name='clientStreet'
+          type='text'
+          value={street}
+          onChange={(street) =>
+            setInvoice((prev) => ({
+              // spread out previous state
+              ...prev,
+              clientAddress: {
+                // spread out previous state of clientAddress
+                ...prev.clientAddress,
+                street,
+              },
+            }))
+          }
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -94,12 +88,22 @@ const BillTo = () => {
           }}
         />
         <FormInput
+          label='City'
           className='client-city'
           name='clientCity'
           type='text'
-          onChange={handleChange}
-          value={form.clientCity}
-          label='City'
+          value={city}
+          onChange={(city) =>
+            setInvoice((prev) => ({
+              // spread out previous state
+              ...prev,
+              clientAddress: {
+                // spread out previous state of clientAddress
+                ...prev.clientAddress,
+                city,
+              },
+            }))
+          }
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -107,12 +111,22 @@ const BillTo = () => {
           }}
         />
         <FormInput
+          label='Post Code'
           className='client-post-code'
           name='clientPostCode'
           type='text'
-          onChange={handleChange}
-          value={form.clientPostCode}
-          label='Post Code'
+          value={postCode}
+          onChange={(postCode) =>
+            setInvoice((prev) => ({
+              // spread out previous state
+              ...prev,
+              clientAddress: {
+                // spread out previous state of clientAddress
+                ...prev.clientAddress,
+                postCode,
+              },
+            }))
+          }
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -120,12 +134,22 @@ const BillTo = () => {
           }}
         />
         <FormInput
+          label='Country'
           className='client-country'
           name='clientCountry'
           type='text'
-          onChange={handleChange}
-          value={form.clientCountry}
-          label='Country'
+          value={country}
+          onChange={(country) =>
+            setInvoice((prev) => ({
+              // spread out previous state
+              ...prev,
+              clientAddress: {
+                // spread out previous state of clientAddress
+                ...prev.clientAddress,
+                country,
+              },
+            }))
+          }
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -133,12 +157,18 @@ const BillTo = () => {
           }}
         />
         <FormInput
-          className='invoice-date'
-          name='invoiceDate'
-          type='date'
-          onChange={handleChange}
-          value={form.invoiceDate}
           label='Invoice Date'
+          className='invoice-date'
+          name='paymentDue'
+          type='date'
+          value={paymentDue}
+          onChange={(paymentDue) =>
+            setInvoice((prev) => ({
+              // spread out previous state
+              ...prev,
+              paymentDue,
+            }))
+          }
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -146,12 +176,18 @@ const BillTo = () => {
           }}
         />
         <FormSelect
+          label='Payment Terms'
           className='payment-terms'
           name='paymentTerms'
-          onChange={handleChange}
-          value={form.paymentTerms}
-          label='Payment Terms'
           icon={'arrow-down'}
+          value={paymentTerms}
+          onChange={(paymentTerms) =>
+            setInvoice((prev) => ({
+              // spread out previous state
+              ...prev,
+              paymentTerms,
+            }))
+          }
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -165,12 +201,18 @@ const BillTo = () => {
           <FormOption value='30' item='Net 30 days' />
         </FormSelect>
         <FormInput
-          className='project-description'
-          name='projectDescription'
-          type='text'
-          onChange={handleChange}
-          value={form.projectDescription}
           label='Project Description'
+          className='project-description'
+          name='description'
+          type='text'
+          value={description}
+          onChange={(description) =>
+            setInvoice((prev) => ({
+              // spread out previous state
+              ...prev,
+              description,
+            }))
+          }
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,

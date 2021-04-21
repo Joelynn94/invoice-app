@@ -15,19 +15,19 @@
       'city post-code country';
   }
 
-  .street {
+  .sender-street {
     grid-area: street;
   }
 
-  .city {
+  .sender-city {
     grid-area: city;
   }
 
-  .post-code {
+  .sender-post-code {
     grid-area: post-code;
   }
 
-  .country {
+  .sender-country {
     grid-area: country;
   }
 }

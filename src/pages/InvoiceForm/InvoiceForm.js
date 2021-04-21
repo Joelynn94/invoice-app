@@ -1,12 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import { AppContext } from '../../context/AppContext';
-import changeToCurrency from '../../utils/changeToCurrency';
-import formatRandomId from '../../utils/formatRandomId';
 
 import FormInput from '../../components/FormInput/FormInput';
-import FormSelect from '../../components/FormSelect/FormSelect';
-import FormOption from '../../components/FormOption/FormOption';
 import Heading from '../../components/Heading/Heading';
 import Button from '../../components/Button/Button';
 import GoBack from '../../components/GoBack/GoBack';
@@ -14,6 +10,7 @@ import InvoiceButtons from '../../components/InvoiceCreateButtons/InvoiceCreateB
 
 import './InvoiceForm.scss';
 import BillFrom from '../../components/BillFrom/BillFrom';
+import BillTo from '../../components/BillTo/BillTo';
 
 const defaultSenderAddress = {
   street: '',
@@ -87,123 +84,18 @@ const InvoiceForm = () => {
         postCode={senderAddress.postCode}
         country={senderAddress.country}
       />
-      <Heading variant='h4'>Bill To</Heading>
-      <section className='bill-to'>
-        <FormInput
-          className='client-name'
-          name='clientName'
-          type='text'
-          value={clientName}
-          label="Client's Name"
-          style={{
-            backgroundColor: theme.cardBg,
-            border: `1px solid ${theme.borderColor}`,
-            color: theme.text,
-          }}
-        />
-        <FormInput
-          className='client-email'
-          name='clientEmail'
-          type='text'
-          value={clientEmail}
-          label="Client's Email"
-          style={{
-            backgroundColor: theme.cardBg,
-            border: `1px solid ${theme.borderColor}`,
-            color: theme.text,
-          }}
-        />
-        <FormInput
-          className='client-street'
-          name='clientStreet'
-          type='text'
-          value={clientAddress.clientStreet}
-          label='Street Address'
-          style={{
-            backgroundColor: theme.cardBg,
-            border: `1px solid ${theme.borderColor}`,
-            color: theme.text,
-          }}
-        />
-        <FormInput
-          className='client-city'
-          name='clientCity'
-          type='text'
-          value={clientAddress.clientCity}
-          label='City'
-          style={{
-            backgroundColor: theme.cardBg,
-            border: `1px solid ${theme.borderColor}`,
-            color: theme.text,
-          }}
-        />
-        <FormInput
-          className='client-post-code'
-          name='clientPostCode'
-          type='text'
-          value={clientAddress.clientPostCode}
-          label='Post Code'
-          style={{
-            backgroundColor: theme.cardBg,
-            border: `1px solid ${theme.borderColor}`,
-            color: theme.text,
-          }}
-        />
-        <FormInput
-          className='client-country'
-          name='clientCountry'
-          type='text'
-          value={clientAddress.clientCountry}
-          label='Country'
-          style={{
-            backgroundColor: theme.cardBg,
-            border: `1px solid ${theme.borderColor}`,
-            color: theme.text,
-          }}
-        />
-        <FormInput
-          className='invoice-date'
-          name='paymentDue'
-          type='date'
-          value={paymentDue}
-          label='Invoice Date'
-          style={{
-            backgroundColor: theme.cardBg,
-            border: `1px solid ${theme.borderColor}`,
-            color: theme.text,
-          }}
-        />
-        <FormSelect
-          className='payment-terms'
-          name='paymentTerms'
-          value={paymentTerms}
-          label='Payment Terms'
-          icon={'arrow-down'}
-          style={{
-            backgroundColor: theme.cardBg,
-            border: `1px solid ${theme.borderColor}`,
-            color: theme.text,
-          }}
-          option='1'
-        >
-          <FormOption value='1' item='Net 1 day' />
-          <FormOption value='7' item='Net 7 days' />
-          <FormOption value='14' item='Net 14 days' />
-          <FormOption value='30' item='Net 30 days' />
-        </FormSelect>
-        <FormInput
-          className='project-description'
-          name='description'
-          type='text'
-          value={description}
-          label='Project Description'
-          style={{
-            backgroundColor: theme.cardBg,
-            border: `1px solid ${theme.borderColor}`,
-            color: theme.text,
-          }}
-        />
-      </section>
+      <BillTo
+        setInvoice={setInvoice}
+        clientName={clientName}
+        clientEmai={clientEmail}
+        street={clientAddress.street}
+        city={clientAddress.city}
+        postCode={clientAddress.postCode}
+        country={clientAddress.country}
+        paymentDue={paymentDue}
+        paymentTerms={paymentTerms}
+        description={description}
+      />
       <Heading variant='h2'>Item List</Heading>
       <section className='bill-item'>
         <FormInput

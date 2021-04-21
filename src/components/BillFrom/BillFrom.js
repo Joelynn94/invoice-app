@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import FormInput from '../../components/FormInput/FormInput';
 import Heading from '../../components/Heading/Heading';
@@ -15,7 +15,7 @@ const BillFrom = ({ street, city, postCode, country, setInvoice }) => {
       <section className='bill-from'>
         <FormInput
           label='Street Address'
-          className='street'
+          className='sender-street'
           name='senderStreet'
           type='text'
           value={street}
@@ -38,7 +38,7 @@ const BillFrom = ({ street, city, postCode, country, setInvoice }) => {
         />
         <FormInput
           label='City'
-          className='city'
+          className='sender-city'
           name='senderCity'
           type='text'
           value={city}
@@ -61,7 +61,7 @@ const BillFrom = ({ street, city, postCode, country, setInvoice }) => {
         />
         <FormInput
           label='Post Code'
-          className='postCode'
+          className='sender-post-code'
           name='senderPostCode'
           type='text'
           value={postCode}
@@ -84,7 +84,7 @@ const BillFrom = ({ street, city, postCode, country, setInvoice }) => {
         />
         <FormInput
           label='Country'
-          className='country'
+          className='sender-country'
           name='senderCountry'
           type='text'
           value={country}
