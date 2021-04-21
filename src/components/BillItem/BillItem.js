@@ -1,68 +1,38 @@
 import React, { useContext, useState } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import { AppContext } from '../../context/AppContext';
+import Button from '../Button/Button';
 import FormInput from '../FormInput/FormInput';
 import Heading from '../Heading/Heading';
-import BillTotal from '../BillTotal/BillTotal';
+import changeToCurrency from '../../utils/changeToCurrency';
 
 import './BillItem.scss';
 
-const BillItem = () => {
+const BillItem = ({ setInvoice, itemName, quantity, price, total }) => {
   const { dispatch } = useContext(AppContext);
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
 
-  const [item, setItem] = useState({
-    itemName: '',
-    itemQty: '',
-    itemPrice: '',
-    itemTotal: '',
-  });
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const billItem = {
-      ...item,
-      itemName: item.itemName,
-      itemQty: item.itemQty,
-      itemPrice: item.itemPrice,
-      itemTotal: item.itemTotal,
-    };
-
-    dispatch({
-      type: 'ADD_INVOICE',
-      payload: billItem,
-    });
-
-    setItem({
-      itemName: '',
-      itemQty: '',
-      itemPrice: '',
-      itemTotal: '',
-    });
-  };
-
-  const handleChange = (event) => {
-    const { name, value, type } = event.target;
-
-    setItem({
-      ...item,
-      [name]: type === 'number' ? parseFloat(value) : value,
-    });
-  };
-
   return (
     <>
-      <Heading variant='h2'>Item List</Heading>
-      <section className='bill-item' onSubmit={handleSubmit}>
+      <section className='bill-item'>
         <FormInput
+          label='Item Name'
           className='item-name'
           name='itemName'
           type='text'
-          onChange={handleChange}
-          value={item.itemName}
-          label='Item Name'
+          value={itemName}
+          onChange={(itemName) =>
+            setInvoice((prev) => ({
+              // spread out previous state
+              ...prev,
+              items: {
+                // spread out previous state of items
+                ...prev.items,
+                itemName,
+              },
+            }))
+          }
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -70,13 +40,22 @@ const BillItem = () => {
           }}
         />
         <FormInput
+          label='Qty'
           className='item-qty'
           name='itemQty'
-          type='number'
-          min='1'
-          onChange={handleChange}
-          value={item.itemQty}
-          label='Qty'
+          type='text'
+          value={quantity}
+          onChange={(quantity) =>
+            setInvoice((prev) => ({
+              // spread out previous state
+              ...prev,
+              items: {
+                // spread out previous state of items
+                ...prev.items,
+                quantity,
+              },
+            }))
+          }
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -84,21 +63,35 @@ const BillItem = () => {
           }}
         />
         <FormInput
+          label='Price'
           className='item-price'
           name='itemPrice'
-          step='.01'
           type='text'
-          pattern='[0-9]*'
-          onChange={handleChange}
-          value={item.itemPrice}
-          label='Price'
+          value={price}
+          onChange={(price) =>
+            setInvoice((prev) => ({
+              // spread out previous state
+              ...prev,
+              items: {
+                // spread out previous state of items
+                ...prev.items,
+                price,
+              },
+            }))
+          }
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
             color: theme.text,
           }}
         />
-        <BillTotal className='item-total' item={item} />
+        <div className='item-total bill-total'>
+          <div>
+            <Heading variant='h5'>Total</Heading>
+            <span>{changeToCurrency(parseFloat(total))}</span>
+          </div>
+          <Button icon='delete'></Button>
+        </div>
       </section>
     </>
   );

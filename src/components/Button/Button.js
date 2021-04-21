@@ -26,12 +26,12 @@ const ICONS = [
 
 const Button = ({
   children,
-  type,
+  type = 'button',
   variant,
   disabled,
   size,
   text,
-  onClick,
+  onClick = () => {},
   icon,
   style,
 }) => {

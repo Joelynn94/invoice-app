@@ -21,7 +21,6 @@ const BillTo = ({
 }) => {
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
-
   return (
     <>
       <Heading variant='h4'>Bill To</Heading>

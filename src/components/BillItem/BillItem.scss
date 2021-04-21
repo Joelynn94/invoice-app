@@ -1,3 +1,5 @@
+@import '../../app.global.scss';
+
 .bill-item {
   display: grid;
   column-gap: 16px;
@@ -9,10 +11,6 @@
   @media (min-width: 768px) {
     grid-template-columns: repeat(5, 1fr);
     grid-template-areas: 'item-name item-name item-qty item-price item-total';
-  }
-
-  .btn > div {
-    background: none;
   }
 
   &__button {
@@ -36,5 +34,46 @@
 
   .item-total {
     grid-area: item-total;
+  }
+}
+
+.bill-total {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  color: $light-grey;
+
+  h5 {
+    margin-bottom: 27px;
+  }
+
+  span {
+    font-weight: bold;
+  }
+
+  .btn {
+    justify-self: end;
+    background: none;
+    width: 30px;
+    height: 30px;
+    align-self: center;
+    align-items: center;
+    margin-bottom: 11px;
+    color: $light-grey;
+  }
+
+  .btn-icon {
+    padding: 8px;
+  }
+
+  .btn > div {
+    margin-right: 0;
+    align-self: center;
+    padding: 0;
+    background: none;
+  }
+
+  .btn > div > img {
+    height: 15px;
+    width: 15px;
   }
 }

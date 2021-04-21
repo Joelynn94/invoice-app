@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import { AppContext } from '../../context/AppContext';
 
@@ -11,6 +11,7 @@ import InvoiceButtons from '../../components/InvoiceCreateButtons/InvoiceCreateB
 import './InvoiceForm.scss';
 import BillFrom from '../../components/BillFrom/BillFrom';
 import BillTo from '../../components/BillTo/BillTo';
+import BillItem from '../../components/BillItem/BillItem';
 
 const defaultSenderAddress = {
   street: '',
@@ -26,6 +27,13 @@ const defaultClientAddress = {
   country: '',
 };
 
+const defaultBillItem = {
+  itemName: '',
+  quantity: '',
+  price: '',
+  total: '',
+};
+
 const defaultState = {
   id: '',
   createdAt: '',
@@ -37,14 +45,7 @@ const defaultState = {
   status: '',
   senderAddress: defaultSenderAddress,
   clientAddress: defaultClientAddress,
-  items: [
-    {
-      name: '',
-      quantity: '',
-      price: '',
-      total: '',
-    },
-  ],
+  items: [defaultBillItem],
   total: '',
 };
 
@@ -54,6 +55,10 @@ const InvoiceForm = () => {
   const theme = isLightTheme ? light : dark;
 
   const [invoice, setInvoice] = useState(defaultState);
+
+  useEffect(() => {
+    console.dir(invoice);
+  }, [invoice]);
 
   // destructure out of state
   const {
@@ -66,7 +71,6 @@ const InvoiceForm = () => {
     senderAddress,
     clientAddress,
     items,
-    total,
   } = invoice;
 
   const handleSubmit = (event) => {
@@ -87,7 +91,7 @@ const InvoiceForm = () => {
       <BillTo
         setInvoice={setInvoice}
         clientName={clientName}
-        clientEmai={clientEmail}
+        clientEmail={clientEmail}
         street={clientAddress.street}
         city={clientAddress.city}
         postCode={clientAddress.postCode}
@@ -97,57 +101,27 @@ const InvoiceForm = () => {
         description={description}
       />
       <Heading variant='h2'>Item List</Heading>
-      <section className='bill-item'>
-        <FormInput
-          className='item-name'
-          name='name'
-          type='text'
-          value={items.name}
-          label='Item Name'
-          style={{
-            backgroundColor: theme.cardBg,
-            border: `1px solid ${theme.borderColor}`,
-            color: theme.text,
-          }}
-        />
-        <FormInput
-          className='item-qty'
-          name='quantity'
-          type='number'
-          min='1'
-          value={items.quantity}
-          label='Qty'
-          style={{
-            backgroundColor: theme.cardBg,
-            border: `1px solid ${theme.borderColor}`,
-            color: theme.text,
-          }}
-        />
-        <FormInput
-          className='item-price'
-          name='price'
-          step='.01'
-          type='text'
-          pattern='[0-9]*'
-          value={items.price}
-          label='Price'
-          style={{
-            backgroundColor: theme.cardBg,
-            border: `1px solid ${theme.borderColor}`,
-            color: theme.text,
-          }}
-        />
-        <div className='bill-total'>
-          <div>
-            <Heading variant='h5'>Total</Heading>
-            <span>{items.total}</span>
-          </div>
-          <Button icon='delete'></Button>
-        </div>
-      </section>
+      {items.map((item) => {
+        const { itemName, quantity, price, total } = item;
+        return (
+          <BillItem
+            setInvoice={setInvoice}
+            itemName={itemName}
+            quantity={quantity}
+            price={price}
+            total={total}
+          />
+        );
+      })}
       <div className='bill-item__button'>
         <Button
           type='submit'
+          onClick={() =>
+            setInvoice((prev) => ({
+              ...prev,
+              items: [...prev.items, defaultBillItem],
+            }))
+          }
           style={{
             backgroundColor: theme.cardBg,
           }}
