@@ -3,9 +3,9 @@ const currencyOptions = {
   maximumFractionDigits: 2,
 };
 
-const formatToCurrency = (num) => {
-  if (num) {
-    return num.toLocaleString(undefined, currencyOptions);
+const formatToCurrency = (price) => {
+  if (price) {
+    return price.toLocaleString(undefined, currencyOptions);
   }
   return;
 };
