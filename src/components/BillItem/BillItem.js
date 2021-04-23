@@ -1,17 +1,27 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
-import { AppContext } from '../../context/AppContext';
-import Button from '../Button/Button';
+import Button from '../../components/Button/Button';
 import FormInput from '../FormInput/FormInput';
 import Heading from '../Heading/Heading';
 import changeToCurrency from '../../utils/changeToCurrency';
 
 import './BillItem.scss';
 
-const BillItem = ({ setInvoice, itemName, quantity, price, total }) => {
-  const { dispatch } = useContext(AppContext);
+const BillItem = ({
+  item,
+  items,
+  index,
+  itemName,
+  quantity,
+  price,
+  total,
+  setInvoice,
+}) => {
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
+
+  const values = [...items];
+  console.log(values[index]);
 
   return (
     <>
@@ -24,13 +34,13 @@ const BillItem = ({ setInvoice, itemName, quantity, price, total }) => {
           value={itemName}
           onChange={(itemName) =>
             setInvoice((prev) => ({
-              // spread out previous state
               ...prev,
-              items: {
-                // spread out previous state of items
-                ...prev.items,
-                itemName,
-              },
+              items: [
+                {
+                  ...item,
+                  itemName,
+                },
+              ],
             }))
           }
           style={{
@@ -47,13 +57,13 @@ const BillItem = ({ setInvoice, itemName, quantity, price, total }) => {
           value={quantity}
           onChange={(quantity) =>
             setInvoice((prev) => ({
-              // spread out previous state
               ...prev,
-              items: {
-                // spread out previous state of items
-                ...prev.items,
-                quantity,
-              },
+              items: [
+                {
+                  ...item,
+                  quantity,
+                },
+              ],
             }))
           }
           style={{
@@ -70,13 +80,8 @@ const BillItem = ({ setInvoice, itemName, quantity, price, total }) => {
           value={price}
           onChange={(price) =>
             setInvoice((prev) => ({
-              // spread out previous state
               ...prev,
-              items: {
-                // spread out previous state of items
-                ...prev.items,
-                price,
-              },
+              items: [{ ...item, price }],
             }))
           }
           style={{

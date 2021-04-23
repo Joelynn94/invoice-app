@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import { AppContext } from '../../context/AppContext';
 
-import FormInput from '../../components/FormInput/FormInput';
 import Heading from '../../components/Heading/Heading';
 import Button from '../../components/Button/Button';
 import GoBack from '../../components/GoBack/GoBack';
@@ -12,6 +11,7 @@ import './InvoiceForm.scss';
 import BillFrom from '../../components/BillFrom/BillFrom';
 import BillTo from '../../components/BillTo/BillTo';
 import BillItem from '../../components/BillItem/BillItem';
+import FormInput from '../../components/FormInput/FormInput';
 
 const defaultSenderAddress = {
   street: '',
@@ -46,7 +46,6 @@ const defaultState = {
   senderAddress: defaultSenderAddress,
   clientAddress: defaultClientAddress,
   items: [defaultBillItem],
-  total: '',
 };
 
 const InvoiceForm = () => {
@@ -73,9 +72,22 @@ const InvoiceForm = () => {
     items,
   } = invoice;
 
+  const addBillItem = (value) => {
+    setInvoice((prevState) => ({
+      ...prevState,
+      items: [...items, { value }],
+    }));
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
   };
+
+  // console.log(
+  //   invoice.items.map((item) => ({
+  //     items: { ...item, hello: 'll' },
+  //   }))
+  // );
 
   return (
     <main className='invoice-form'>
@@ -101,18 +113,26 @@ const InvoiceForm = () => {
         description={description}
       />
       <Heading variant='h2'>Item List</Heading>
-      {items.map((item) => {
-        const { itemName, quantity, price, total } = item;
-        return (
-          <BillItem
-            setInvoice={setInvoice}
-            itemName={itemName}
-            quantity={quantity}
-            price={price}
-            total={total}
-          />
-        );
-      })}
+      {items.length > 0 &&
+        items.map((item, index) => {
+          const { itemName, quantity, price, total } = item;
+          return (
+            <>
+              <BillItem
+                key={index}
+                index={index}
+                setInvoice={setInvoice}
+                itemName={itemName}
+                quantity={quantity}
+                price={price}
+                total={total}
+                items={items}
+                item={item}
+              />
+            </>
+          );
+        })}
+
       <div className='bill-item__button'>
         <Button
           type='submit'

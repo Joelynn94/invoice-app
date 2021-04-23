@@ -58,7 +58,7 @@ const intitalState = {
       },
       items: [
         {
-          name: 'Brand Guidelines',
+          itemName: 'Brand Guidelines',
           quantity: 1,
           price: 1800.9,
           total: 1800.9,
@@ -89,7 +89,7 @@ const intitalState = {
       },
       items: [
         {
-          name: 'Banner Design',
+          itemName: 'Banner Design',
           quantity: 1,
           price: 156.0,
           total: 156.0,
@@ -126,7 +126,7 @@ const intitalState = {
       },
       items: [
         {
-          name: 'Website Redesign',
+          itemName: 'Website Redesign',
           quantity: 1,
           price: 14002.33,
           total: 14002.33,
@@ -157,7 +157,7 @@ const intitalState = {
       },
       items: [
         {
-          name: 'Logo Sketches',
+          itemName: 'Logo Sketches',
           quantity: 1,
           price: 102.04,
           total: 102.04,
@@ -188,7 +188,7 @@ const intitalState = {
       },
       items: [
         {
-          name: 'New Logo',
+          itemName: 'New Logo',
           quantity: 1,
           price: 1532.33,
           total: 1532.33,
@@ -225,7 +225,7 @@ const intitalState = {
       },
       items: [
         {
-          name: 'Web Design',
+          itemName: 'Web Design',
           quantity: 1,
           price: 6155.91,
           total: 6155.91,
@@ -256,7 +256,7 @@ const intitalState = {
       },
       items: [
         {
-          name: 'Logo Re-design',
+          itemName: 'Logo Re-design',
           quantity: 1,
           price: 3102.04,
           total: 3102.04,
