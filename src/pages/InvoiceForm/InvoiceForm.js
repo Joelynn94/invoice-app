@@ -1,4 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+
 import { ThemeContext } from '../../context/ThemeContext';
 import { AppContext } from '../../context/AppContext';
 
@@ -28,6 +30,7 @@ const defaultClientAddress = {
 };
 
 const defaultBillItem = {
+  id: uuidv4(),
   itemName: '',
   quantity: '',
   price: '',
@@ -82,12 +85,14 @@ const InvoiceForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
   };
-
-  // console.log(
-  //   invoice.items.map((item) => ({
-  //     items: { ...item, hello: 'll' },
-  //   }))
-  // );
+  const onChange = (e, index) => {
+    console.log([e.target.name], e, index)
+    const updatedItems = items.map((item, i) => index === i 
+    ? Object.assign(item, {[e.target.name]: e.target.value}) 
+    : item
+    );
+    setInvoice(updatedItems)
+  }
 
   return (
     <main className='invoice-form'>
@@ -113,25 +118,25 @@ const InvoiceForm = () => {
         description={description}
       />
       <Heading variant='h2'>Item List</Heading>
-      {items.length > 0 &&
-        items.map((item, index) => {
-          const { itemName, quantity, price, total } = item;
-          return (
-            <>
-              <BillItem
-                key={index}
-                index={index}
-                setInvoice={setInvoice}
-                itemName={itemName}
-                quantity={quantity}
-                price={price}
-                total={total}
-                items={items}
-                item={item}
-              />
-            </>
-          );
-        })}
+      {items.map((item, index) => {
+        const { id, itemName, quantity, price, total } = item;
+        return (
+          <>
+            <BillItem
+              key={index}
+              id={id}
+              index={index}
+              setInvoice={setInvoice}
+              itemName={itemName}
+              quantity={quantity}
+              price={price}
+              total={total}
+              items={items}
+              item={item}
+            />
+          </>
+        );
+      })}
 
       <div className='bill-item__button'>
         <Button
@@ -139,7 +144,15 @@ const InvoiceForm = () => {
           onClick={() =>
             setInvoice((prev) => ({
               ...prev,
-              items: [...prev.items, defaultBillItem],
+              items: [...prev.items, 
+              {  
+                id: uuidv4(),
+                itemName: '',
+                quantity: '',
+                price: '',
+                total: '',
+              }
+              ],
             }))
           }
           style={{
