@@ -15,6 +15,9 @@ import BillTo from '../../components/BillTo/BillTo';
 import BillItem from '../../components/BillItem/BillItem';
 import FormInput from '../../components/FormInput/FormInput';
 
+import formatDate from '../../utils/formatDate'
+import formatRandomId from '../../utils/formatRandomId'
+
 const defaultSenderAddress = {
   street: '',
   city: '',
@@ -38,8 +41,8 @@ const defaultBillItem = {
 };
 
 const defaultState = {
-  id: '',
-  createdAt: '',
+  id: formatRandomId(),
+  createdAt: formatDate(),
   paymentDue: '',
   description: '',
   paymentTerms: '',
@@ -60,6 +63,7 @@ const InvoiceForm = () => {
 
   useEffect(() => {
     console.dir(invoice);
+    console.log(formatDate())
   }, [invoice]);
 
   // destructure out of state
@@ -75,24 +79,9 @@ const InvoiceForm = () => {
     items,
   } = invoice;
 
-  const addBillItem = (value) => {
-    setInvoice((prevState) => ({
-      ...prevState,
-      items: [...items, { value }],
-    }));
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
   };
-  const onChange = (e, index) => {
-    console.log([e.target.name], e, index)
-    const updatedItems = items.map((item, i) => index === i 
-    ? Object.assign(item, {[e.target.name]: e.target.value}) 
-    : item
-    );
-    setInvoice(updatedItems)
-  }
 
   return (
     <main className='invoice-form'>

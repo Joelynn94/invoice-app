@@ -1,5 +1,5 @@
 import { createContext, useReducer } from 'react';
-import formatRandomId from '../utils/formatRandomId';
+import { v4 as uuidv4 } from 'uuid';
 
 const AppReducer = (state, action) => {
   switch (action.type) {
@@ -95,7 +95,7 @@ const intitalState = {
           total: 156.0,
         },
         {
-          name: 'Email Design',
+          itemName: 'Email Design',
           quantity: 2,
           price: 200.0,
           total: 400.0,
@@ -194,7 +194,7 @@ const intitalState = {
           total: 1532.33,
         },
         {
-          name: 'Brand Guidelines',
+          itemName: 'Brand Guidelines',
           quantity: 1,
           price: 2500.0,
           total: 2500.0,

@@ -3,6 +3,7 @@ import { ThemeContext } from '../../context/ThemeContext';
 import Heading from '../Heading/Heading';
 import InvoiceItem from '../InvoiceItem/InvoiceItem';
 import changeToCurrency from '../../utils/changeToCurrency';
+import formatDate from '../../utils/formatDate'
 
 import './InvoiceDetails.scss';
 
@@ -41,7 +42,7 @@ const InvoiceDetails = ({ invoice }) => {
               Invoice Date
             </Heading>
             <Heading variant='h3' className='invoice-details--created-at'>
-              {invoice.createdAt}
+              {formatDate(invoice.createdAt)}
             </Heading>
           </div>
           <div className='invoice-details__payment-date'>
@@ -49,7 +50,7 @@ const InvoiceDetails = ({ invoice }) => {
               Payment Due
             </Heading>
             <Heading variant='h3' className='invoice-details--payment-due'>
-              {invoice.paymentDue}
+              {formatDate(invoice.paymentDue)}
             </Heading>
           </div>
         </div>

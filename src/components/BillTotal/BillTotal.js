@@ -12,7 +12,7 @@ const BillTotal = ({ item }) => {
       <div>
         <Heading variant='h5'>Total</Heading>
         <span>
-          {changeToCurrency(parseFloat(item.itemQty * item.itemPrice))}
+          {changeToCurrency(parseFloat(item.quantity * item.price))}
         </span>
       </div>
       <Button icon='delete'></Button>

@@ -20,7 +20,7 @@ const InvoiceItem = ({ invoice }) => {
       {invoice.items.map((item, index) => (
         <div className='invoice-details__item' key={index}>
           <div className='invoice-details__item--breakdown'>
-            <Heading variant='h4'>{item.name}</Heading>
+            <Heading variant='h4'>{item.itemName}</Heading>
             <p className='invoice-details--alt-txt'>{`${
               item.quantity
             } x ${changeToCurrency(item.price)}`}</p>
@@ -29,7 +29,7 @@ const InvoiceItem = ({ invoice }) => {
             <Heading variant='h4'>${changeToCurrency(item.total)}</Heading>
           </div>
           <div className='invoice-details__item--breakdown-lg'>
-            <p className='invoice-details--alt-txt justify-start'>{`${item.name}`}</p>
+            <p className='invoice-details--alt-txt justify-start'>{`${item.itemName}`}</p>
             <p className='invoice-details--alt-txt justify-center'>{`${item.quantity}`}</p>
             <p className='invoice-details--alt-txt'>{`${changeToCurrency(
               item.price

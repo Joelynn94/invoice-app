@@ -5,6 +5,7 @@ import InvoiceBadge from '../InvoiceBadge/InvoiceBadge';
 import Button from '../Button/Button';
 import Heading from '../Heading/Heading';
 import changeToCurrency from '../../utils/changeToCurrency';
+import formatDate from '../../utils/formatDate'
 
 import './InvoiceSummary.scss';
 
@@ -43,7 +44,7 @@ const InvoiceSummary = ({ invoice }) => {
               >
                 <p>
                   <span className='invoice-summary__due-txt'>Due</span>
-                  {invoice.paymentDue}
+                  {formatDate(invoice.paymentDue)}
                 </p>
               </div>
               <div className='invoice-summary__total'>
@@ -59,7 +60,7 @@ const InvoiceSummary = ({ invoice }) => {
             >
               <p>
                 <span className='invoice-summary__due-txt'>Due</span>
-                {invoice.paymentDue}
+                {formatDate(invoice.paymentDue)}
               </p>
             </div>
             <div className='invoice-summary__total'>
