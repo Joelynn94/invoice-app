@@ -109,19 +109,17 @@ const InvoiceForm = () => {
       {items.map((item) => {
         const { id, itemName, quantity, price } = item;
         return (
-          <>
-            <BillItem
-              key={item.id}
-              id={id}
-              setInvoice={setInvoice}
-              itemName={itemName}
-              quantity={quantity}
-              price={price}
-              total={quantity * price}
-              items={items}
-              item={item}
-            />
-          </>
+          <BillItem
+            key={item.id}
+            id={id}
+            setInvoice={setInvoice}
+            itemName={itemName}
+            quantity={quantity}
+            price={price}
+            total={quantity * price}
+            items={items}
+            item={item}
+          />
         );
       })}
 
