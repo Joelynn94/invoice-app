@@ -13,10 +13,9 @@ import './InvoiceForm.scss';
 import BillFrom from '../../components/BillFrom/BillFrom';
 import BillTo from '../../components/BillTo/BillTo';
 import BillItem from '../../components/BillItem/BillItem';
-import FormInput from '../../components/FormInput/FormInput';
 
-import formatDate from '../../utils/formatDate'
-import formatRandomId from '../../utils/formatRandomId'
+import formatDate from '../../utils/formatDate';
+import formatRandomId from '../../utils/formatRandomId';
 
 const defaultSenderAddress = {
   street: '',
@@ -52,6 +51,7 @@ const defaultState = {
   senderAddress: defaultSenderAddress,
   clientAddress: defaultClientAddress,
   items: [defaultBillItem],
+  total: '',
 };
 
 const InvoiceForm = () => {
@@ -63,7 +63,6 @@ const InvoiceForm = () => {
 
   useEffect(() => {
     console.dir(invoice);
-    console.log(formatDate())
   }, [invoice]);
 
   // destructure out of state
@@ -107,19 +106,18 @@ const InvoiceForm = () => {
         description={description}
       />
       <Heading variant='h2'>Item List</Heading>
-      {items.map((item, index) => {
-        const { id, itemName, quantity, price, total } = item;
+      {items.map((item) => {
+        const { id, itemName, quantity, price } = item;
         return (
           <>
             <BillItem
-              key={index}
+              key={item.id}
               id={id}
-              index={index}
               setInvoice={setInvoice}
               itemName={itemName}
               quantity={quantity}
               price={price}
-              total={total}
+              total={quantity * price}
               items={items}
               item={item}
             />
@@ -133,14 +131,15 @@ const InvoiceForm = () => {
           onClick={() =>
             setInvoice((prev) => ({
               ...prev,
-              items: [...prev.items, 
-              {  
-                id: uuidv4(),
-                itemName: '',
-                quantity: '',
-                price: '',
-                total: '',
-              }
+              items: [
+                ...prev.items,
+                {
+                  id: uuidv4(),
+                  itemName: '',
+                  quantity: '',
+                  price: '',
+                  total: '',
+                },
               ],
             }))
           }

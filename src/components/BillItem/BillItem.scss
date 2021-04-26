@@ -37,7 +37,7 @@
   }
 
   .item-delete {
-    grid-area: item-delete
+    grid-area: item-delete;
   }
 }
 
@@ -52,9 +52,9 @@
   span {
     font-weight: bold;
   }
-  
+
   .item-total {
-    flex: 3;
+    flex: 6;
   }
 
   .btn {

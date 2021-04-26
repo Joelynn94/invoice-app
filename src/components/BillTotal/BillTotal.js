@@ -11,9 +11,7 @@ const BillTotal = ({ item }) => {
     <div className='bill-total'>
       <div>
         <Heading variant='h5'>Total</Heading>
-        <span>
-          {changeToCurrency(parseFloat(item.quantity * item.price))}
-        </span>
+        <span>{changeToCurrency(parseFloat(item.quantity * item.price))}</span>
       </div>
       <Button icon='delete'></Button>
     </div>
