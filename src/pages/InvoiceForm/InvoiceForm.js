@@ -47,15 +47,15 @@ const defaultState = {
   paymentTerms: '',
   clientName: '',
   clientEmail: '',
-  status: '',
+  status: 'pending',
   senderAddress: defaultSenderAddress,
   clientAddress: defaultClientAddress,
   items: [defaultBillItem],
   total: '',
 };
 
-const InvoiceForm = () => {
-  const { invoices } = useContext(AppContext);
+const InvoiceForm = ({ history }) => {
+  const { invoices, createInvoice } = useContext(AppContext);
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
 
@@ -80,6 +80,10 @@ const InvoiceForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+  };
+
+  const redirectToHome = () => {
+    history.push('/');
   };
 
   return (
@@ -107,7 +111,7 @@ const InvoiceForm = () => {
       />
       <Heading variant='h2'>Item List</Heading>
       {items.map((item) => {
-        const { id, itemName, quantity, price } = item;
+        const { id, itemName, quantity, price, total } = item;
         return (
           <BillItem
             key={item.id}
@@ -149,6 +153,8 @@ const InvoiceForm = () => {
         </Button>
       </div>
       <InvoiceButtons
+        createInvoice={createInvoice}
+        invoice={invoice}
         style={{
           backgroundColor: theme.cardBg,
           color: theme.text,

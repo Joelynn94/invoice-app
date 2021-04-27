@@ -2,10 +2,16 @@ import { createContext, useReducer } from 'react';
 
 const AppReducer = (state, action) => {
   switch (action.type) {
+    case 'GET_INVOICES':
+      return {
+        ...state,
+        invoices: action.payload,
+        loading: false,
+      };
     case 'CREATE_INVOICE':
       return {
         ...state,
-        invoices: [action.payload, state.invoices],
+        invoices: [action.payload, ...state.invoices],
         loading: false,
       };
     case 'FILTER_STATUS':
@@ -273,6 +279,10 @@ export const AppContext = createContext(intitalState);
 export const AppProvider = (props) => {
   const [state, dispatch] = useReducer(AppReducer, intitalState);
 
+  const getInvoices = (invoices) => {
+    dispatch({ type: 'GET_INVOICES', payload: invoices });
+  };
+
   const createInvoice = (invoice) => {
     dispatch({ type: 'CREATE_INVOICE', payload: invoice });
   };
@@ -289,6 +299,7 @@ export const AppProvider = (props) => {
       value={{
         invoices: state.invoices,
         filtered: state.filtered,
+        getInvoices,
         createInvoice,
         filterInvoices,
         clearFilter,

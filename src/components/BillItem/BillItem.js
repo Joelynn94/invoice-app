@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import Button from '../../components/Button/Button';
 import FormInput from '../FormInput/FormInput';
 
 import './BillItem.scss';
+import calculateTotal from '../../utils/calculateTotal';
 
 const BillItem = ({
   id,
@@ -16,6 +17,7 @@ const BillItem = ({
 }) => {
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
+  console.log(total);
 
   return (
     <>
@@ -95,8 +97,8 @@ const BillItem = ({
                 className='item-total'
                 name='total'
                 type='text'
-                value={total.toFixed(2)}
                 disabled
+                value={total}
                 onChange={(total) =>
                   setInvoice((prev) => {
                     return {
@@ -120,6 +122,7 @@ const BillItem = ({
                     return {
                       ...prev,
                       items: items.filter((item) => item.id !== id),
+                      isSubmitted: true,
                     };
                   })
                 }

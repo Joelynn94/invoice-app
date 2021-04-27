@@ -8,15 +8,19 @@ import NoInvoices from '../components/NoInvoices/NoInvoices';
 const Dashboard = () => {
   const { invoices, filtered } = useContext(AppContext);
 
-  console.log(filtered);
-  return (
-    <main>
-      <InvoicesBar invoices={invoices} />
+  /**
       {filtered.length > 0 ? (
         filtered.map((filter) => (
           <InvoiceSummary invoice={filter} key={filter.id} />
         ))
-      ) : invoices.length > 0 ? (
+      ) :
+  */
+
+  console.log(filtered);
+  return (
+    <main>
+      <InvoicesBar invoices={invoices} />
+      {invoices.length > 0 ? (
         invoices.map((invoice) => (
           <InvoiceSummary invoice={invoice} key={invoice.id} />
         ))
