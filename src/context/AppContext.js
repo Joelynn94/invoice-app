@@ -2,10 +2,16 @@ import { createContext, useReducer } from 'react';
 
 const AppReducer = (state, action) => {
   switch (action.type) {
+    case 'SET_CURRENT_INVOICE':
+      return {
+        ...state,
+        currentInvoice: action.payload,
+        loading: false,
+      };
     case 'GET_INVOICES':
       return {
         ...state,
-        invoices: action.payload,
+        invoices: [...action.payload],
         loading: false,
       };
     case 'CREATE_INVOICE':
@@ -13,6 +19,26 @@ const AppReducer = (state, action) => {
         ...state,
         invoices: [action.payload, ...state.invoices],
         loading: false,
+      };
+    case 'EDIT_INVOICE':
+      return {
+        ...state,
+        invoices: state.invoices.map((invoice) => {
+          return invoice.id === action.payload.id ? action.payload : invoice;
+        }),
+        loading: false,
+      };
+    case 'DELETE_INVOICE':
+      return {
+        ...state,
+        invoices: state.invoices.filter((invoice) => {
+          return invoice.id !== action.payload;
+        }),
+      };
+    case 'INVOICE_ERROR':
+      return {
+        ...state,
+        error: action.payload,
       };
     case 'FILTER_STATUS':
       let value = action.payload;
@@ -22,6 +48,18 @@ const AppReducer = (state, action) => {
       return {
         ...state,
         filtered: filteredInvocies,
+      };
+    case 'SAVE_DRAFT':
+      return {
+        ...state,
+        status: 'draft',
+        loading: false,
+      };
+    case 'MARK_PAID':
+      return {
+        ...state,
+        status: 'paid',
+        loading: false,
       };
     case 'CLEAR_FILTER':
       return {
@@ -270,14 +308,20 @@ const intitalState = {
       total: 3102.04,
     },
   ],
+  currentInvoice: {},
   filtered: [],
   loading: false,
+  editing: false,
 };
 
 export const AppContext = createContext(intitalState);
 
 export const AppProvider = (props) => {
   const [state, dispatch] = useReducer(AppReducer, intitalState);
+
+  const setCurrentInvoice = (invoice) => {
+    dispatch({ type: 'SET_CURRENT_INVOICE', payload: invoice });
+  };
 
   const getInvoices = (invoices) => {
     dispatch({ type: 'GET_INVOICES', payload: invoices });
@@ -287,8 +331,25 @@ export const AppProvider = (props) => {
     dispatch({ type: 'CREATE_INVOICE', payload: invoice });
   };
 
-  const filterInvoices = (status) =>
+  const editInvoice = (invoice) => {
+    dispatch({ type: 'EDIT_INVOICE', payload: invoice });
+  };
+
+  const deleteInvoice = (id) => {
+    dispatch({ type: 'DELETE_INVOICE', payload: id });
+  };
+
+  const filterInvoices = (status) => {
     dispatch({ type: 'FILTER_STATUS', payload: status });
+  };
+
+  const saveDraft = (status) => {
+    dispatch({ type: 'SAVE_DRAFT', payload: status });
+  };
+
+  const markPaid = (status) => {
+    dispatch({ type: 'MARK_PAID', payload: status });
+  };
 
   const clearFilter = () => {
     dispatch({ type: 'CLEAR_FILTER' });
@@ -299,9 +360,14 @@ export const AppProvider = (props) => {
       value={{
         invoices: state.invoices,
         filtered: state.filtered,
+        setCurrentInvoice,
         getInvoices,
         createInvoice,
+        editInvoice,
+        deleteInvoice,
         filterInvoices,
+        saveDraft,
+        markPaid,
         clearFilter,
       }}
     >
