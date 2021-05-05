@@ -41,13 +41,20 @@ const AppReducer = (state, action) => {
         error: action.payload,
       };
     case 'FILTER_STATUS':
-      let value = action.payload;
-      const filteredInvocies = state.invoices.filter((invoice) => {
-        return invoice.status.includes(value);
+      let values = action.payload;
+      console.log(action.payload);
+      const filteredInvoices = state.invoices.filter((invoice) => {
+        if (invoice.status.indexOf(values)) {
+          return invoice;
+        } else {
+          return;
+        }
       });
+      console.log(filteredInvoices);
       return {
         ...state,
-        filtered: filteredInvocies,
+        filtered: filteredInvoices,
+        loading: false,
       };
     case 'SAVE_DRAFT':
       return {
