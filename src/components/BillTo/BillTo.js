@@ -194,6 +194,7 @@ const BillTo = ({
           }}
           option='1'
         >
+          <FormOption value='' item='Choose an option' />
           <FormOption value='1' item='Net 1 day' />
           <FormOption value='7' item='Net 7 days' />
           <FormOption value='14' item='Net 14 days' />
