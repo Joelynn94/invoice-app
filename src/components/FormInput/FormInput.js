@@ -25,7 +25,7 @@ const FormInput = ({
         type={type}
         value={value}
         disabled={disabled}
-        onChange={(e) => onChange(e.target.value, e)}
+        onChange={onChange}
         {...otherProps}
       />
     </div>

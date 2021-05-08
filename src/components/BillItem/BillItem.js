@@ -8,6 +8,7 @@ import calculateTotal from '../../utils/calculateTotal';
 
 const BillItem = ({
   id,
+  item,
   items,
   itemName,
   quantity,
@@ -101,6 +102,7 @@ const BillItem = ({
                 value={total}
                 onChange={(total) =>
                   setInvoice((prev) => {
+                    console.log(total);
                     return {
                       ...prev,
                       items: items.map((item) =>

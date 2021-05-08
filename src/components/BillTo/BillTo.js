@@ -11,13 +11,17 @@ const BillTo = ({
   setInvoice,
   clientName,
   clientEmail,
-  street,
-  city,
-  postCode,
-  country,
   paymentDue,
   paymentTerms,
   description,
+  clientStreet,
+  clientCity,
+  clientPostCode,
+  clientCountry,
+  onStreetChange,
+  onCityChange,
+  onPostCodeChange,
+  onCountryChange,
 }) => {
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
@@ -68,18 +72,8 @@ const BillTo = ({
           className='client-street'
           name='clientStreet'
           type='text'
-          value={street}
-          onChange={(street) =>
-            setInvoice((prev) => ({
-              // spread out previous state
-              ...prev,
-              clientAddress: {
-                // spread out previous state of clientAddress
-                ...prev.clientAddress,
-                street,
-              },
-            }))
-          }
+          value={clientStreet}
+          onChange={onStreetChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -91,18 +85,8 @@ const BillTo = ({
           className='client-city'
           name='clientCity'
           type='text'
-          value={city}
-          onChange={(city) =>
-            setInvoice((prev) => ({
-              // spread out previous state
-              ...prev,
-              clientAddress: {
-                // spread out previous state of clientAddress
-                ...prev.clientAddress,
-                city,
-              },
-            }))
-          }
+          value={clientCity}
+          onChange={onCityChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -114,18 +98,8 @@ const BillTo = ({
           className='client-post-code'
           name='clientPostCode'
           type='text'
-          value={postCode}
-          onChange={(postCode) =>
-            setInvoice((prev) => ({
-              // spread out previous state
-              ...prev,
-              clientAddress: {
-                // spread out previous state of clientAddress
-                ...prev.clientAddress,
-                postCode,
-              },
-            }))
-          }
+          value={clientPostCode}
+          onChange={onPostCodeChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -137,18 +111,8 @@ const BillTo = ({
           className='client-country'
           name='clientCountry'
           type='text'
-          value={country}
-          onChange={(country) =>
-            setInvoice((prev) => ({
-              // spread out previous state
-              ...prev,
-              clientAddress: {
-                // spread out previous state of clientAddress
-                ...prev.clientAddress,
-                country,
-              },
-            }))
-          }
+          value={clientCountry}
+          onChange={onCountryChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,

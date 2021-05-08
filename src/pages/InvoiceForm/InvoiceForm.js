@@ -16,6 +16,7 @@ import BillItem from '../../components/BillItem/BillItem';
 
 import formatDate from '../../utils/formatDate';
 import formatRandomId from '../../utils/formatRandomId';
+import calculateTotal from '../../utils/calculateTotal';
 
 const defaultSenderAddress = {
   street: '',
@@ -47,7 +48,7 @@ const defaultState = {
   paymentTerms: '',
   clientName: '',
   clientEmail: '',
-  status: 'pending',
+  status: 'draft',
   senderAddress: defaultSenderAddress,
   clientAddress: defaultClientAddress,
   items: [defaultBillItem],
@@ -61,9 +62,17 @@ const InvoiceForm = ({ history }) => {
 
   const [invoice, setInvoice] = useState(defaultState);
 
-  useEffect(() => {
-    console.dir(invoice);
-  }, [invoice]);
+  const [senderAddress, setSenderAddress] = useState({});
+  const [senderStreet, setSenderStreet] = useState('');
+  const [senderCity, setSenderCity] = useState('');
+  const [senderPostCode, setSenderPostCode] = useState('');
+  const [senderCountry, setSenderCountry] = useState('');
+
+  const [clientAddress, setClientAddress] = useState({});
+  const [clientStreet, setClientStreet] = useState('');
+  const [clientCity, setClientCity] = useState('');
+  const [clientPostCode, setClientPostCode] = useState('');
+  const [clientCountry, setClientCountry] = useState('');
 
   // destructure out of state
   const {
@@ -73,93 +82,135 @@ const InvoiceForm = ({ history }) => {
     clientName,
     clientEmail,
     status,
-    senderAddress,
-    clientAddress,
     items,
   } = invoice;
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
+  useEffect(() => {
+    console.dir(invoice);
+  }, [invoice]);
 
-  const redirectToHome = () => {
-    history.push('/');
-  };
+  function handleSenderStreetChange(event) {
+    setSenderStreet(event.target.value);
+  }
+
+  function handleSenderCityChange(event) {
+    setSenderCity(event.target.value);
+  }
+
+  function handleSenderPostCodeChange(event) {
+    setSenderPostCode(event.target.value);
+  }
+
+  function handleSenderCountryChange(event) {
+    setSenderCountry(event.target.value);
+  }
+
+  function handleClientStreetChange(event) {
+    setClientStreet(event.target.value);
+  }
+
+  function handleClientCityChange(event) {
+    setClientCity(event.target.value);
+  }
+
+  function handleClientPostCodeChange(event) {
+    setClientPostCode(event.target.value);
+  }
+
+  function handleClientCountryChange(event) {
+    setClientCountry(event.target.value);
+  }
+
+  function handleFormSubmit(event) {
+    event.preventDefault();
+
+    console.log(senderAddress);
+    console.log(clientAddress);
+  }
 
   return (
     <main className='invoice-form'>
-      <GoBack></GoBack>
-      <Heading variant='h1'>New Invoice</Heading>
-      <BillFrom
-        setInvoice={setInvoice}
-        street={senderAddress.street}
-        city={senderAddress.city}
-        postCode={senderAddress.postCode}
-        country={senderAddress.country}
-      />
-      <BillTo
-        setInvoice={setInvoice}
-        clientName={clientName}
-        clientEmail={clientEmail}
-        street={clientAddress.street}
-        city={clientAddress.city}
-        postCode={clientAddress.postCode}
-        country={clientAddress.country}
-        paymentDue={paymentDue}
-        paymentTerms={paymentTerms}
-        description={description}
-      />
-      <Heading variant='h2'>Item List</Heading>
-      {items.map((item) => {
-        const { id, itemName, quantity, price, total } = item;
-        return (
-          <BillItem
-            key={item.id}
-            id={id}
-            setInvoice={setInvoice}
-            itemName={itemName}
-            quantity={quantity}
-            price={price}
-            total={quantity * price}
-            items={items}
-            item={item}
-          />
-        );
-      })}
+      <form>
+        <GoBack></GoBack>
+        <Heading variant='h1'>New Invoice</Heading>
+        <BillFrom
+          street={senderStreet}
+          city={senderCity}
+          postCode={senderPostCode}
+          country={senderCountry}
+          onStreetChange={handleSenderStreetChange}
+          onCityChange={handleSenderCityChange}
+          onPostCodeChange={handleSenderPostCodeChange}
+          onCountryChange={handleSenderCountryChange}
+        />
+        <BillTo
+          setInvoice={setInvoice}
+          clientName={clientName}
+          clientEmail={clientEmail}
+          paymentDue={paymentDue}
+          paymentTerms={paymentTerms}
+          description={description}
+          street={clientStreet}
+          city={clientCity}
+          postCode={clientPostCode}
+          country={clientCountry}
+          onStreetChange={handleClientStreetChange}
+          onCityChange={handleClientCityChange}
+          onPostCodeChange={handleClientPostCodeChange}
+          onCountryChange={handleClientCountryChange}
+        />
+        <Heading variant='h2'>Item List</Heading>
+        {items.map((item) => {
+          const { id, itemName, quantity, price, total } = item;
+          return (
+            <BillItem
+              key={item.id}
+              id={id}
+              setInvoice={setInvoice}
+              itemName={itemName}
+              quantity={quantity}
+              price={price}
+              total={quantity * price}
+              items={items}
+              item={item}
+            />
+          );
+        })}
 
-      <div className='bill-item__button'>
-        <Button
-          type='submit'
-          onClick={() =>
-            setInvoice((prev) => ({
-              ...prev,
-              items: [
-                ...prev.items,
-                {
-                  id: uuidv4(),
-                  itemName: '',
-                  quantity: '',
-                  price: '',
-                  total: '',
-                },
-              ],
-            }))
-          }
+        <div className='bill-item__button'>
+          <Button
+            type='submit'
+            onClick={() =>
+              setInvoice((prev) => ({
+                ...prev,
+                items: [
+                  ...prev.items,
+                  {
+                    id: uuidv4(),
+                    itemName: '',
+                    quantity: '',
+                    price: '',
+                    total: '',
+                  },
+                ],
+              }))
+            }
+            style={{
+              backgroundColor: theme.cardBg,
+            }}
+          >
+            + Add New Item
+          </Button>
+        </div>
+        <InvoiceButtons
+          createInvoice={createInvoice}
+          invoice={invoice}
           style={{
             backgroundColor: theme.cardBg,
+            color: theme.text,
           }}
-        >
-          + Add New Item
-        </Button>
-      </div>
-      <InvoiceButtons
-        createInvoice={createInvoice}
-        invoice={invoice}
-        style={{
-          backgroundColor: theme.cardBg,
-          color: theme.text,
-        }}
-      />
+        />
+      </form>
     </main>
   );
 };

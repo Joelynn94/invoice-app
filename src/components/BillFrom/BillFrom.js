@@ -5,7 +5,16 @@ import Heading from '../../components/Heading/Heading';
 
 import './BillFrom.scss';
 
-const BillFrom = ({ street, city, postCode, country, setInvoice }) => {
+const BillFrom = ({
+  street,
+  city,
+  postCode,
+  country,
+  onStreetChange,
+  onCityChange,
+  onPostCodeChange,
+  onCountryChange,
+}) => {
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
 
@@ -14,22 +23,13 @@ const BillFrom = ({ street, city, postCode, country, setInvoice }) => {
       <Heading variant='h4'>Bill From</Heading>
       <section className='bill-from'>
         <FormInput
+          id='sender-street'
           label='Street Address'
           className='sender-street'
           name='senderStreet'
           type='text'
           value={street}
-          onChange={(street) =>
-            setInvoice((prev) => ({
-              // spread out previous state
-              ...prev,
-              senderAddress: {
-                // spread out the state of senderAddress
-                ...prev.senderAddress,
-                street,
-              },
-            }))
-          }
+          onChange={onStreetChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -37,22 +37,13 @@ const BillFrom = ({ street, city, postCode, country, setInvoice }) => {
           }}
         />
         <FormInput
+          id='sender-city'
           label='City'
           className='sender-city'
           name='senderCity'
           type='text'
           value={city}
-          onChange={(city) =>
-            setInvoice((prev) => ({
-              // spread out previous state of invoice
-              ...prev,
-              senderAddress: {
-                // spread out the state of senderAddress
-                ...prev.senderAddress,
-                city,
-              },
-            }))
-          }
+          onChange={onCityChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -60,22 +51,13 @@ const BillFrom = ({ street, city, postCode, country, setInvoice }) => {
           }}
         />
         <FormInput
+          id='sender-post'
           label='Post Code'
           className='sender-post-code'
           name='senderPostCode'
           type='text'
           value={postCode}
-          onChange={(postCode) =>
-            setInvoice((prev) => ({
-              // spread out previous state of invoice
-              ...prev,
-              senderAddress: {
-                // spread out the state of senderAddress
-                ...prev.senderAddress,
-                postCode,
-              },
-            }))
-          }
+          onChange={onPostCodeChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -83,22 +65,13 @@ const BillFrom = ({ street, city, postCode, country, setInvoice }) => {
           }}
         />
         <FormInput
+          id='sender-country'
           label='Country'
           className='sender-country'
           name='senderCountry'
           type='text'
           value={country}
-          onChange={(country) =>
-            setInvoice((prev) => ({
-              // spread out previous state of invoice
-              ...prev,
-              senderAddress: {
-                // spread out the state of senderAddress
-                ...prev.senderAddress,
-                country,
-              },
-            }))
-          }
+          onChange={onCountryChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,

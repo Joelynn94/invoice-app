@@ -7,13 +7,11 @@ const checkIsNan = (val) => {
 
 const calculateTotal = (items) => {
   checkIsNan(items);
-  if (items) {
-    return items.map((item) => {
-      return Number(item.quantity) * parseFloat(item.price);
-    });
+  let total = 0;
+  for (const item of items) {
+    total += item.total;
   }
-
-  return items;
+  return total;
 };
 
 export default calculateTotal;
