@@ -117,22 +117,20 @@ const InvoiceForm = ({ history }) => {
     });
   }
 
-  function handleBillItemChange(event) {
-    console.log(billItem);
-    setBillItem({
-      ...billItem,
-      [event.target.name]: event.target.value,
-    });
-  }
+  function handleBillItemsChange(id, event) {
+    console.log(id, event.target.name);
+    const items = [...billItems];
+    items[id] = event.target.value;
+    console.log((items[id] = event.target.value));
 
-  function handleBillItemsChange(e) {
-    e.preventDefault();
-    setBillItems([
-      ...billItems,
-      {
-        ...billItem,
-      },
-    ]);
+    setBillItems((currentItem) => {
+      return currentItem.map((item) =>
+        item.id === id
+          ? { ...item, [event.target.name]: event.target.value }
+          : item
+      );
+    });
+    console.log(billItems);
   }
 
   function handleDeleteItemClick(id) {
@@ -194,7 +192,7 @@ const InvoiceForm = ({ history }) => {
               total={item.quantity * item.price}
               item={item}
               items={billItems}
-              onBillItemChange={handleBillItemChange}
+              onBillItemChange={(e) => handleBillItemsChange(item.id, e)}
               onHandleItemDelete={handleDeleteItemClick}
             />
           );
