@@ -18,10 +18,8 @@ const BillTo = ({
   clientCity,
   clientPostCode,
   clientCountry,
-  onStreetChange,
-  onCityChange,
-  onPostCodeChange,
-  onCountryChange,
+  onClientAddressChange,
+  onBillToChange,
 }) => {
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
@@ -35,13 +33,7 @@ const BillTo = ({
           name='clientName'
           type='text'
           value={clientName}
-          onChange={(clientName) =>
-            setInvoice((prev) => ({
-              // spread out previous state
-              ...prev,
-              clientName,
-            }))
-          }
+          onChange={onBillToChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -54,13 +46,7 @@ const BillTo = ({
           name='clientEmail'
           type='text'
           value={clientEmail}
-          onChange={(clientEmail) =>
-            setInvoice((prev) => ({
-              // spread out previous state
-              ...prev,
-              clientEmail,
-            }))
-          }
+          onChange={onBillToChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -73,7 +59,7 @@ const BillTo = ({
           name='clientStreet'
           type='text'
           value={clientStreet}
-          onChange={onStreetChange}
+          onChange={onClientAddressChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -86,7 +72,7 @@ const BillTo = ({
           name='clientCity'
           type='text'
           value={clientCity}
-          onChange={onCityChange}
+          onChange={onClientAddressChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -99,7 +85,7 @@ const BillTo = ({
           name='clientPostCode'
           type='text'
           value={clientPostCode}
-          onChange={onPostCodeChange}
+          onChange={onClientAddressChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -112,7 +98,7 @@ const BillTo = ({
           name='clientCountry'
           type='text'
           value={clientCountry}
-          onChange={onCountryChange}
+          onChange={onClientAddressChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -125,13 +111,7 @@ const BillTo = ({
           name='paymentDue'
           type='date'
           value={paymentDue}
-          onChange={(paymentDue) =>
-            setInvoice((prev) => ({
-              // spread out previous state
-              ...prev,
-              paymentDue,
-            }))
-          }
+          onChange={onBillToChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -144,13 +124,7 @@ const BillTo = ({
           name='paymentTerms'
           icon={'arrow-down'}
           value={paymentTerms}
-          onChange={(paymentTerms) =>
-            setInvoice((prev) => ({
-              // spread out previous state
-              ...prev,
-              paymentTerms,
-            }))
-          }
+          onChange={onBillToChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -158,6 +132,7 @@ const BillTo = ({
           }}
           option='1'
         >
+          <FormOption value='n/a' item='Choose an option' />
           <FormOption value='1' item='Net 1 day' />
           <FormOption value='7' item='Net 7 days' />
           <FormOption value='14' item='Net 14 days' />
@@ -169,13 +144,7 @@ const BillTo = ({
           name='description'
           type='text'
           value={description}
-          onChange={(description) =>
-            setInvoice((prev) => ({
-              // spread out previous state
-              ...prev,
-              description,
-            }))
-          }
+          onChange={onBillToChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,

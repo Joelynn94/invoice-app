@@ -16,7 +16,6 @@ import BillItem from '../../components/BillItem/BillItem';
 
 import formatDate from '../../utils/formatDate';
 import formatRandomId from '../../utils/formatRandomId';
-import calculateTotal from '../../utils/calculateTotal';
 
 const defaultSenderAddress = {
   street: '',
@@ -56,76 +55,105 @@ const defaultState = {
 };
 
 const InvoiceForm = ({ history }) => {
-  const { invoices, createInvoice } = useContext(AppContext);
+  const { createInvoice } = useContext(AppContext);
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
 
   const [invoice, setInvoice] = useState(defaultState);
 
-  const [senderAddress, setSenderAddress] = useState({});
-  const [senderStreet, setSenderStreet] = useState('');
-  const [senderCity, setSenderCity] = useState('');
-  const [senderPostCode, setSenderPostCode] = useState('');
-  const [senderCountry, setSenderCountry] = useState('');
+  const [senderAddress, setSenderAddress] = useState({
+    senderStreet: '',
+    senderCity: '',
+    senderPostCode: '',
+    senderCountry: '',
+  });
 
-  const [clientAddress, setClientAddress] = useState({});
-  const [clientStreet, setClientStreet] = useState('');
-  const [clientCity, setClientCity] = useState('');
-  const [clientPostCode, setClientPostCode] = useState('');
-  const [clientCountry, setClientCountry] = useState('');
+  const [clientAddress, setClientAddress] = useState({
+    clientStreet: '',
+    clientCity: '',
+    clientPostCode: '',
+    clientCountry: '',
+  });
 
-  // destructure out of state
-  const {
-    paymentDue,
-    description,
-    paymentTerms,
-    clientName,
-    clientEmail,
-    status,
-    items,
-  } = invoice;
+  const [billToDetails, setBillToDetails] = useState({
+    paymentDue: '',
+    description: '',
+    paymentTerms: '',
+    clientName: '',
+    clientEmail: '',
+  });
+
+  const [billItems, setBillItems] = useState([]);
+  const [billItem, setBillItem] = useState({
+    id: uuidv4(),
+    itemName: '',
+    quantity: '',
+    price: '',
+    total: '',
+  });
 
   useEffect(() => {
     console.dir(invoice);
   }, [invoice]);
 
-  function handleSenderStreetChange(event) {
-    setSenderStreet(event.target.value);
+  function handleSenderAddressChange(event) {
+    setSenderAddress({
+      ...senderAddress,
+      [event.target.name]: event.target.value,
+    });
   }
 
-  function handleSenderCityChange(event) {
-    setSenderCity(event.target.value);
+  function handleClientAddressChange(event) {
+    setClientAddress({
+      ...clientAddress,
+      [event.target.name]: event.target.value,
+    });
   }
 
-  function handleSenderPostCodeChange(event) {
-    setSenderPostCode(event.target.value);
+  function handleBillToChange(event) {
+    setBillToDetails({
+      ...billToDetails,
+      [event.target.name]: event.target.value,
+    });
   }
 
-  function handleSenderCountryChange(event) {
-    setSenderCountry(event.target.value);
+  function handleBillItemChange(event) {
+    console.log(billItem);
+    setBillItem({
+      ...billItem,
+      [event.target.name]: event.target.value,
+    });
   }
 
-  function handleClientStreetChange(event) {
-    setClientStreet(event.target.value);
+  function handleBillItemsChange(e) {
+    e.preventDefault();
+    setBillItems([
+      ...billItems,
+      {
+        ...billItem,
+      },
+    ]);
   }
 
-  function handleClientCityChange(event) {
-    setClientCity(event.target.value);
+  function handleDeleteItemClick(id) {
+    const removedItem = billItems.filter((item) => {
+      return item.id !== id;
+    });
+    setBillItems(removedItem);
   }
 
-  function handleClientPostCodeChange(event) {
-    setClientPostCode(event.target.value);
-  }
-
-  function handleClientCountryChange(event) {
-    setClientCountry(event.target.value);
-  }
-
-  function handleFormSubmit(event) {
+  function addBillItem(event) {
     event.preventDefault();
-
-    console.log(senderAddress);
-    console.log(clientAddress);
+    setBillItems([
+      ...billItems,
+      {
+        id: uuidv4(),
+        itemName: '',
+        quantity: '',
+        price: '',
+        total: '',
+      },
+    ]);
   }
 
   return (
@@ -134,45 +162,40 @@ const InvoiceForm = ({ history }) => {
         <GoBack></GoBack>
         <Heading variant='h1'>New Invoice</Heading>
         <BillFrom
-          street={senderStreet}
-          city={senderCity}
-          postCode={senderPostCode}
-          country={senderCountry}
-          onStreetChange={handleSenderStreetChange}
-          onCityChange={handleSenderCityChange}
-          onPostCodeChange={handleSenderPostCodeChange}
-          onCountryChange={handleSenderCountryChange}
+          senderStreet={senderAddress.senderStreet}
+          senderCity={senderAddress.senderCity}
+          senderPostCode={senderAddress.senderPostCode}
+          senderCountry={senderAddress.senderCountry}
+          onAddressChange={handleSenderAddressChange}
         />
         <BillTo
-          setInvoice={setInvoice}
-          clientName={clientName}
-          clientEmail={clientEmail}
-          paymentDue={paymentDue}
-          paymentTerms={paymentTerms}
-          description={description}
-          street={clientStreet}
-          city={clientCity}
-          postCode={clientPostCode}
-          country={clientCountry}
-          onStreetChange={handleClientStreetChange}
-          onCityChange={handleClientCityChange}
-          onPostCodeChange={handleClientPostCodeChange}
-          onCountryChange={handleClientCountryChange}
+          clientName={billToDetails.clientName}
+          clientEmail={billToDetails.clientEmail}
+          paymentDue={billToDetails.paymentDue}
+          paymentTerms={billToDetails.paymentTerms}
+          description={billToDetails.description}
+          clientStreet={clientAddress.clientStreet}
+          clientCity={clientAddress.clientCity}
+          clientPostCode={clientAddress.clientPostCode}
+          clientCountry={clientAddress.clientCountry}
+          onClientAddressChange={handleClientAddressChange}
+          onBillToChange={handleBillToChange}
         />
         <Heading variant='h2'>Item List</Heading>
-        {items.map((item) => {
-          const { id, itemName, quantity, price, total } = item;
+        {billItems.map((item) => {
+          console.log(item.itemName);
           return (
             <BillItem
               key={item.id}
-              id={id}
-              setInvoice={setInvoice}
-              itemName={itemName}
-              quantity={quantity}
-              price={price}
-              total={quantity * price}
-              items={items}
+              id={item.id}
+              itemName={item.itemName}
+              quantity={item.quantity}
+              price={item.price}
+              total={item.quantity * item.price}
               item={item}
+              items={billItems}
+              onBillItemChange={handleBillItemChange}
+              onHandleItemDelete={handleDeleteItemClick}
             />
           );
         })}
@@ -180,21 +203,7 @@ const InvoiceForm = ({ history }) => {
         <div className='bill-item__button'>
           <Button
             type='submit'
-            onClick={() =>
-              setInvoice((prev) => ({
-                ...prev,
-                items: [
-                  ...prev.items,
-                  {
-                    id: uuidv4(),
-                    itemName: '',
-                    quantity: '',
-                    price: '',
-                    total: '',
-                  },
-                ],
-              }))
-            }
+            onClick={(e) => addBillItem(e)}
             style={{
               backgroundColor: theme.cardBg,
             }}

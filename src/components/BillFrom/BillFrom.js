@@ -6,14 +6,11 @@ import Heading from '../../components/Heading/Heading';
 import './BillFrom.scss';
 
 const BillFrom = ({
-  street,
-  city,
-  postCode,
-  country,
-  onStreetChange,
-  onCityChange,
-  onPostCodeChange,
-  onCountryChange,
+  senderStreet,
+  senderCity,
+  senderPostCode,
+  senderCountry,
+  onAddressChange,
 }) => {
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
@@ -28,8 +25,8 @@ const BillFrom = ({
           className='sender-street'
           name='senderStreet'
           type='text'
-          value={street}
-          onChange={onStreetChange}
+          value={senderStreet}
+          onChange={onAddressChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -42,8 +39,8 @@ const BillFrom = ({
           className='sender-city'
           name='senderCity'
           type='text'
-          value={city}
-          onChange={onCityChange}
+          value={senderCity}
+          onChange={onAddressChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -56,8 +53,8 @@ const BillFrom = ({
           className='sender-post-code'
           name='senderPostCode'
           type='text'
-          value={postCode}
-          onChange={onPostCodeChange}
+          value={senderPostCode}
+          onChange={onAddressChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -70,8 +67,8 @@ const BillFrom = ({
           className='sender-country'
           name='senderCountry'
           type='text'
-          value={country}
-          onChange={onCountryChange}
+          value={senderCountry}
+          onChange={onAddressChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,

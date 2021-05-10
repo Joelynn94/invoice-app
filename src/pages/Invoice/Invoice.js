@@ -12,7 +12,7 @@ const Invoice = ({ match }) => {
 
   useEffect(() => {
     getInvoices(invoices);
-  }, []);
+  }, [getInvoices, invoices]);
 
   return (
     <main className='invoice'>

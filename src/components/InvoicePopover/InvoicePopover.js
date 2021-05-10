@@ -8,7 +8,7 @@ const InvoicePopover = () => {
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
 
-  const { invoices, filterInvoices } = useContext(AppContext);
+  const { filterInvoices } = useContext(AppContext);
 
   const [statusFiltered, setFiltered] = useState('');
 
