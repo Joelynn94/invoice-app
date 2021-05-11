@@ -84,13 +84,6 @@ const InvoiceForm = ({ history }) => {
   });
 
   const [billItems, setBillItems] = useState([]);
-  const [billItem, setBillItem] = useState({
-    id: uuidv4(),
-    itemName: '',
-    quantity: '',
-    price: '',
-    total: '',
-  });
 
   useEffect(() => {
     console.dir(invoice);
@@ -115,22 +108,32 @@ const InvoiceForm = ({ history }) => {
       ...billToDetails,
       [event.target.name]: event.target.value,
     });
+    setInvoice({
+      id: formatRandomId(),
+      createdAt: formatDate(),
+      paymentDue: billToDetails.paymentDue,
+      description: billToDetails.description,
+      paymentTerms: billToDetails.paymentTerms,
+      clientName: billToDetails.clientName,
+      clientEmail: billToDetails.clientEmail,
+      senderAddress,
+      clientAddress,
+      items: [...billItems],
+      total: '',
+    });
   }
 
   function handleBillItemsChange(id, event) {
-    console.log(id, event.target.name);
     const items = [...billItems];
     items[id] = event.target.value;
-    console.log((items[id] = event.target.value));
 
-    setBillItems((currentItem) => {
-      return currentItem.map((item) =>
+    setBillItems((currentItem) =>
+      currentItem.map((item) =>
         item.id === id
           ? { ...item, [event.target.name]: event.target.value }
           : item
-      );
-    });
-    console.log(billItems);
+      )
+    );
   }
 
   function handleDeleteItemClick(id) {
@@ -154,9 +157,22 @@ const InvoiceForm = ({ history }) => {
     ]);
   }
 
+  function onFormSubmit(e) {
+    e.preventDefault();
+
+    setInvoice({
+      ...invoice,
+      senderAddress,
+      clientAddress,
+      billToDetails,
+      billItems,
+    });
+    console.log(invoice);
+  }
+
   return (
     <main className='invoice-form'>
-      <form>
+      <form onSubmit={onFormSubmit}>
         <GoBack></GoBack>
         <Heading variant='h1'>New Invoice</Heading>
         <BillFrom
@@ -181,7 +197,6 @@ const InvoiceForm = ({ history }) => {
         />
         <Heading variant='h2'>Item List</Heading>
         {billItems.map((item) => {
-          console.log(item.itemName);
           return (
             <BillItem
               key={item.id}

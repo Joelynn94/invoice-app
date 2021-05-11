@@ -2,11 +2,36 @@ import { createContext, useReducer } from 'react';
 
 const AppReducer = (state, action) => {
   switch (action.type) {
+    case 'GET_INVOICES':
+      return {
+        ...state,
+        invoices: action.payload,
+        loading: false,
+      };
     case 'CREATE_INVOICE':
       return {
         ...state,
         invoices: [action.payload, ...state.invoices],
         loading: false,
+      };
+    case 'FILTER_STATUS':
+      let value = action.payload;
+      const filteredInvocies = state.invoices.filter((invoice) => {
+        return invoice.status.includes(value);
+      });
+      return {
+        ...state,
+        filtered: filteredInvocies,
+      };
+    case 'CLEAR_FILTER':
+      return {
+        ...state,
+        filtered: [],
+      };
+    case 'TOGGLE_DARK_MODE':
+      localStorage.setItem('isLightTheme', !state.isLightTheme);
+      return {
+        isLightTheme: !state.isLightTheme,
       };
     default:
       return state;
@@ -260,12 +285,26 @@ export const AppProvider = (props) => {
     dispatch({ type: 'GET_INVOICES', payload: invoices });
   };
 
+  const createInvoice = (invoice) => {
+    dispatch({ type: 'CREATE_INVOICE', payload: invoice });
+  };
+
+  const filterInvoices = (status) =>
+    dispatch({ type: 'FILTER_STATUS', payload: status });
+
+  const clearFilter = () => {
+    dispatch({ type: 'CLEAR_FILTER' });
+  };
+
   return (
     <AppContext.Provider
       value={{
         invoices: state.invoices,
         filtered: state.filtered,
         getInvoices,
+        createInvoice,
+        filterInvoices,
+        clearFilter,
       }}
     >
       {props.children}

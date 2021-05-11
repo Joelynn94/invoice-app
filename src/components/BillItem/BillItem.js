@@ -16,7 +16,6 @@ const BillItem = ({
 }) => {
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
-  console.log(total);
 
   return (
     <>
