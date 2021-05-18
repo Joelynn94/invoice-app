@@ -17,11 +17,12 @@ const AppReducer = (state, action) => {
     case 'FILTER_STATUS':
       let value = action.payload;
       const filteredInvocies = state.invoices.filter((invoice) => {
-        return invoice.status.includes(value);
+        return value.indexOf(invoice.status) !== -1;
       });
       return {
         ...state,
-        filtered: filteredInvocies,
+        filtered:
+          filteredInvocies.length > 0 ? filteredInvocies : state.invoices,
       };
     case 'CLEAR_FILTER':
       return {

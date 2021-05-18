@@ -4,18 +4,24 @@ import { AppContext } from '../../context/AppContext';
 
 import './InvoicePopover.scss';
 
-const InvoicePopover = () => {
+const InvoicePopover = ({
+  filtered,
+  onShowAllInvoices,
+  onShowDraftInvoices,
+  onShowPendingInvoices,
+  onShowPaidInvoices,
+}) => {
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
 
   const { filterInvoices } = useContext(AppContext);
 
-  const [statusFiltered, setFiltered] = useState('');
+  const [statusFilter, setStatusFilter] = useState([]);
 
   const handleCheckbox = (event) => {
     const { name, checked } = event.target;
 
-    const newCheckedArray = [...statusFiltered];
+    const newCheckedArray = [...statusFilter];
     let index;
 
     if (checked) {
@@ -26,7 +32,7 @@ const InvoicePopover = () => {
         newCheckedArray.push(name);
       }
       // update state
-      setFiltered(newCheckedArray);
+      setStatusFilter(newCheckedArray);
       filterInvoices(newCheckedArray);
       console.log(newCheckedArray);
     } else {
@@ -35,7 +41,7 @@ const InvoicePopover = () => {
       // remove the item if the checkbox is not checked
       newCheckedArray.splice(index, 1);
       // update state
-      setFiltered(newCheckedArray);
+      setStatusFilter(newCheckedArray);
       filterInvoices(newCheckedArray);
       console.log(newCheckedArray);
     }
@@ -50,7 +56,7 @@ const InvoicePopover = () => {
               type='checkbox'
               name='draft'
               id='draft'
-              value={statusFiltered}
+              value={statusFilter}
               onClick={handleCheckbox}
             />
             <div>
@@ -64,7 +70,7 @@ const InvoicePopover = () => {
               type='checkbox'
               name='pending'
               id='pending'
-              value={statusFiltered}
+              value={statusFilter}
               onClick={handleCheckbox}
             />
             <div>
@@ -78,7 +84,7 @@ const InvoicePopover = () => {
               type='checkbox'
               name='paid'
               id='paid'
-              value={statusFiltered}
+              value={statusFilter}
               onClick={handleCheckbox}
             />
             <div>

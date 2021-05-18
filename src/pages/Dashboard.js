@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 
 import InvoicesBar from '../components/InvoicesBar/InvoicesBar';
@@ -6,21 +6,17 @@ import InvoiceSummary from '../components/InvoiceSummary/InvoiceSummary';
 import NoInvoices from '../components/NoInvoices/NoInvoices';
 
 const Dashboard = () => {
-  const { invoices, filtered } = useContext(AppContext);
+  const { invoices, getInvoices, filtered, filterInvoices } =
+    useContext(AppContext);
 
-  /**
-      {filtered.length > 0 ? (
-        filtered.map((filter) => (
-          <InvoiceSummary invoice={filter} key={filter.id} />
-        ))
-      ) :
-  */
-
-  console.log(filtered);
   return (
     <main>
       <InvoicesBar invoices={invoices} />
-      {invoices.length > 0 ? (
+      {filtered.length > 0 ? (
+        filtered.map((invoice) => (
+          <InvoiceSummary invoice={invoice} key={invoice.id} />
+        ))
+      ) : invoices ? (
         invoices.map((invoice) => (
           <InvoiceSummary invoice={invoice} key={invoice.id} />
         ))
