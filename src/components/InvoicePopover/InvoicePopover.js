@@ -4,13 +4,7 @@ import { AppContext } from '../../context/AppContext';
 
 import './InvoicePopover.scss';
 
-const InvoicePopover = ({
-  filtered,
-  onShowAllInvoices,
-  onShowDraftInvoices,
-  onShowPendingInvoices,
-  onShowPaidInvoices,
-}) => {
+const InvoicePopover = () => {
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
 
