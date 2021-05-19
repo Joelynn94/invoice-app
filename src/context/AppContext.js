@@ -8,6 +8,12 @@ const AppReducer = (state, action) => {
         invoices: action.payload,
         loading: false,
       };
+    case 'GET_INVOICE':
+      return {
+        ...state,
+        currentInvoice: action.payload,
+        loading: false,
+      };
     case 'CREATE_INVOICE':
       return {
         ...state,
@@ -25,10 +31,13 @@ const AppReducer = (state, action) => {
         filtered:
           filteredInvoices.length > 0 ? filteredInvoices : state.invoices,
       };
-    case 'CLEAR_FILTER':
+    case 'MARK_AS_PAID':
       return {
         ...state,
-        filtered: [],
+        currentInvoice: {
+          ...state.currentInvoice,
+          status: 'paid',
+        },
       };
     case 'TOGGLE_DARK_MODE':
       localStorage.setItem('isLightTheme', !state.isLightTheme);
@@ -287,6 +296,10 @@ export const AppProvider = (props) => {
     dispatch({ type: 'GET_INVOICES', payload: invoices });
   };
 
+  const getInvoice = (invoice) => {
+    dispatch({ type: 'GET_INVOICE', payload: invoice });
+  };
+
   const createInvoice = (invoice) => {
     dispatch({ type: 'CREATE_INVOICE', payload: invoice });
   };
@@ -294,8 +307,8 @@ export const AppProvider = (props) => {
   const filterInvoices = (status) =>
     dispatch({ type: 'FILTER_STATUS', payload: status });
 
-  const clearFilter = () => {
-    dispatch({ type: 'CLEAR_FILTER' });
+  const markAsPaid = (invoice) => {
+    dispatch({ type: 'MARK_AS_PAID', payload: invoice });
   };
 
   return (
@@ -303,10 +316,12 @@ export const AppProvider = (props) => {
       value={{
         invoices: state.invoices,
         filtered: state.filtered,
+        currentInvoice: state.currentInvoice,
         getInvoices,
+        getInvoice,
         createInvoice,
         filterInvoices,
-        clearFilter,
+        markAsPaid,
       }}
     >
       {props.children}

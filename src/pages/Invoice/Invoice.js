@@ -7,12 +7,12 @@ import InvoiceDetails from '../../components/InvoiceDetails/InvoiceDetails';
 import './Invoice.scss';
 
 const Invoice = ({ match }) => {
-  const { invoices, getInvoices } = useContext(AppContext);
+  const { invoices, getInvoice } = useContext(AppContext);
   const invoice = invoices.find((invoice) => invoice.id === match.params.id);
 
   useEffect(() => {
-    getInvoices(invoices);
-  }, [invoices]);
+    getInvoice(invoice);
+  }, [invoice]);
 
   return (
     <main className='invoice'>
