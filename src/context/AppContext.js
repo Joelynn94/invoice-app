@@ -32,12 +32,22 @@ const AppReducer = (state, action) => {
           filteredInvoices.length > 0 ? filteredInvoices : state.invoices,
       };
     case 'MARK_AS_PAID':
+      const paidId = action.payload;
+      const updatedInvoice = state.invoices.map((invoice) => {
+        return invoice.id === paidId ? { ...invoice, status: 'paid' } : invoice;
+      });
       return {
         ...state,
-        currentInvoice: {
-          ...state.currentInvoice,
-          status: 'paid',
-        },
+        invoices: updatedInvoice,
+      };
+    case 'DELETE_INVOICE':
+      const deleteId = action.payload;
+      const removeInvoice = state.invoices.filter((invoice) => {
+        return invoice.id !== deleteId;
+      });
+      return {
+        ...state,
+        invoices: removeInvoice,
       };
     case 'TOGGLE_DARK_MODE':
       localStorage.setItem('isLightTheme', !state.isLightTheme);
@@ -307,8 +317,12 @@ export const AppProvider = (props) => {
   const filterInvoices = (status) =>
     dispatch({ type: 'FILTER_STATUS', payload: status });
 
-  const markAsPaid = (invoice) => {
-    dispatch({ type: 'MARK_AS_PAID', payload: invoice });
+  const markAsPaid = (id) => {
+    dispatch({ type: 'MARK_AS_PAID', payload: id });
+  };
+
+  const deleteInvoice = (id) => {
+    dispatch({ type: 'DELETE_INVOICE', payload: id });
   };
 
   return (
@@ -322,6 +336,7 @@ export const AppProvider = (props) => {
         createInvoice,
         filterInvoices,
         markAsPaid,
+        deleteInvoice,
       }}
     >
       {props.children}
