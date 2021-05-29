@@ -4,28 +4,25 @@ import Button from '../Button/Button';
 
 import './InvoiceCreateButtons.scss';
 
-const InvoiceCreateButtons = ({ invoice, createInvoice, ...otherProps }) => {
+const InvoiceCreateButtons = ({
+  invoice,
+  onFormSubmit,
+  createInvoice,
+  ...otherProps
+}) => {
   const history = useHistory();
 
-  const routeChange = () => {
-    window.onbeforeunload = function () {
-      window.scrollTo(0, 0);
-    };
-    let path = `/`;
-    history.push(path);
+  const handleCreateButtonClick = (e) => {
+    onFormSubmit(e);
+    createInvoice(invoice);
+    history.push('/');
   };
 
   return (
     <div className='invoice-create-buttons' {...otherProps}>
       <Button variant={'edit-dark'}>Discard</Button>
       <Button variant={'dark'}>Save as Draft</Button>
-      <Button
-        variant={'primary'}
-        onClick={() => {
-          createInvoice(invoice);
-          routeChange();
-        }}
-      >
+      <Button variant={'primary'} onClick={handleCreateButtonClick}>
         Save & Send
       </Button>
     </div>

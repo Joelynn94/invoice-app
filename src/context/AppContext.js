@@ -8,10 +8,16 @@ const AppReducer = (state, action) => {
         invoices: action.payload,
         loading: false,
       };
-    case 'GET_INVOICE':
+    case 'SET_CURRENT':
       return {
         ...state,
         currentInvoice: action.payload,
+        loading: false,
+      };
+    case 'CLEAR_CURRENT':
+      return {
+        ...state,
+        currentInvoice: {},
         loading: false,
       };
     case 'CREATE_INVOICE':
@@ -306,8 +312,12 @@ export const AppProvider = (props) => {
     dispatch({ type: 'GET_INVOICES', payload: invoices });
   };
 
-  const getInvoice = (invoice) => {
-    dispatch({ type: 'GET_INVOICE', payload: invoice });
+  const setInvoice = (invoice) => {
+    dispatch({ type: 'SET_CURRENT', payload: invoice });
+  };
+
+  const clearInvoice = (invoice) => {
+    dispatch({ type: 'CLEAR_CURRENT', payload: invoice });
   };
 
   const createInvoice = (invoice) => {
@@ -332,7 +342,8 @@ export const AppProvider = (props) => {
         filtered: state.filtered,
         currentInvoice: state.currentInvoice,
         getInvoices,
-        getInvoice,
+        setInvoice,
+        clearInvoice,
         createInvoice,
         filterInvoices,
         markAsPaid,

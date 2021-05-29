@@ -8,9 +8,7 @@ const checkIsNan = (val) => {
 const calculateTotal = (items) => {
   checkIsNan(items);
   let total = 0;
-  for (const item of items) {
-    total += item.total;
-  }
+  items.forEach((item) => (total += item.quantity * item.price));
   return total;
 };
 

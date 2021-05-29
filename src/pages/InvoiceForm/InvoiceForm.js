@@ -7,7 +7,7 @@ import { AppContext } from '../../context/AppContext';
 import Heading from '../../components/Heading/Heading';
 import Button from '../../components/Button/Button';
 import GoBack from '../../components/GoBack/GoBack';
-import InvoiceButtons from '../../components/InvoiceCreateButtons/InvoiceCreateButtons';
+import InvoiceCreateButtons from '../../components/InvoiceCreateButtons/InvoiceCreateButtons';
 
 import './InvoiceForm.scss';
 import BillFrom from '../../components/BillFrom/BillFrom';
@@ -16,6 +16,7 @@ import BillItem from '../../components/BillItem/BillItem';
 
 import formatDate from '../../utils/formatDate';
 import formatRandomId from '../../utils/formatRandomId';
+import calculateTotal from '../../utils/calculateTotal';
 
 const defaultSenderAddress = {
   street: '',
@@ -47,7 +48,7 @@ const defaultState = {
   paymentTerms: '',
   clientName: '',
   clientEmail: '',
-  status: 'draft',
+  status: 'pending',
   senderAddress: defaultSenderAddress,
   clientAddress: defaultClientAddress,
   items: [defaultBillItem],
@@ -55,7 +56,7 @@ const defaultState = {
 };
 
 const InvoiceForm = ({ history }) => {
-  const { createInvoice } = useContext(AppContext);
+  const { createInvoice, currentInvoice } = useContext(AppContext);
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
 
@@ -87,7 +88,12 @@ const InvoiceForm = ({ history }) => {
 
   useEffect(() => {
     console.dir(invoice);
-  }, [invoice]);
+    if (currentInvoice !== null) {
+      setInvoice(currentInvoice);
+    } else {
+      setInvoice(defaultState);
+    }
+  }, [invoice, currentInvoice]);
 
   function handleSenderAddressChange(event) {
     setSenderAddress({
@@ -107,19 +113,6 @@ const InvoiceForm = ({ history }) => {
     setBillToDetails({
       ...billToDetails,
       [event.target.name]: event.target.value,
-    });
-    setInvoice({
-      id: formatRandomId(),
-      createdAt: formatDate(),
-      paymentDue: billToDetails.paymentDue,
-      description: billToDetails.description,
-      paymentTerms: billToDetails.paymentTerms,
-      clientName: billToDetails.clientName,
-      clientEmail: billToDetails.clientEmail,
-      senderAddress,
-      clientAddress,
-      items: [...billItems],
-      total: '',
     });
   }
 
@@ -157,22 +150,23 @@ const InvoiceForm = ({ history }) => {
     ]);
   }
 
-  function onFormSubmit(e) {
+  function handleFormSubmit(e) {
     e.preventDefault();
 
     setInvoice({
       ...invoice,
-      senderAddress,
-      clientAddress,
-      billToDetails,
-      billItems,
+      senderAddress: senderAddress,
+      clientAddress: clientAddress,
+      items: [billItems],
+      total: calculateTotal(invoice.items),
     });
+
     console.log(invoice);
   }
 
   return (
     <main className='invoice-form'>
-      <form onSubmit={onFormSubmit}>
+      <form onSubmit={handleFormSubmit}>
         <GoBack></GoBack>
         <Heading variant='h1'>New Invoice</Heading>
         <BillFrom
@@ -224,7 +218,8 @@ const InvoiceForm = ({ history }) => {
             + Add New Item
           </Button>
         </div>
-        <InvoiceButtons
+        <InvoiceCreateButtons
+          onFormSubmit={handleFormSubmit}
           createInvoice={createInvoice}
           invoice={invoice}
           style={{

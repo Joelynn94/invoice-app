@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
-import { AppContext } from '../context/AppContext';
 
+import { AppContext } from '../context/AppContext';
 import InvoicesBar from '../components/InvoicesBar/InvoicesBar';
 import InvoiceSummary from '../components/InvoiceSummary/InvoiceSummary';
 import NoInvoices from '../components/NoInvoices/NoInvoices';
