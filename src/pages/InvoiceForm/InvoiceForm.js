@@ -3,16 +3,14 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { ThemeContext } from '../../context/ThemeContext';
 import { AppContext } from '../../context/AppContext';
-
 import Heading from '../../components/Heading/Heading';
 import Button from '../../components/Button/Button';
 import GoBack from '../../components/GoBack/GoBack';
 import InvoiceCreateButtons from '../../components/InvoiceCreateButtons/InvoiceCreateButtons';
-
-import './InvoiceForm.scss';
 import BillFrom from '../../components/BillFrom/BillFrom';
 import BillTo from '../../components/BillTo/BillTo';
 import BillItem from '../../components/BillItem/BillItem';
+import './InvoiceForm.scss';
 
 import formatDate from '../../utils/formatDate';
 import formatRandomId from '../../utils/formatRandomId';
@@ -51,29 +49,29 @@ const defaultState = {
   status: 'pending',
   senderAddress: defaultSenderAddress,
   clientAddress: defaultClientAddress,
-  items: [defaultBillItem],
+  items: defaultBillItem,
   total: '',
 };
 
 const InvoiceForm = ({ history }) => {
-  const { createInvoice, currentInvoice } = useContext(AppContext);
+  const { currentInvoice } = useContext(AppContext);
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
 
   const [invoice, setInvoice] = useState(defaultState);
 
   const [senderAddress, setSenderAddress] = useState({
-    senderStreet: '',
-    senderCity: '',
-    senderPostCode: '',
-    senderCountry: '',
+    street: '',
+    city: '',
+    postCode: '',
+    country: '',
   });
 
   const [clientAddress, setClientAddress] = useState({
-    clientStreet: '',
-    clientCity: '',
-    clientPostCode: '',
-    clientCountry: '',
+    street: '',
+    city: '',
+    postCode: '',
+    country: '',
   });
 
   const [billToDetails, setBillToDetails] = useState({
@@ -88,12 +86,7 @@ const InvoiceForm = ({ history }) => {
 
   useEffect(() => {
     console.dir(invoice);
-    if (currentInvoice !== null) {
-      setInvoice(currentInvoice);
-    } else {
-      setInvoice(defaultState);
-    }
-  }, [invoice, currentInvoice]);
+  }, [invoice]);
 
   function handleSenderAddressChange(event) {
     setSenderAddress({
@@ -155,13 +148,14 @@ const InvoiceForm = ({ history }) => {
 
     setInvoice({
       ...invoice,
-      senderAddress: senderAddress,
-      clientAddress: clientAddress,
-      items: [billItems],
-      total: calculateTotal(invoice.items),
+      ...billToDetails,
+      senderAddress: { ...senderAddress },
+      clientAddress: { ...clientAddress },
+      items: [...billItems],
+      total: calculateTotal(billItems),
     });
 
-    console.log(invoice);
+    console.log(currentInvoice);
   }
 
   return (
@@ -170,11 +164,11 @@ const InvoiceForm = ({ history }) => {
         <GoBack></GoBack>
         <Heading variant='h1'>New Invoice</Heading>
         <BillFrom
-          senderStreet={senderAddress.senderStreet}
-          senderCity={senderAddress.senderCity}
-          senderPostCode={senderAddress.senderPostCode}
-          senderCountry={senderAddress.senderCountry}
-          onAddressChange={handleSenderAddressChange}
+          senderStreet={senderAddress.street}
+          senderCity={senderAddress.city}
+          senderPostCode={senderAddress.postCode}
+          senderCountry={senderAddress.country}
+          onSenderAddressChange={handleSenderAddressChange}
         />
         <BillTo
           clientName={billToDetails.clientName}
@@ -182,10 +176,10 @@ const InvoiceForm = ({ history }) => {
           paymentDue={billToDetails.paymentDue}
           paymentTerms={billToDetails.paymentTerms}
           description={billToDetails.description}
-          clientStreet={clientAddress.clientStreet}
-          clientCity={clientAddress.clientCity}
-          clientPostCode={clientAddress.clientPostCode}
-          clientCountry={clientAddress.clientCountry}
+          clientStreet={clientAddress.street}
+          clientCity={clientAddress.city}
+          clientPostCode={clientAddress.postCode}
+          clientCountry={clientAddress.country}
           onClientAddressChange={handleClientAddressChange}
           onBillToChange={handleBillToChange}
         />
@@ -219,9 +213,6 @@ const InvoiceForm = ({ history }) => {
           </Button>
         </div>
         <InvoiceCreateButtons
-          onFormSubmit={handleFormSubmit}
-          createInvoice={createInvoice}
-          invoice={invoice}
           style={{
             backgroundColor: theme.cardBg,
             color: theme.text,

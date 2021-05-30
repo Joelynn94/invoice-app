@@ -6,7 +6,7 @@ import { ThemeContext } from '../../context/ThemeContext';
 import './GoBack.scss';
 
 const GoBack = () => {
-  const { clearInvoice } = useContext(AppContext);
+  const { clearCurrentInvoice } = useContext(AppContext);
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
 
@@ -14,7 +14,7 @@ const GoBack = () => {
     <Link
       to='/'
       className='go-back'
-      onClick={clearInvoice}
+      onClick={clearCurrentInvoice}
       style={{ color: theme.text }}
     >
       <img

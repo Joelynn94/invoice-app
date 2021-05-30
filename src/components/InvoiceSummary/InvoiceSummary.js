@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+
 import { ThemeContext } from '../../context/ThemeContext';
 import InvoiceBadge from '../InvoiceBadge/InvoiceBadge';
 import Button from '../Button/Button';
 import Heading from '../Heading/Heading';
 import changeToCurrency from '../../utils/changeToCurrency';
-import formatDate from '../../utils/formatDate'
+import formatDate from '../../utils/formatDate';
 
 import './InvoiceSummary.scss';
 

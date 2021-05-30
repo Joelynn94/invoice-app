@@ -8,7 +8,6 @@ import FormOption from '../FormOption/FormOption';
 import './BillTo.scss';
 
 const BillTo = ({
-  setInvoice,
   clientName,
   clientEmail,
   paymentDue,
