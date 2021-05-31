@@ -1,50 +1,87 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import formatDate from '../utils/formatDate';
-import formatRandomId from '../utils/formatRandomId';
 import calculateTotal from '../utils/calculateTotal';
 
 const useForm = () => {
-  const [values, setValues] = useState({
+  const [status, setStatus] = useState('');
+  const [total, setTotal] = useState(0);
+  const [billToDetails, setBillToDetails] = useState({
     paymentDue: '',
     description: '',
     paymentTerms: '',
     clientName: '',
     clientEmail: '',
-    senderAddress: {
-      street: '',
-      city: '',
-      postCode: '',
-      country: '',
-    },
-    clientAddress: {
-      street: '',
-      city: '',
-      postCode: '',
-      country: '',
-    },
-    items: [
-      {
-        id: uuidv4(),
-        itemName: '',
-        quantity: '',
-        price: '',
-        total: '',
-      },
-    ],
   });
+  const [senderAddress, setSenderAddress] = useState({
+    street: '',
+    city: '',
+    postCode: '',
+    country: '',
+  });
+  const [clientAddress, setClientAddress] = useState({
+    street: '',
+    city: '',
+    postCode: '',
+    country: '',
+  });
+  const [billItems, setBillItems] = useState([]);
 
-  const [errors, setErrors] = useState({});
+  function setStatusToPending() {
+    setStatus('pending');
+  }
 
-  const handleInputChange = (e) => {
-    console.log({ [e.target.name]: e.target.value });
-    setValues((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
+  function calculateInvoiceTotal() {
+    setTotal(calculateTotal(billItems));
+  }
+
+  function handleSenderAddressChange(event) {
+    setSenderAddress({
+      ...senderAddress,
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  function handleClientAddressChange(event) {
+    setClientAddress({
+      ...clientAddress,
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  function handleBillToChange(event) {
+    setBillToDetails({
+      ...billToDetails,
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  function handleBillItemsChange(id, event) {
+    const items = [...billItems];
+    items[id] = event.target.value;
+
+    setBillItems((currentItem) =>
+      currentItem.map((item) =>
+        item.id === id
+          ? { ...item, [event.target.name]: event.target.value }
+          : item
+      )
+    );
+  }
+  return {
+    handleSenderAddressChange,
+    handleClientAddressChange,
+    handleBillToChange,
+    handleBillItemsChange,
+    setStatusToPending,
+    calculateInvoiceTotal,
+    billToDetails,
+    senderAddress,
+    clientAddress,
+    billItems,
+    status,
+    total,
+    setBillItems,
   };
-
-  return { handleInputChange, values };
 };
 
 export default useForm;

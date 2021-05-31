@@ -12,115 +12,33 @@ import BillTo from '../../components/BillTo/BillTo';
 import BillItem from '../../components/BillItem/BillItem';
 import './InvoiceForm.scss';
 
-import formatDate from '../../utils/formatDate';
-import formatRandomId from '../../utils/formatRandomId';
 import calculateTotal from '../../utils/calculateTotal';
+import useForm from '../../utils/useForm';
 
-const defaultSenderAddress = {
-  street: '',
-  city: '',
-  postCode: '',
-  country: '',
-};
-
-const defaultClientAddress = {
-  street: '',
-  city: '',
-  postCode: '',
-  country: '',
-};
-
-const defaultBillItem = {
-  id: uuidv4(),
-  itemName: '',
-  quantity: '',
-  price: '',
-  total: '',
-};
-
-const defaultState = {
-  id: formatRandomId(),
-  createdAt: formatDate(),
-  paymentDue: '',
-  description: '',
-  paymentTerms: '',
-  clientName: '',
-  clientEmail: '',
-  status: 'pending',
-  senderAddress: defaultSenderAddress,
-  clientAddress: defaultClientAddress,
-  items: defaultBillItem,
-  total: '',
-};
-
-const InvoiceForm = ({ history }) => {
-  const { currentInvoice } = useContext(AppContext);
+const InvoiceForm = () => {
+  const { currentInvoice, setCurrentInvoice, createInvoice } =
+    useContext(AppContext);
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
 
-  const [invoice, setInvoice] = useState(defaultState);
-
-  const [senderAddress, setSenderAddress] = useState({
-    street: '',
-    city: '',
-    postCode: '',
-    country: '',
-  });
-
-  const [clientAddress, setClientAddress] = useState({
-    street: '',
-    city: '',
-    postCode: '',
-    country: '',
-  });
-
-  const [billToDetails, setBillToDetails] = useState({
-    paymentDue: '',
-    description: '',
-    paymentTerms: '',
-    clientName: '',
-    clientEmail: '',
-  });
-
-  const [billItems, setBillItems] = useState([]);
+  const {
+    handleSenderAddressChange,
+    handleClientAddressChange,
+    handleBillToChange,
+    handleBillItemsChange,
+    setStatusToPending,
+    calculateInvoiceTotal,
+    billToDetails,
+    senderAddress,
+    clientAddress,
+    billItems,
+    total,
+    setBillItems,
+  } = useForm();
 
   useEffect(() => {
-    console.dir(invoice);
-  }, [invoice]);
-
-  function handleSenderAddressChange(event) {
-    setSenderAddress({
-      ...senderAddress,
-      [event.target.name]: event.target.value,
-    });
-  }
-
-  function handleClientAddressChange(event) {
-    setClientAddress({
-      ...clientAddress,
-      [event.target.name]: event.target.value,
-    });
-  }
-
-  function handleBillToChange(event) {
-    setBillToDetails({
-      ...billToDetails,
-      [event.target.name]: event.target.value,
-    });
-  }
-
-  function handleBillItemsChange(id, event) {
-    const items = [...billItems];
-    items[id] = event.target.value;
-
-    setBillItems((currentItem) =>
-      currentItem.map((item) =>
-        item.id === id
-          ? { ...item, [event.target.name]: event.target.value }
-          : item
-      )
-    );
-  }
+    console.dir(currentInvoice);
+  }, [currentInvoice]);
 
   function handleDeleteItemClick(id) {
     const removedItem = billItems.filter((item) => {
@@ -145,17 +63,19 @@ const InvoiceForm = ({ history }) => {
 
   function handleFormSubmit(e) {
     e.preventDefault();
-
-    setInvoice({
-      ...invoice,
+    setCurrentInvoice({
       ...billToDetails,
-      senderAddress: { ...senderAddress },
-      clientAddress: { ...clientAddress },
+      senderAddress: {
+        ...senderAddress,
+      },
+      clientAddress: {
+        ...clientAddress,
+      },
       items: [...billItems],
-      total: calculateTotal(billItems),
+      status: setStatusToPending(),
+      total: calculateInvoiceTotal(),
     });
-
-    console.log(currentInvoice);
+    createInvoice(currentInvoice);
   }
 
   return (
@@ -168,7 +88,7 @@ const InvoiceForm = ({ history }) => {
           senderCity={senderAddress.city}
           senderPostCode={senderAddress.postCode}
           senderCountry={senderAddress.country}
-          onSenderAddressChange={handleSenderAddressChange}
+          onAddressChange={handleSenderAddressChange}
         />
         <BillTo
           clientName={billToDetails.clientName}
@@ -180,7 +100,7 @@ const InvoiceForm = ({ history }) => {
           clientCity={clientAddress.city}
           clientPostCode={clientAddress.postCode}
           clientCountry={clientAddress.country}
-          onClientAddressChange={handleClientAddressChange}
+          onAddressChange={handleClientAddressChange}
           onBillToChange={handleBillToChange}
         />
         <Heading variant='h2'>Item List</Heading>

@@ -8,13 +8,13 @@ const AppReducer = (state, action) => {
         invoices: action.payload,
         loading: false,
       };
-    case 'SET_CURRENT':
+    case 'SET_CURRENT_INVOICE':
       return {
         ...state,
         currentInvoice: action.payload,
         loading: false,
       };
-    case 'CLEAR_CURRENT':
+    case 'CLEAR_CURRENT_INVOICE':
       return {
         ...state,
         currentInvoice: {},
@@ -59,6 +59,11 @@ const AppReducer = (state, action) => {
       localStorage.setItem('isLightTheme', !state.isLightTheme);
       return {
         isLightTheme: !state.isLightTheme,
+      };
+    case 'LOADING':
+      return {
+        ...state,
+        loading: true,
       };
     default:
       return state;
@@ -312,12 +317,12 @@ export const AppProvider = (props) => {
     dispatch({ type: 'GET_INVOICES', payload: invoices });
   };
 
-  const setInvoice = (invoice) => {
-    dispatch({ type: 'SET_CURRENT', payload: invoice });
+  const setCurrentInvoice = (invoice) => {
+    dispatch({ type: 'SET_CURRENT_INVOICE', payload: invoice });
   };
 
-  const clearInvoice = (invoice) => {
-    dispatch({ type: 'CLEAR_CURRENT', payload: invoice });
+  const clearCurrentInvoice = () => {
+    dispatch({ type: 'CLEAR_CURRENT_INVOICE' });
   };
 
   const createInvoice = (invoice) => {
@@ -335,6 +340,10 @@ export const AppProvider = (props) => {
     dispatch({ type: 'DELETE_INVOICE', payload: id });
   };
 
+  const setIsLoading = () => {
+    dispatch({ type: 'LOADING' });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -342,12 +351,13 @@ export const AppProvider = (props) => {
         filtered: state.filtered,
         currentInvoice: state.currentInvoice,
         getInvoices,
-        setInvoice,
-        clearInvoice,
+        setCurrentInvoice,
+        clearCurrentInvoice,
         createInvoice,
         filterInvoices,
         markAsPaid,
         deleteInvoice,
+        setIsLoading,
       }}
     >
       {props.children}

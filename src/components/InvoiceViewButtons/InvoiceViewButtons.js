@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+
 import { AppContext } from '../../context/AppContext';
 import Button from '../../components/Button/Button';
-
 import './InvoiceViewButtons.scss';
 
 const InvoiceViewButtons = ({ invoice, ...otherProps }) => {

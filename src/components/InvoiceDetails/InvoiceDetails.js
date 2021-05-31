@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
+
 import { ThemeContext } from '../../context/ThemeContext';
 import Heading from '../Heading/Heading';
 import InvoiceItem from '../InvoiceItem/InvoiceItem';
 import changeToCurrency from '../../utils/changeToCurrency';
-import formatDate from '../../utils/formatDate'
-
+import formatDate from '../../utils/formatDate';
 import './InvoiceDetails.scss';
 
 const InvoiceDetails = ({ invoice }) => {

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { AppContext } from '../../context/AppContext';
 import { Link } from 'react-router-dom';
-import { ThemeContext } from '../../context/ThemeContext';
 
+import { AppContext } from '../../context/AppContext';
+import { ThemeContext } from '../../context/ThemeContext';
 import './GoBack.scss';
 
 const GoBack = () => {
@@ -14,7 +14,7 @@ const GoBack = () => {
     <Link
       to='/'
       className='go-back'
-      onClick={clearCurrentInvoice}
+      onClick={() => clearCurrentInvoice()}
       style={{ color: theme.text }}
     >
       <img

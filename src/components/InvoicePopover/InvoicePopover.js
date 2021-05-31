@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
+
 import { ThemeContext } from '../../context/ThemeContext';
 import { AppContext } from '../../context/AppContext';
-
 import './InvoicePopover.scss';
 
 const InvoicePopover = () => {
@@ -12,7 +12,7 @@ const InvoicePopover = () => {
 
   const [statusFilter, setStatusFilter] = useState([]);
 
-  const handleCheckbox = (event) => {
+  const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
 
     const newCheckedArray = [...statusFilter];
@@ -52,7 +52,7 @@ const InvoicePopover = () => {
               name='draft'
               id='draft'
               value={statusFilter}
-              onClick={handleCheckbox}
+              onClick={handleCheckboxChange}
             />
             <span className='invoices-popover__checkmark'></span>
             <div>
@@ -68,7 +68,7 @@ const InvoicePopover = () => {
               name='pending'
               id='pending'
               value={statusFilter}
-              onClick={handleCheckbox}
+              onClick={handleCheckboxChange}
             />
             <span className='invoices-popover__checkmark'></span>
             <div>
@@ -84,7 +84,7 @@ const InvoicePopover = () => {
               name='paid'
               id='paid'
               value={statusFilter}
-              onClick={handleCheckbox}
+              onClick={handleCheckboxChange}
             />
             <span className='invoices-popover__checkmark'></span>
             <div>

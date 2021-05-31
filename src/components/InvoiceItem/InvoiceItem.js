@@ -1,7 +1,7 @@
 import React from 'react';
+
 import Heading from '../Heading/Heading';
 import changeToCurrency from '../../utils/changeToCurrency';
-
 import './InvoiceItem.scss';
 
 const InvoiceItem = ({ invoice }) => {

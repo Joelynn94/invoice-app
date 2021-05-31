@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import InvoicePopover from '../InvoicePopover/InvoicePopover';
 
+import InvoicePopover from '../InvoicePopover/InvoicePopover';
 import './InvoiceFilter.scss';
 
 const InvoiceFilter = () => {

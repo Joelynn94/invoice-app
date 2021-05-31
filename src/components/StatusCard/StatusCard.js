@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
+
 import { ThemeContext } from '../../context/ThemeContext';
 import InvoiceBadge from '../InvoiceBadge/InvoiceBadge';
 import InvoiceViewButtons from '../InvoiceViewButtons/InvoiceViewButtons';
-
 import './StatusCard.scss';
 
 const StatusCard = ({ invoice }) => {

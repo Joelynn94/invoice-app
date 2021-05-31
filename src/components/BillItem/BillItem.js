@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
+
 import { ThemeContext } from '../../context/ThemeContext';
 import Button from '../../components/Button/Button';
 import FormInput from '../FormInput/FormInput';
-
 import './BillItem.scss';
 
 const BillItem = ({

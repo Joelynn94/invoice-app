@@ -7,7 +7,6 @@ import Button from '../Button/Button';
 import Heading from '../Heading/Heading';
 import changeToCurrency from '../../utils/changeToCurrency';
 import formatDate from '../../utils/formatDate';
-
 import './InvoiceSummary.scss';
 
 const InvoiceSummary = ({ invoice }) => {

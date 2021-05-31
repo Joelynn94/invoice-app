@@ -1,16 +1,16 @@
 import React, { useContext, useEffect } from 'react';
 
-import { AppContext } from '../context/AppContext';
-import InvoicesBar from '../components/InvoicesBar/InvoicesBar';
-import InvoiceSummary from '../components/InvoiceSummary/InvoiceSummary';
-import NoInvoices from '../components/NoInvoices/NoInvoices';
+import { AppContext } from '../../context/AppContext';
+import InvoicesBar from '../../components/InvoicesBar/InvoicesBar';
+import InvoiceSummary from '../../components/InvoiceSummary/InvoiceSummary';
+import NoInvoices from '../../components/NoInvoices/NoInvoices';
 
 const Dashboard = () => {
   const { invoices, filtered, getInvoices } = useContext(AppContext);
 
   useEffect(() => {
     getInvoices(invoices);
-  }, [invoices]);
+  }, []);
 
   return (
     <main>

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
+
 import { ThemeContext } from '../../context/ThemeContext';
 import FormInput from '../../components/FormInput/FormInput';
 import Heading from '../../components/Heading/Heading';
-
 import './BillFrom.scss';
 
 const BillFrom = ({
@@ -23,7 +23,7 @@ const BillFrom = ({
           id='sender-street'
           label='Street Address'
           className='sender-street'
-          name='senderStreet'
+          name='street'
           type='text'
           value={senderStreet}
           onChange={onAddressChange}
@@ -37,7 +37,7 @@ const BillFrom = ({
           id='sender-city'
           label='City'
           className='sender-city'
-          name='senderCity'
+          name='city'
           type='text'
           value={senderCity}
           onChange={onAddressChange}
@@ -51,7 +51,7 @@ const BillFrom = ({
           id='sender-post'
           label='Post Code'
           className='sender-post-code'
-          name='senderPostCode'
+          name='postCode'
           type='text'
           value={senderPostCode}
           onChange={onAddressChange}
@@ -65,7 +65,7 @@ const BillFrom = ({
           id='sender-country'
           label='Country'
           className='sender-country'
-          name='senderCountry'
+          name='country'
           type='text'
           value={senderCountry}
           onChange={onAddressChange}

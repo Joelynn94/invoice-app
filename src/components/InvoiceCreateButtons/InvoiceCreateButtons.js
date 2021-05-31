@@ -1,20 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import Button from '../Button/Button';
 
+import { AppContext } from '../../context/AppContext';
+import Button from '../Button/Button';
 import './InvoiceCreateButtons.scss';
 
-const InvoiceCreateButtons = ({
-  invoice,
-  onFormSubmit,
-  createInvoice,
-  ...otherProps
-}) => {
+const InvoiceCreateButtons = ({ ...otherProps }) => {
+  const { createInvoice, currentInvoice } = useContext(AppContext);
   const history = useHistory();
 
   const handleCreateButtonClick = (e) => {
-    onFormSubmit(e);
-    createInvoice(invoice);
+    createInvoice(currentInvoice);
     history.push('/');
   };
 
@@ -22,7 +18,7 @@ const InvoiceCreateButtons = ({
     <div className='invoice-create-buttons' {...otherProps}>
       <Button variant={'edit-dark'}>Discard</Button>
       <Button variant={'dark'}>Save as Draft</Button>
-      <Button variant={'primary'} onClick={handleCreateButtonClick}>
+      <Button variant={'primary'} onClick={() => handleCreateButtonClick()}>
         Save & Send
       </Button>
     </div>

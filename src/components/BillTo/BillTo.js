@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
+
 import { ThemeContext } from '../../context/ThemeContext';
 import FormInput from '../../components/FormInput/FormInput';
 import Heading from '../../components/Heading/Heading';
 import FormSelect from '../FormSelect/FormSelect';
 import FormOption from '../FormOption/FormOption';
-
 import './BillTo.scss';
 
 const BillTo = ({
@@ -17,7 +17,7 @@ const BillTo = ({
   clientCity,
   clientPostCode,
   clientCountry,
-  onClientAddressChange,
+  onAddressChange,
   onBillToChange,
 }) => {
   const { isLightTheme, light, dark } = useContext(ThemeContext);
@@ -55,10 +55,10 @@ const BillTo = ({
         <FormInput
           label='Street Address'
           className='client-street'
-          name='clientStreet'
+          name='street'
           type='text'
           value={clientStreet}
-          onChange={onClientAddressChange}
+          onChange={onAddressChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -68,10 +68,10 @@ const BillTo = ({
         <FormInput
           label='City'
           className='client-city'
-          name='clientCity'
+          name='city'
           type='text'
           value={clientCity}
-          onChange={onClientAddressChange}
+          onChange={onAddressChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -81,10 +81,10 @@ const BillTo = ({
         <FormInput
           label='Post Code'
           className='client-post-code'
-          name='clientPostCode'
+          name='postCode'
           type='text'
           value={clientPostCode}
-          onChange={onClientAddressChange}
+          onChange={onAddressChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,
@@ -94,10 +94,10 @@ const BillTo = ({
         <FormInput
           label='Country'
           className='client-country'
-          name='clientCountry'
+          name='country'
           type='text'
           value={clientCountry}
-          onChange={onClientAddressChange}
+          onChange={onAddressChange}
           style={{
             backgroundColor: theme.cardBg,
             border: `1px solid ${theme.borderColor}`,

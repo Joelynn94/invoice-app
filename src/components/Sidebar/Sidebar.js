@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
+
 import { ThemeContext } from '../../context/ThemeContext';
 import Avatar from '../Avatar/Avatar';
 import Logo from '../Logo/Logo';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
-
 import './Sidebar.scss';
 
 const Sidebar = () => {
