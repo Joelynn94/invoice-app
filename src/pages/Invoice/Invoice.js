@@ -7,14 +7,14 @@ import InvoiceDetails from '../../components/InvoiceDetails/InvoiceDetails';
 import './Invoice.scss';
 
 const Invoice = ({ match }) => {
-  const { invoices, setCurrentInvoice, currentInvoice } =
-    useContext(AppContext);
+  const { invoices, setCurrentInvoice, getInvoices } = useContext(AppContext);
   // find the invoice clicked and set to current
   const invoice = invoices.find((invoice) => invoice.id === match.params.id);
 
   useEffect(() => {
+    getInvoices(invoices);
     setCurrentInvoice(invoice);
-  }, [invoice]);
+  }, []);
 
   return (
     <main className='invoice'>

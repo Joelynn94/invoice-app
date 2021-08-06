@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import formatDate from '../utils/formatDate';
+import formatRandomId from '../utils/formatRandomId';
 import calculateTotal from '../utils/calculateTotal';
 
 const useForm = () => {
   const [status, setStatus] = useState('');
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState('');
   const [billToDetails, setBillToDetails] = useState({
     paymentDue: '',
     description: '',
@@ -25,14 +27,6 @@ const useForm = () => {
     country: '',
   });
   const [billItems, setBillItems] = useState([]);
-
-  function setStatusToPending() {
-    setStatus('pending');
-  }
-
-  function calculateInvoiceTotal() {
-    setTotal(calculateTotal(billItems));
-  }
 
   function handleSenderAddressChange(event) {
     setSenderAddress({
@@ -72,14 +66,10 @@ const useForm = () => {
     handleClientAddressChange,
     handleBillToChange,
     handleBillItemsChange,
-    setStatusToPending,
-    calculateInvoiceTotal,
     billToDetails,
     senderAddress,
     clientAddress,
     billItems,
-    status,
-    total,
     setBillItems,
   };
 };

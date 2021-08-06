@@ -12,8 +12,42 @@ import BillTo from '../../components/BillTo/BillTo';
 import BillItem from '../../components/BillItem/BillItem';
 import './InvoiceForm.scss';
 
-import calculateTotal from '../../utils/calculateTotal';
-import useForm from '../../utils/useForm';
+const defaultSenderAddress = {
+  street: '',
+  city: '',
+  postCode: '',
+  country: '',
+};
+
+const defaultClientAddress = {
+  street: '',
+  city: '',
+  postCode: '',
+  country: '',
+};
+
+const defaultBillItem = {
+  id: uuidv4(),
+  itemName: '',
+  quantity: '',
+  price: '',
+  total: '',
+};
+
+const defaultState = {
+  id: formatRandomId(),
+  createdAt: formatDate(),
+  paymentDue: '',
+  description: '',
+  paymentTerms: '',
+  clientName: '',
+  clientEmail: '',
+  status: 'pending',
+  senderAddress: defaultSenderAddress,
+  clientAddress: defaultClientAddress,
+  items: [defaultBillItem],
+  total: '',
+};
 
 const InvoiceForm = () => {
   const { currentInvoice, setCurrentInvoice, createInvoice } =
@@ -21,24 +55,11 @@ const InvoiceForm = () => {
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
 
-  const {
-    handleSenderAddressChange,
-    handleClientAddressChange,
-    handleBillToChange,
-    handleBillItemsChange,
-    setStatusToPending,
-    calculateInvoiceTotal,
-    billToDetails,
-    senderAddress,
-    clientAddress,
-    billItems,
-    total,
-    setBillItems,
-  } = useForm();
+  const [invoice, setInvoice] = useState(defaultState);
 
   useEffect(() => {
-    console.dir(currentInvoice);
-  }, [currentInvoice]);
+    console.dir(invoice);
+  }, [invoice]);
 
   function handleDeleteItemClick(id) {
     const removedItem = billItems.filter((item) => {
@@ -47,23 +68,26 @@ const InvoiceForm = () => {
     setBillItems(removedItem);
   }
 
-  function addBillItem(event) {
-    event.preventDefault();
-    setBillItems([
-      ...billItems,
-      {
-        id: uuidv4(),
-        itemName: '',
-        quantity: '',
-        price: '',
-        total: '',
-      },
-    ]);
+  function addBillItem() {
+    setInvoice((prevState) => ({
+      ...prevState,
+      items: [
+        ...prevState.items,
+        {
+          id: uuidv4(),
+          itemName: '',
+          quantity: '',
+          price: '',
+          total: '',
+        },
+      ],
+    }));
   }
 
   function handleFormSubmit(e) {
     e.preventDefault();
-    setCurrentInvoice({
+
+    setInvoice({
       ...billToDetails,
       senderAddress: {
         ...senderAddress,
@@ -75,7 +99,8 @@ const InvoiceForm = () => {
       status: setStatusToPending(),
       total: calculateInvoiceTotal(),
     });
-    createInvoice(currentInvoice);
+
+    createInvoice(invoice);
   }
 
   return (
@@ -84,27 +109,26 @@ const InvoiceForm = () => {
         <GoBack></GoBack>
         <Heading variant='h1'>New Invoice</Heading>
         <BillFrom
-          senderStreet={senderAddress.street}
-          senderCity={senderAddress.city}
-          senderPostCode={senderAddress.postCode}
-          senderCountry={senderAddress.country}
-          onAddressChange={handleSenderAddressChange}
+          setInvoice={setInvoice}
+          street={senderAddress.street}
+          city={senderAddress.city}
+          postCode={senderAddress.postCode}
+          country={senderAddress.country}
         />
         <BillTo
-          clientName={billToDetails.clientName}
-          clientEmail={billToDetails.clientEmail}
-          paymentDue={billToDetails.paymentDue}
-          paymentTerms={billToDetails.paymentTerms}
-          description={billToDetails.description}
-          clientStreet={clientAddress.street}
-          clientCity={clientAddress.city}
-          clientPostCode={clientAddress.postCode}
-          clientCountry={clientAddress.country}
-          onAddressChange={handleClientAddressChange}
-          onBillToChange={handleBillToChange}
+          setInvoice={setInvoice}
+          clientName={clientName}
+          clientEmail={clientEmail}
+          street={clientAddress.street}
+          city={clientAddress.city}
+          postCode={clientAddress.postCode}
+          country={clientAddress.country}
+          paymentDue={paymentDue}
+          paymentTerms={paymentTerms}
+          description={description}
         />
         <Heading variant='h2'>Item List</Heading>
-        {billItems.map((item) => {
+        {currentInvoice.items.map((item) => {
           return (
             <BillItem
               key={item.id}
@@ -133,6 +157,7 @@ const InvoiceForm = () => {
           </Button>
         </div>
         <InvoiceCreateButtons
+          onFormSubmit={handleFormSubmit}
           style={{
             backgroundColor: theme.cardBg,
             color: theme.text,
