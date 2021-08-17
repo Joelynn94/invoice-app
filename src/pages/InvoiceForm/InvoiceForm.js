@@ -1,69 +1,73 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useContext, useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 
-import { ThemeContext } from '../../context/ThemeContext';
-import { AppContext } from '../../context/AppContext';
+import { ThemeContext } from "../../context/ThemeContext";
+import { AppContext } from "../../context/AppContext";
 
-import Heading from '../../components/Heading/Heading';
-import Button from '../../components/Button/Button';
-import GoBack from '../../components/GoBack/GoBack';
-import InvoiceButtons from '../../components/InvoiceCreateButtons/InvoiceCreateButtons';
+import Heading from "../../components/Heading/Heading";
+import Button from "../../components/Button/Button";
+import GoBack from "../../components/GoBack/GoBack";
+import InvoiceCreateButtons from "../../components/InvoiceCreateButtons/InvoiceCreateButtons";
 
-import './InvoiceForm.scss';
-import BillFrom from '../../components/BillFrom/BillFrom';
-import BillTo from '../../components/BillTo/BillTo';
-import BillItem from '../../components/BillItem/BillItem';
+import "./InvoiceForm.scss";
+import BillFrom from "../../components/BillFrom/BillFrom";
+import BillTo from "../../components/BillTo/BillTo";
+import BillItem from "../../components/BillItem/BillItem";
 
-import formatDate from '../../utils/formatDate';
-import formatRandomId from '../../utils/formatRandomId';
+import formatDate from "../../utils/formatDate";
+import formatRandomId from "../../utils/formatRandomId";
 
 const defaultSenderAddress = {
-  street: '',
-  city: '',
-  postCode: '',
-  country: '',
+  street: "",
+  city: "",
+  postCode: "",
+  country: "",
 };
 
 const defaultClientAddress = {
-  street: '',
-  city: '',
-  postCode: '',
-  country: '',
+  street: "",
+  city: "",
+  postCode: "",
+  country: "",
 };
 
 const defaultBillItem = {
   id: uuidv4(),
-  itemName: '',
-  quantity: '',
-  price: '',
-  total: '',
+  itemName: "",
+  quantity: "",
+  price: "",
+  total: "",
 };
 
 const defaultState = {
   id: formatRandomId(),
   createdAt: formatDate(),
-  paymentDue: '',
-  description: '',
-  paymentTerms: '',
-  clientName: '',
-  clientEmail: '',
-  status: 'pending',
+  paymentDue: "",
+  description: "",
+  paymentTerms: "",
+  clientName: "",
+  clientEmail: "",
+  status: "pending",
   senderAddress: defaultSenderAddress,
   clientAddress: defaultClientAddress,
   items: [defaultBillItem],
-  total: '',
+  total: "",
 };
 
 const InvoiceForm = ({ history }) => {
-  const { invoices, createInvoice } = useContext(AppContext);
+  const { createInvoice, currentInvoice } = useContext(AppContext);
   const { isLightTheme, light, dark } = useContext(ThemeContext);
   const theme = isLightTheme ? light : dark;
 
   const [invoice, setInvoice] = useState(defaultState);
 
   useEffect(() => {
-    console.dir(invoice);
-  }, [invoice]);
+    if (currentInvoice !== null) {
+      setInvoice(currentInvoice);
+    } else {
+      setInvoice(defaultState);
+    }
+  }, [invoice, currentInvoice]);
 
   // destructure out of state
   const {
@@ -83,13 +87,13 @@ const InvoiceForm = ({ history }) => {
   };
 
   const redirectToHome = () => {
-    history.push('/');
+    history.push("/");
   };
 
   return (
-    <main className='invoice-form'>
+    <main className="invoice-form">
       <GoBack></GoBack>
-      <Heading variant='h1'>New Invoice</Heading>
+      <Heading variant="h1">New Invoice</Heading>
       <BillFrom
         setInvoice={setInvoice}
         street={senderAddress.street}
@@ -109,7 +113,7 @@ const InvoiceForm = ({ history }) => {
         paymentTerms={paymentTerms}
         description={description}
       />
-      <Heading variant='h2'>Item List</Heading>
+      <Heading variant="h2">Item List</Heading>
       {items.map((item) => {
         const { id, itemName, quantity, price, total } = item;
         return (
@@ -127,9 +131,9 @@ const InvoiceForm = ({ history }) => {
         );
       })}
 
-      <div className='bill-item__button'>
+      <div className="bill-item__button">
         <Button
-          type='submit'
+          type="submit"
           onClick={() =>
             setInvoice((prev) => ({
               ...prev,
@@ -137,10 +141,10 @@ const InvoiceForm = ({ history }) => {
                 ...prev.items,
                 {
                   id: uuidv4(),
-                  itemName: '',
-                  quantity: '',
-                  price: '',
-                  total: '',
+                  itemName: "",
+                  quantity: "",
+                  price: "",
+                  total: "",
                 },
               ],
             }))
@@ -152,7 +156,7 @@ const InvoiceForm = ({ history }) => {
           + Add New Item
         </Button>
       </div>
-      <InvoiceButtons
+      <InvoiceCreateButtons
         createInvoice={createInvoice}
         invoice={invoice}
         style={{
