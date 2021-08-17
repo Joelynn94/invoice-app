@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import './InvoiceBadge.scss';
+import "./InvoiceBadge.scss";
 
-const STATUS = ['draft', 'pending', 'paid'];
-const THEME = ['light', 'dark'];
+const STATUS = ["draft", "pending", "paid"];
+const THEME = ["light", "dark"];
 
 const getDefaultStatus = (arr) => {
   return arr[0][0].toUpperCase() + arr[0].substring(1).toLowerCase();

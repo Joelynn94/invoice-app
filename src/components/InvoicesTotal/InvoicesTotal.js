@@ -1,14 +1,21 @@
-import React from 'react';
-import Heading from '../Heading/Heading';
+import React, { useContext } from "react";
+import { AppContext } from "../../context/AppContext";
+import Heading from "../Heading/Heading";
 
-import './InvoicesTotal.scss';
+import "./InvoicesTotal.scss";
 
-const InvoicesTotal = ({ invoices }) => {
+const InvoicesTotal = () => {
+  const { filtered } = useContext(AppContext);
+
   return (
-    <div className='invoices-total'>
-      <Heading variant='h1'>Invoices</Heading>
-      <p className='invoices-total__sub'>
-        {invoices.length > 0 ? `${invoices.length} invoices` : 'No invoices'}
+    <div className="invoices-total">
+      <Heading variant="h1">Invoices</Heading>
+      <p className="invoices-total__sub">
+        {filtered.length === 1
+          ? `${filtered.length} invoice`
+          : filtered.length > 1
+          ? `${filtered.length} invoices`
+          : "No invoices"}
       </p>
     </div>
   );

@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
-import { AppContext } from '../../context/AppContext';
+import React, { useContext, useState } from "react";
+import { ThemeContext } from "../../context/ThemeContext";
+import { AppContext } from "../../context/AppContext";
 
-import './InvoicePopover.scss';
+import "./InvoicePopover.scss";
 
 const InvoicePopover = () => {
   const { isLightTheme, light, dark } = useContext(ThemeContext);
@@ -10,12 +10,12 @@ const InvoicePopover = () => {
 
   const { filterInvoices } = useContext(AppContext);
 
-  const [statusFiltered, setFiltered] = useState('');
+  const [statusFilter, setStatusFilter] = useState("");
 
   const handleCheckbox = (event) => {
     const { name, checked } = event.target;
 
-    const newCheckedArray = [...statusFiltered];
+    const newCheckedArray = [...statusFilter];
     let index;
 
     if (checked) {
@@ -26,7 +26,7 @@ const InvoicePopover = () => {
         newCheckedArray.push(name);
       }
       // update state
-      setFiltered(newCheckedArray);
+      setStatusFilter(newCheckedArray);
       filterInvoices(newCheckedArray);
       console.log(newCheckedArray);
     } else {
@@ -35,22 +35,22 @@ const InvoicePopover = () => {
       // remove the item if the checkbox is not checked
       newCheckedArray.splice(index, 1);
       // update state
-      setFiltered(newCheckedArray);
+      setStatusFilter(newCheckedArray);
       filterInvoices(newCheckedArray);
       console.log(newCheckedArray);
     }
   };
 
   return (
-    <div className='invoices-popover' style={{ backgroundColor: theme.cardBg }}>
+    <div className="invoices-popover" style={{ backgroundColor: theme.cardBg }}>
       <ul>
         <li>
-          <label className='invoices-popover__label'>
+          <label className="invoices-popover__label">
             <input
-              type='checkbox'
-              name='draft'
-              id='draft'
-              value={statusFiltered}
+              type="checkbox"
+              name="draft"
+              id="draft"
+              value={statusFilter}
               onClick={handleCheckbox}
             />
             <div>
@@ -59,12 +59,12 @@ const InvoicePopover = () => {
           </label>
         </li>
         <li>
-          <label className='invoices-popover__label'>
+          <label className="invoices-popover__label">
             <input
-              type='checkbox'
-              name='pending'
-              id='pending'
-              value={statusFiltered}
+              type="checkbox"
+              name="pending"
+              id="pending"
+              value={statusFilter}
               onClick={handleCheckbox}
             />
             <div>
@@ -73,12 +73,12 @@ const InvoicePopover = () => {
           </label>
         </li>
         <li>
-          <label className='invoices-popover__label'>
+          <label className="invoices-popover__label">
             <input
-              type='checkbox'
-              name='paid'
-              id='paid'
-              value={statusFiltered}
+              type="checkbox"
+              name="paid"
+              id="paid"
+              value={statusFilter}
               onClick={handleCheckbox}
             />
             <div>

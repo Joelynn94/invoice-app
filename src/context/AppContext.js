@@ -1,35 +1,36 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useReducer } from "react";
 
 const AppReducer = (state, action) => {
   switch (action.type) {
-    case 'GET_INVOICES':
+    case "GET_INVOICES":
       return {
         ...state,
         invoices: action.payload,
         loading: false,
       };
-    case 'CREATE_INVOICE':
+    case "CREATE_INVOICE":
       return {
         ...state,
         invoices: [action.payload, ...state.invoices],
         loading: false,
       };
-    case 'FILTER_STATUS':
+    case "FILTER_STATUS":
       let value = action.payload;
       const filteredInvocies = state.invoices.filter((invoice) => {
-        return invoice.status.includes(value);
+        return value.indexOf(invoice.status) !== -1;
       });
       return {
         ...state,
-        filtered: filteredInvocies,
+        filtered:
+          filteredInvocies.length > 0 ? filteredInvocies : state.invoices,
       };
-    case 'CLEAR_FILTER':
+    case "CLEAR_FILTER":
       return {
         ...state,
         filtered: [],
       };
-    case 'TOGGLE_DARK_MODE':
-      localStorage.setItem('isLightTheme', !state.isLightTheme);
+    case "TOGGLE_DARK_MODE":
+      localStorage.setItem("isLightTheme", !state.isLightTheme);
       return {
         isLightTheme: !state.isLightTheme,
       };
@@ -41,29 +42,29 @@ const AppReducer = (state, action) => {
 const intitalState = {
   invoices: [
     {
-      id: 'RT3080',
-      createdAt: '2021-08-18',
-      paymentDue: '2021-08-19',
-      description: 'Re-branding',
+      id: "RT3080",
+      createdAt: "2021-08-18",
+      paymentDue: "2021-08-19",
+      description: "Re-branding",
       paymentTerms: 1,
-      clientName: 'Jensen Huang',
-      clientEmail: 'jensenh@mail.com',
-      status: 'paid',
+      clientName: "Jensen Huang",
+      clientEmail: "jensenh@mail.com",
+      status: "paid",
       senderAddress: {
-        street: '19 Union Terrace',
-        city: 'London',
-        postCode: 'E1 3EZ',
-        country: 'United Kingdom',
+        street: "19 Union Terrace",
+        city: "London",
+        postCode: "E1 3EZ",
+        country: "United Kingdom",
       },
       clientAddress: {
-        street: '106 Kendell Street',
-        city: 'Sharrington',
-        postCode: 'NR24 5WQ',
-        country: 'United Kingdom',
+        street: "106 Kendell Street",
+        city: "Sharrington",
+        postCode: "NR24 5WQ",
+        country: "United Kingdom",
       },
       items: [
         {
-          itemName: 'Brand Guidelines',
+          itemName: "Brand Guidelines",
           quantity: 1,
           price: 1800.9,
           total: 1800.9,
@@ -72,35 +73,35 @@ const intitalState = {
       total: 1800.9,
     },
     {
-      id: 'XM9141',
-      createdAt: '2021-08-21',
-      paymentDue: '2021-09-20',
-      description: 'Graphic Design',
+      id: "XM9141",
+      createdAt: "2021-08-21",
+      paymentDue: "2021-09-20",
+      description: "Graphic Design",
       paymentTerms: 30,
-      clientName: 'Alex Grim',
-      clientEmail: 'alexgrim@mail.com',
-      status: 'pending',
+      clientName: "Alex Grim",
+      clientEmail: "alexgrim@mail.com",
+      status: "pending",
       senderAddress: {
-        street: '19 Union Terrace',
-        city: 'London',
-        postCode: 'E1 3EZ',
-        country: 'United Kingdom',
+        street: "19 Union Terrace",
+        city: "London",
+        postCode: "E1 3EZ",
+        country: "United Kingdom",
       },
       clientAddress: {
-        street: '84 Church Way',
-        city: 'Bradford',
-        postCode: 'BD1 9PB',
-        country: 'United Kingdom',
+        street: "84 Church Way",
+        city: "Bradford",
+        postCode: "BD1 9PB",
+        country: "United Kingdom",
       },
       items: [
         {
-          itemName: 'Banner Design',
+          itemName: "Banner Design",
           quantity: 1,
           price: 156.0,
           total: 156.0,
         },
         {
-          itemName: 'Email Design',
+          itemName: "Email Design",
           quantity: 2,
           price: 200.0,
           total: 400.0,
@@ -109,29 +110,29 @@ const intitalState = {
       total: 556.0,
     },
     {
-      id: 'RG0314',
-      createdAt: '2021-09-24',
-      paymentDue: '2021-10-01',
-      description: 'Website Redesign',
+      id: "RG0314",
+      createdAt: "2021-09-24",
+      paymentDue: "2021-10-01",
+      description: "Website Redesign",
       paymentTerms: 7,
-      clientName: 'John Morrison',
-      clientEmail: 'jm@myco.com',
-      status: 'paid',
+      clientName: "John Morrison",
+      clientEmail: "jm@myco.com",
+      status: "paid",
       senderAddress: {
-        street: '19 Union Terrace',
-        city: 'London',
-        postCode: 'E1 3EZ',
-        country: 'United Kingdom',
+        street: "19 Union Terrace",
+        city: "London",
+        postCode: "E1 3EZ",
+        country: "United Kingdom",
       },
       clientAddress: {
-        street: '79 Dover Road',
-        city: 'Westhall',
-        postCode: 'IP19 3PF',
-        country: 'United Kingdom',
+        street: "79 Dover Road",
+        city: "Westhall",
+        postCode: "IP19 3PF",
+        country: "United Kingdom",
       },
       items: [
         {
-          itemName: 'Website Redesign',
+          itemName: "Website Redesign",
           quantity: 1,
           price: 14002.33,
           total: 14002.33,
@@ -140,29 +141,29 @@ const intitalState = {
       total: 14002.33,
     },
     {
-      id: 'RT2080',
-      createdAt: '2021-10-11',
-      paymentDue: '2021-10-12',
-      description: 'Logo Concept',
+      id: "RT2080",
+      createdAt: "2021-10-11",
+      paymentDue: "2021-10-12",
+      description: "Logo Concept",
       paymentTerms: 1,
-      clientName: 'Alysa Werner',
-      clientEmail: 'alysa@email.co.uk',
-      status: 'pending',
+      clientName: "Alysa Werner",
+      clientEmail: "alysa@email.co.uk",
+      status: "pending",
       senderAddress: {
-        street: '19 Union Terrace',
-        city: 'London',
-        postCode: 'E1 3EZ',
-        country: 'United Kingdom',
+        street: "19 Union Terrace",
+        city: "London",
+        postCode: "E1 3EZ",
+        country: "United Kingdom",
       },
       clientAddress: {
-        street: '63 Warwick Road',
-        city: 'Carlisle',
-        postCode: 'CA20 2TG',
-        country: 'United Kingdom',
+        street: "63 Warwick Road",
+        city: "Carlisle",
+        postCode: "CA20 2TG",
+        country: "United Kingdom",
       },
       items: [
         {
-          itemName: 'Logo Sketches',
+          itemName: "Logo Sketches",
           quantity: 1,
           price: 102.04,
           total: 102.04,
@@ -171,35 +172,35 @@ const intitalState = {
       total: 102.04,
     },
     {
-      id: 'AA1449',
-      createdAt: '2021-10-7',
-      paymentDue: '2021-10-14',
-      description: 'Re-branding',
+      id: "AA1449",
+      createdAt: "2021-10-7",
+      paymentDue: "2021-10-14",
+      description: "Re-branding",
       paymentTerms: 7,
-      clientName: 'Mellisa Clarke',
-      clientEmail: 'mellisa.clarke@example.com',
-      status: 'pending',
+      clientName: "Mellisa Clarke",
+      clientEmail: "mellisa.clarke@example.com",
+      status: "pending",
       senderAddress: {
-        street: '19 Union Terrace',
-        city: 'London',
-        postCode: 'E1 3EZ',
-        country: 'United Kingdom',
+        street: "19 Union Terrace",
+        city: "London",
+        postCode: "E1 3EZ",
+        country: "United Kingdom",
       },
       clientAddress: {
-        street: '46 Abbey Row',
-        city: 'Cambridge',
-        postCode: 'CB5 6EG',
-        country: 'United Kingdom',
+        street: "46 Abbey Row",
+        city: "Cambridge",
+        postCode: "CB5 6EG",
+        country: "United Kingdom",
       },
       items: [
         {
-          itemName: 'New Logo',
+          itemName: "New Logo",
           quantity: 1,
           price: 1532.33,
           total: 1532.33,
         },
         {
-          itemName: 'Brand Guidelines',
+          itemName: "Brand Guidelines",
           quantity: 1,
           price: 2500.0,
           total: 2500.0,
@@ -208,29 +209,29 @@ const intitalState = {
       total: 4032.33,
     },
     {
-      id: 'TY9141',
-      createdAt: '2021-10-01',
-      paymentDue: '2021-10-31',
-      description: 'Landing Page Design',
+      id: "TY9141",
+      createdAt: "2021-10-01",
+      paymentDue: "2021-10-31",
+      description: "Landing Page Design",
       paymentTerms: 30,
-      clientName: 'Thomas Wayne',
-      clientEmail: 'thomas@dc.com',
-      status: 'pending',
+      clientName: "Thomas Wayne",
+      clientEmail: "thomas@dc.com",
+      status: "pending",
       senderAddress: {
-        street: '19 Union Terrace',
-        city: 'London',
-        postCode: 'E1 3EZ',
-        country: 'United Kingdom',
+        street: "19 Union Terrace",
+        city: "London",
+        postCode: "E1 3EZ",
+        country: "United Kingdom",
       },
       clientAddress: {
-        street: '3964  Queens Lane',
-        city: 'Gotham',
-        postCode: '60457',
-        country: 'United States of America',
+        street: "3964  Queens Lane",
+        city: "Gotham",
+        postCode: "60457",
+        country: "United States of America",
       },
       items: [
         {
-          itemName: 'Web Design',
+          itemName: "Web Design",
           quantity: 1,
           price: 6155.91,
           total: 6155.91,
@@ -239,29 +240,29 @@ const intitalState = {
       total: 6155.91,
     },
     {
-      id: 'FV2353',
-      createdAt: '2021-11-05',
-      paymentDue: '2021-11-12',
-      description: 'Logo Re-design',
+      id: "FV2353",
+      createdAt: "2021-11-05",
+      paymentDue: "2021-11-12",
+      description: "Logo Re-design",
       paymentTerms: 7,
-      clientName: 'Anita Wainwright',
-      clientEmail: '',
-      status: 'draft',
+      clientName: "Anita Wainwright",
+      clientEmail: "",
+      status: "draft",
       senderAddress: {
-        street: '19 Union Terrace',
-        city: 'London',
-        postCode: 'E1 3EZ',
-        country: 'United Kingdom',
+        street: "19 Union Terrace",
+        city: "London",
+        postCode: "E1 3EZ",
+        country: "United Kingdom",
       },
       clientAddress: {
-        street: '',
-        city: '',
-        postCode: '',
-        country: '',
+        street: "",
+        city: "",
+        postCode: "",
+        country: "",
       },
       items: [
         {
-          itemName: 'Logo Re-design',
+          itemName: "Logo Re-design",
           quantity: 1,
           price: 3102.04,
           total: 3102.04,
@@ -280,18 +281,18 @@ export const AppProvider = (props) => {
   const [state, dispatch] = useReducer(AppReducer, intitalState);
 
   const getInvoices = (invoices) => {
-    dispatch({ type: 'GET_INVOICES', payload: invoices });
+    dispatch({ type: "GET_INVOICES", payload: invoices });
   };
 
   const createInvoice = (invoice) => {
-    dispatch({ type: 'CREATE_INVOICE', payload: invoice });
+    dispatch({ type: "CREATE_INVOICE", payload: invoice });
   };
 
   const filterInvoices = (status) =>
-    dispatch({ type: 'FILTER_STATUS', payload: status });
+    dispatch({ type: "FILTER_STATUS", payload: status });
 
   const clearFilter = () => {
-    dispatch({ type: 'CLEAR_FILTER' });
+    dispatch({ type: "CLEAR_FILTER" });
   };
 
   return (
