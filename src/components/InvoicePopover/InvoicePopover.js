@@ -47,12 +47,14 @@ const InvoicePopover = () => {
         <li>
           <label className="invoices-popover__label">
             <input
+              className="invoices-popover__checkbox"
               type="checkbox"
               name="draft"
               id="draft"
               value={statusFilter}
               onClick={handleCheckbox}
             />
+            <span className="invoices-popover__checkmark"></span>
             <div>
               <p>Draft</p>
             </div>
@@ -61,12 +63,14 @@ const InvoicePopover = () => {
         <li>
           <label className="invoices-popover__label">
             <input
+              className="invoices-popover__checkbox"
               type="checkbox"
               name="pending"
               id="pending"
               value={statusFilter}
               onClick={handleCheckbox}
             />
+            <span className="invoices-popover__checkmark"></span>
             <div>
               <p>Pending</p>
             </div>
@@ -75,12 +79,14 @@ const InvoicePopover = () => {
         <li>
           <label className="invoices-popover__label">
             <input
+              className="invoices-popover__checkbox"
               type="checkbox"
               name="paid"
               id="paid"
               value={statusFilter}
               onClick={handleCheckbox}
             />
+            <span className="invoices-popover__checkmark"></span>
             <div>
               <p>Paid</p>
             </div>
@@ -90,5 +96,4 @@ const InvoicePopover = () => {
     </div>
   );
 };
-
 export default InvoicePopover;
