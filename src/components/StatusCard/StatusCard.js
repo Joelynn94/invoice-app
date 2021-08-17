@@ -12,7 +12,10 @@ const StatusCard = ({ invoice }) => {
   return (
     <div className="status-card" style={{ backgroundColor: theme.cardBg }}>
       <p className="status-card__status-text">Status</p>
-      <InvoiceBadge status={invoice.status} />
+      <InvoiceBadge
+        status={invoice.status}
+        theme={isLightTheme ? "light" : "dark"}
+      />
       <InvoiceViewButtons
         invoice={invoice}
         style={{
