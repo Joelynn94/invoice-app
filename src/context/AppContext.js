@@ -8,6 +8,12 @@ const AppReducer = (state, action) => {
         invoices: action.payload,
         loading: false,
       };
+    case "GET_INVOICE":
+      return {
+        ...state,
+        currentInvoice: action.payload,
+        loading: false,
+      };
     case "CREATE_INVOICE":
       return {
         ...state,
@@ -16,18 +22,32 @@ const AppReducer = (state, action) => {
       };
     case "FILTER_STATUS":
       let value = action.payload;
-      const filteredInvocies = state.invoices.filter((invoice) => {
+      const filteredInvoices = state.invoices.filter((invoice) => {
         return value.indexOf(invoice.status) !== -1;
       });
       return {
         ...state,
+        invoices: [...state.invoices],
         filtered:
-          filteredInvocies.length > 0 ? filteredInvocies : state.invoices,
+          filteredInvoices.length > 0 ? filteredInvoices : state.invoices,
       };
-    case "CLEAR_FILTER":
+    case "MARK_AS_PAID":
+      const paidId = action.payload;
+      const updatedInvoice = state.invoices.map((invoice) => {
+        return invoice.id === paidId ? { ...invoice, status: "paid" } : invoice;
+      });
       return {
         ...state,
-        filtered: [],
+        invoices: updatedInvoice,
+      };
+    case "DELETE_INVOICE":
+      const deleteId = action.payload;
+      const removeInvoice = state.invoices.filter((invoice) => {
+        return invoice.id !== deleteId;
+      });
+      return {
+        ...state,
+        invoices: removeInvoice,
       };
     case "TOGGLE_DARK_MODE":
       localStorage.setItem("isLightTheme", !state.isLightTheme);
@@ -271,8 +291,10 @@ const intitalState = {
       total: 3102.04,
     },
   ],
+  currentInvoice: {},
   filtered: [],
   loading: false,
+  editing: false,
 };
 
 export const AppContext = createContext(intitalState);
@@ -284,6 +306,10 @@ export const AppProvider = (props) => {
     dispatch({ type: "GET_INVOICES", payload: invoices });
   };
 
+  const getInvoice = (invoice) => {
+    dispatch({ type: "GET_INVOICE", payload: invoice });
+  };
+
   const createInvoice = (invoice) => {
     dispatch({ type: "CREATE_INVOICE", payload: invoice });
   };
@@ -291,8 +317,12 @@ export const AppProvider = (props) => {
   const filterInvoices = (status) =>
     dispatch({ type: "FILTER_STATUS", payload: status });
 
-  const clearFilter = () => {
-    dispatch({ type: "CLEAR_FILTER" });
+  const markAsPaid = (id) => {
+    dispatch({ type: "MARK_AS_PAID", payload: id });
+  };
+
+  const deleteInvoice = (id) => {
+    dispatch({ type: "DELETE_INVOICE", payload: id });
   };
 
   return (
@@ -300,10 +330,13 @@ export const AppProvider = (props) => {
       value={{
         invoices: state.invoices,
         filtered: state.filtered,
+        currentInvoice: state.currentInvoice,
         getInvoices,
+        getInvoice,
         createInvoice,
         filterInvoices,
-        clearFilter,
+        markAsPaid,
+        deleteInvoice,
       }}
     >
       {props.children}
