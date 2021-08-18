@@ -1,70 +1,5 @@
 import { createContext, useReducer } from "react";
 
-const AppReducer = (state, action) => {
-  switch (action.type) {
-    case "GET_INVOICES":
-      return {
-        ...state,
-        invoices: action.payload,
-        loading: false,
-      };
-    case "SET_CURRENT_INVOICE":
-      return {
-        ...state,
-        currentInvoice: action.payload,
-        loading: false,
-      };
-    case "CLEAR_CURRENT_INVOICE":
-      return {
-        ...state,
-        currentInvoice: {},
-        loading: false,
-      };
-    case "CREATE_INVOICE":
-      return {
-        ...state,
-        invoices: [action.payload, ...state.invoices],
-        loading: false,
-      };
-    case "FILTER_STATUS":
-      let value = action.payload;
-      const filteredInvoices = state.invoices.filter((invoice) => {
-        return value.indexOf(invoice.status) !== -1;
-      });
-      return {
-        ...state,
-        invoices: [...state.invoices],
-        filtered:
-          filteredInvoices.length > 0 ? filteredInvoices : state.invoices,
-      };
-    case "MARK_AS_PAID":
-      const paidId = action.payload;
-      const updatedInvoice = state.invoices.map((invoice) => {
-        return invoice.id === paidId ? { ...invoice, status: "paid" } : invoice;
-      });
-      return {
-        ...state,
-        invoices: updatedInvoice,
-      };
-    case "DELETE_INVOICE":
-      const deleteId = action.payload;
-      const removeInvoice = state.invoices.filter((invoice) => {
-        return invoice.id !== deleteId;
-      });
-      return {
-        ...state,
-        invoices: removeInvoice,
-      };
-    case "TOGGLE_DARK_MODE":
-      localStorage.setItem("isLightTheme", !state.isLightTheme);
-      return {
-        isLightTheme: !state.isLightTheme,
-      };
-    default:
-      return state;
-  }
-};
-
 const intitalState = {
   invoices: [
     {
@@ -304,6 +239,71 @@ const intitalState = {
 };
 
 export const AppContext = createContext(intitalState);
+
+const AppReducer = (state, action) => {
+  switch (action.type) {
+    case "GET_INVOICES":
+      return {
+        ...state,
+        invoices: action.payload,
+        loading: false,
+      };
+    case "SET_CURRENT_INVOICE":
+      return {
+        ...state,
+        currentInvoice: action.payload,
+        loading: false,
+      };
+    case "CLEAR_CURRENT_INVOICE":
+      return {
+        ...state,
+        currentInvoice: {},
+        loading: false,
+      };
+    case "CREATE_INVOICE":
+      return {
+        ...state,
+        invoices: [action.payload, ...state.invoices],
+        loading: false,
+      };
+    case "FILTER_STATUS":
+      let value = action.payload;
+      const filteredInvoices = state.invoices.filter((invoice) => {
+        return value.indexOf(invoice.status) !== -1;
+      });
+      return {
+        ...state,
+        invoices: [...state.invoices],
+        filtered:
+          filteredInvoices.length > 0 ? filteredInvoices : state.invoices,
+      };
+    case "MARK_AS_PAID":
+      const paidId = action.payload;
+      const updatedInvoice = state.invoices.map((invoice) => {
+        return invoice.id === paidId ? { ...invoice, status: "paid" } : invoice;
+      });
+      return {
+        ...state,
+        invoices: updatedInvoice,
+      };
+    case "DELETE_INVOICE":
+      const deleteId = action.payload;
+      const removeInvoice = state.invoices.filter((invoice) => {
+        return invoice.id !== deleteId;
+      });
+      return {
+        ...state,
+        invoices: removeInvoice,
+      };
+    case "TOGGLE_DARK_MODE":
+      localStorage.setItem("isLightTheme", !state.isLightTheme);
+      return {
+        isLightTheme: !state.isLightTheme,
+      };
+    default:
+      return state;
+  }
+};
 
 export const AppProvider = (props) => {
   const [state, dispatch] = useReducer(AppReducer, intitalState);
