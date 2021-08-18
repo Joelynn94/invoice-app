@@ -327,8 +327,8 @@ export const AppProvider = (props) => {
   const filterInvoices = (status) =>
     dispatch({ type: "FILTER_STATUS", payload: status });
 
-  const markAsPaid = (id) => {
-    dispatch({ type: "MARK_AS_PAID", payload: id });
+  const markAsPaid = (status) => {
+    dispatch({ type: "MARK_AS_PAID", payload: status });
   };
 
   const deleteInvoice = (id) => {
