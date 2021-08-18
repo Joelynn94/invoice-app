@@ -8,7 +8,6 @@ import NoInvoices from "../components/NoInvoices/NoInvoices";
 const Dashboard = () => {
   const { invoices, filtered } = useContext(AppContext);
 
-  console.log(filtered);
   return (
     <main>
       <InvoicesBar invoices={invoices} />

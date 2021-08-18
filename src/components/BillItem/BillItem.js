@@ -1,10 +1,9 @@
-import React, { useContext, useEffect } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
-import Button from '../../components/Button/Button';
-import FormInput from '../FormInput/FormInput';
+import React, { useContext } from "react";
+import { ThemeContext } from "../../context/ThemeContext";
+import Button from "../../components/Button/Button";
+import FormInput from "../FormInput/FormInput";
 
-import './BillItem.scss';
-import calculateTotal from '../../utils/calculateTotal';
+import "./BillItem.scss";
 
 const BillItem = ({
   id,
@@ -21,14 +20,14 @@ const BillItem = ({
 
   return (
     <>
-      <section className='bill-item'>
+      <section className="bill-item">
         {items.length > 0 ? (
           <>
             <FormInput
-              label='Item Name'
-              className='item-name'
-              name='itemName'
-              type='text'
+              label="Item Name"
+              className="item-name"
+              name="itemName"
+              type="text"
               value={itemName}
               onChange={(itemName) =>
                 setInvoice((prev) => {
@@ -47,11 +46,11 @@ const BillItem = ({
               }}
             />
             <FormInput
-              label='Qty'
-              className='item-qty'
-              name='quantity'
-              type='text'
-              pattern=''
+              label="Qty"
+              className="item-qty"
+              name="quantity"
+              type="text"
+              pattern=""
               value={quantity}
               onChange={(quantity) =>
                 setInvoice((prev) => {
@@ -70,10 +69,10 @@ const BillItem = ({
               }}
             />
             <FormInput
-              label='Price'
-              className='item-price'
-              name='price'
-              type='text'
+              label="Price"
+              className="item-price"
+              name="price"
+              type="text"
               value={price}
               onChange={(price) =>
                 setInvoice((prev) => {
@@ -91,12 +90,12 @@ const BillItem = ({
                 color: theme.text,
               }}
             />
-            <div className='bill-total'>
+            <div className="bill-total">
               <FormInput
-                label='Total'
-                className='item-total'
-                name='total'
-                type='text'
+                label="Total"
+                className="item-total"
+                name="total"
+                type="text"
                 disabled
                 value={total}
                 onChange={(total) =>
@@ -116,7 +115,7 @@ const BillItem = ({
                 }}
               />
               <Button
-                icon='delete'
+                icon="delete"
                 onClick={(e) =>
                   setInvoice((prev) => {
                     return {
