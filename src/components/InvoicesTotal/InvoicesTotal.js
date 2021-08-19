@@ -5,16 +5,18 @@ import Heading from "../Heading/Heading";
 import "./InvoicesTotal.scss";
 
 const InvoicesTotal = () => {
-  const { filtered } = useContext(AppContext);
+  const { filtered, invoices } = useContext(AppContext);
 
   return (
     <div className="invoices-total">
       <Heading variant="h1">Invoices</Heading>
       <p className="invoices-total__sub">
-        {filtered.length === 1
+        {filtered.length === 0
+          ? `${invoices.length} total invoices`
+          : filtered.length === 1
           ? `${filtered.length} invoice`
           : filtered.length > 1
-          ? `${filtered.length} invoices`
+          ? `${filtered.length} total invoices`
           : "No invoices"}
       </p>
     </div>

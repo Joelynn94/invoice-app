@@ -1,4 +1,4 @@
-@import '../../app.global.scss';
+@import "../../app.global.scss";
 
 .btn {
   padding: 16px 24px;
@@ -35,8 +35,7 @@
     background-color: $primary-btn-bg;
 
     &:hover {
-      opacity: 0.8;
-      background-color: $light-purple;
+      background-color: $primary-btn-hover;
     }
   }
 
@@ -59,8 +58,8 @@
   }
 
   &-edit-light {
-    background-color: $default-btn-bg;
-    color: $default-btn-txt;
+    background-color: $light-btn-bg;
+    color: $light-btn-txt;
 
     &:hover {
       background-color: $default-btn-hover;
@@ -72,8 +71,7 @@
     color: $dark-edit-btn-txt;
 
     &:hover {
-      opacity: 0.7;
-      background-color: $default-btn-bg;
+      background-color: $dark-btn-hover;
     }
   }
 
