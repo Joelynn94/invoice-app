@@ -1,32 +1,32 @@
-import React from 'react';
+import React from "react";
 
-import './Button.scss';
+import "./Button.scss";
 
 const VARIANTS = [
-  'default',
-  'primary',
-  'danger',
-  'dark',
-  'light',
-  'edit-light',
-  'edit-dark',
+  "default",
+  "primary",
+  "danger",
+  "dark",
+  "light",
+  "edit-light",
+  "edit-dark",
 ];
-const SIZES = ['sm', 'md', 'lg'];
+const SIZES = ["sm", "md", "lg"];
 const ICONS = [
-  'arrow-down',
-  'arrow-right',
-  'arrow-left',
-  'calendar',
-  'check',
-  'delete',
-  'moon',
-  'plus',
-  'sun',
+  "arrow-down",
+  "arrow-right",
+  "arrow-left",
+  "calendar",
+  "check",
+  "delete",
+  "moon",
+  "plus",
+  "sun",
 ];
 
 const Button = ({
   children,
-  type = 'button',
+  type = "button",
   variant,
   disabled,
   size,
@@ -39,12 +39,12 @@ const Button = ({
 
   const checkButtonSize = SIZES.includes(size) ? size : SIZES[0];
 
-  const checkButtonIcon = ICONS.includes(icon) ? icon : '';
+  const checkButtonIcon = ICONS.includes(icon) ? icon : "";
 
   return (
     <button
       className={`btn btn-${checkButtonVariant} btn-${checkButtonSize} ${
-        checkButtonIcon ? 'btn-icon' : ''
+        checkButtonIcon ? "btn-icon" : ""
       }`}
       disabled={disabled}
       type={type}
@@ -54,7 +54,7 @@ const Button = ({
     >
       {icon && (
         <div>
-          <img src={`./assets/icon-${checkButtonIcon}.svg`} alt='icon' />
+          <img src={`./assets/icon-${checkButtonIcon}.svg`} alt="icon" />
         </div>
       )}
       {text}

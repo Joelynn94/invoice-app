@@ -7,29 +7,14 @@ import { AppContext } from "../../context/AppContext";
 import Heading from "../../components/Heading/Heading";
 import Button from "../../components/Button/Button";
 import GoBack from "../../components/GoBack/GoBack";
-import InvoiceCreateButtons from "../../components/InvoiceCreateButtons/InvoiceCreateButtons";
-
-import "./InvoiceForm.scss";
 import BillFrom from "../../components/BillFrom/BillFrom";
 import BillTo from "../../components/BillTo/BillTo";
 import BillItem from "../../components/BillItem/BillItem";
+import InvoiceCreateButtons from "../../components/InvoiceCreateButtons/InvoiceCreateButtons";
 
 import formatDate from "../../utils/formatDate";
 import formatRandomId from "../../utils/formatRandomId";
-
-const defaultSenderAddress = {
-  street: "",
-  city: "",
-  postCode: "",
-  country: "",
-};
-
-const defaultClientAddress = {
-  street: "",
-  city: "",
-  postCode: "",
-  country: "",
-};
+import "./InvoiceForm.scss";
 
 const defaultBillItem = {
   id: uuidv4(),
@@ -48,8 +33,18 @@ const defaultState = {
   clientName: "",
   clientEmail: "",
   status: "pending",
-  senderAddress: defaultSenderAddress,
-  clientAddress: defaultClientAddress,
+  senderAddress: {
+    street: "",
+    city: "",
+    postCode: "",
+    country: "",
+  },
+  clientAddress: {
+    street: "",
+    city: "",
+    postCode: "",
+    country: "",
+  },
   items: [defaultBillItem],
   total: "",
 };
@@ -67,7 +62,7 @@ const InvoiceForm = ({ history }) => {
     } else {
       setInvoice(defaultState);
     }
-  }, [invoice, currentInvoice]);
+  }, [currentInvoice]);
 
   // destructure out of state
   const {
@@ -82,33 +77,25 @@ const InvoiceForm = ({ history }) => {
     items,
   } = invoice;
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
-
-  const redirectToHome = () => {
-    history.push("/");
-  };
-
   return (
     <main className="invoice-form">
-      <GoBack></GoBack>
+      <GoBack />
       <Heading variant="h1">New Invoice</Heading>
       <BillFrom
         setInvoice={setInvoice}
-        street={senderAddress.street}
-        city={senderAddress.city}
-        postCode={senderAddress.postCode}
-        country={senderAddress.country}
+        street={senderAddress?.street}
+        city={senderAddress?.city}
+        postCode={senderAddress?.postCode}
+        country={senderAddress?.country}
       />
       <BillTo
         setInvoice={setInvoice}
         clientName={clientName}
         clientEmail={clientEmail}
-        street={clientAddress.street}
-        city={clientAddress.city}
-        postCode={clientAddress.postCode}
-        country={clientAddress.country}
+        street={clientAddress?.street}
+        city={clientAddress?.city}
+        postCode={clientAddress?.postCode}
+        country={clientAddress?.country}
         paymentDue={paymentDue}
         paymentTerms={paymentTerms}
         description={description}

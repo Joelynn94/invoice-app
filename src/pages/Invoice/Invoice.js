@@ -12,6 +12,7 @@ const Invoice = ({ match }) => {
 
   useEffect(() => {
     setCurrentInvoice(invoice);
+    // eslint-disable-next-line
   }, [invoice]);
 
   return (
