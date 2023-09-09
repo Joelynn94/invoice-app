@@ -1,0 +1,52 @@
+.form__select {
+  display: flex;
+  width: 100%;
+  border-radius: 4px;
+  padding: 15px 20px;
+  margin: 10px 0;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: var(--light-accent);
+  color: var(--dark-text);
+  border: 1px solid var(--dark-text-accent);
+}
+
+[data-mode="dark"] .form__select {
+  color: var(--light-text);
+  background-color: var(--dark-accent);
+  border: 1px solid var(--dark-card-alt);
+}
+
+.form__select:active {
+  border: 1px solid var(--primary-light) !important;
+}
+
+.form__select:focus,
+.form__select:hover {
+  outline: none;
+  border: 1px solid var(--primary-light) !important;
+}
+
+.span-with-icon {
+  position: absolute;
+  top: 50%;
+  right: 20px; /* Adjust the right offset as needed */
+  transform: translateY(-50%);
+  pointer-events: none; /* Prevent the icon from intercepting clicks */
+  display: flex;
+  align-items: center; /* Center the icon vertically */
+  height: 100%;
+}
+
+.form__option {
+  position: relative;
+  padding: 16px 24px;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}

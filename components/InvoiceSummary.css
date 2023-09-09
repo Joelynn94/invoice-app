@@ -1,0 +1,119 @@
+.invoice-summary {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  padding: 24px;
+  margin-top: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.1);
+  align-items: baseline;
+  justify-content: center;
+  border: 1px solid transparent;
+  background-color: var(--light-accent);
+}
+
+.invoice-summary:hover {
+  border: 1px solid var(--primary);
+}
+
+[data-mode="dark"] .invoice-summary {
+  background-color: var(--dark-accent);
+}
+
+.invoice-summary__link {
+  text-decoration: none;
+}
+
+.invoice-summary__wrap .invoice-summary__due-date {
+  color: var(--light-grey);
+  display: flex;
+}
+
+.invoice-summary__wrap .invoice-summary__total {
+  font-size: 16px;
+  margin-top: 8px;
+  display: flex;
+}
+
+.invoice-summary__hash {
+  color: var(--dark-grey);
+  margin-right: 2px;
+}
+
+.invoice-summary__client-name {
+  justify-self: end;
+  color: var(--light-text-accent);
+}
+
+[dark-mode="true"] .invoice-summary__client-name {
+  color: var(--dark-text-accent);
+}
+
+.invoice-summary__due-txt {
+  margin-right: 5px;
+}
+
+.invoice-summary__due-date {
+  color: var(--light-text-accent);
+  display: none;
+}
+
+[dark-mode="true"] .invoice-summary__due-date {
+  color: var(--dark-text-accent);
+}
+
+.invoice-summary__total {
+  font-size: 16px;
+  margin-top: 8px;
+  display: none;
+}
+
+.invoice-summary__badge {
+  justify-self: end;
+  order: 5;
+}
+
+.invoice-summary__arrow {
+  display: none;
+}
+
+.invoice-summary__arrow button {
+  padding: 1em;
+  background-color: transparent;
+}
+
+@media (min-width: 768px) {
+  .invoice-summary {
+    grid-template-columns: 1fr 1.5fr 1.5fr 1fr 1fr 40px;
+  }
+
+  .invoice-summary__total {
+    margin-top: 0;
+    display: flex;
+    order: 4;
+    justify-self: end;
+  }
+
+  .invoice-summary__wrap {
+    display: none;
+  }
+
+  .invoice-summary__client-name {
+    order: 3;
+    justify-self: start;
+  }
+
+  .invoice-summary__id {
+    order: 1;
+  }
+
+  .invoice-summary__due-date {
+    display: flex;
+    order: 2;
+  }
+
+  .invoice-summary__arrow {
+    display: inline-block;
+    order: 6;
+  }
+}

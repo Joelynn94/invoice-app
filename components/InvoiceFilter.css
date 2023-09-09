@@ -1,0 +1,21 @@
+.invoices-filter {
+  position: relative;
+  display: flex;
+}
+
+@media (min-width: 768px) {
+  .invoices-filter {
+    margin-right: 27px;
+  }
+}
+
+.invoices-filter__btn {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  font-weight: bold;
+}
+
+.invoices-filter__arrow {
+  margin-left: 12px;
+}

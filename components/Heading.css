@@ -1,0 +1,44 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family);
+}
+
+h1 {
+  font-size: 24px;
+  line-height: 26px;
+  letter-spacing: -0.63px;
+  font-weight: bold;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 32px;
+    line-height: 36px;
+    letter-spacing: -1px;
+  }
+}
+
+h2 {
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 22px;
+  /* letter-spacing: -0.63px; */
+}
+
+h3 {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 15px;
+  /* letter-spacing: -0.8px; */
+}
+
+h4 {
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 15px;
+  /* letter-spacing: -0.25px; */
+}

@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+main {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: calc(1.5rem * 0.5);
+  padding-left: calc(1.5rem * 0.5);
+  padding-bottom: 90px;
+}
+
+@media (min-width: 576px) {
+  main {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  main {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  main {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  main {
+    margin: 0 auto; /* Center horizontally with equal margins */
+    max-width: calc(1140px - var(--sidebar-width));
+    /* margin-right: calc(var(--sidebar-width) + (1.5rem * 0.5)); */
+  }
+}
+
+/* body::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: #1e1e24;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--dark-purple);
+} */
+
+:root {
+  --font-family: "Spartan", sans-serif;
+  /********************************
+    BACKGROUND COLORS
+  *********************************/
+  --dark-bg: #141625;
+  --dark-accent: #1e2139;
+  --dark-bg-alt: #0c0e16;
+  --light-bg: #f8f8fb;
+  --light-accent: #ffffff;
+  --light-accent-dark: #373b53;
+  --dark-grey: #7e88c3;
+  --light-grey: #888eb0;
+  --grey-heading: #777f98;
+  --divider: #494e6e;
+  --card-alt: #f9fafe;
+  --dark-card-alt: #252945;
+  /********************************
+    MAIN COLORS
+  *********************************/
+  --primary: #7c5dfa;
+  --primary-light: #9277ff;
+  --error: #ec5757;
+  --error-hover: #ff9797;
+  /********************************
+    TEXT COLORS
+  *********************************/
+  --dark-text: #0c0e16;
+  --light-text: #ffffff;
+  --dark-text-accent: #dfe3fa;
+  --light-text-accent: #858bb2;
+  /********************************
+    BUTTON COLORS
+  *********************************/
+  --default-btn-bg: #f9fafe;
+  --default-btn-txt: #7e88c3;
+  --default-btn-hover: #dfe3fa;
+  --primary-btn-bg: #7c5dfa;
+  --primary-btn-txt: #ffffff;
+  --primary-btn-hover: #9277ff;
+  --light-btn-bg: #f9fafe;
+  --light-btn-txt: #888eb0;
+  --light-btn-hover: #dfe3fa;
+  --dark-btn-bg: #373b53;
+  --dark-btn-txt: #dfe3fa;
+  --dark-btn-hover: rgba(37, 41, 69, 0.5);
+  --dark-edit-btn-bg: #252945;
+  --dark-edit-btn-txt: #dfe3fa;
+  --danger-btn-bg: #ec5757;
+  --danger-btn-txt: #ffffff;
+  --danger-btn-hover: #ff9797;
+  /********************************
+    STATE COLORS
+  *********************************/
+  --paid-color: #33d69f;
+  --paid-color-bg: rgba(51, 214, 159, 0.06);
+  --pending-color: #ff8f00;
+  --pending-color-bg: rgba(255, 143, 0, 0.06);
+  --draft-color: #959595;
+  --draft-color-bg: rgba(55, 59, 83, 0.08);
+
+  /********************************
+    ELEMENT WIDTHS
+  *********************************/
+  --sidebar-width: 90px;
+}
+
+[data-mode="light"] {
+  color: var(--dark-text);
+}
+
+[data-mode="dark"] {
+  color: var(--light-text);
+}

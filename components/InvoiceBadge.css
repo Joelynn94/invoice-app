@@ -1,0 +1,52 @@
+.badge {
+  display: inline-block;
+  padding: 13px 15px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 6px;
+  width: 100px;
+}
+
+/* Paid badge styles */
+.badge--paid {
+  background-color: var(--paid-color-bg);
+  color: var(--paid-color);
+}
+
+/* Pending badge styles */
+.badge--pending {
+  background-color: var(--pending-color-bg);
+  color: var(--pending-color);
+}
+
+/* Draft badge styles */
+.badge--draft {
+  background-color: var(--draft-color-bg);
+  color: var(--draft-color);
+}
+
+/* Dot styles within badges */
+.badge__dot {
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+/* Dot color for paid */
+.badge__dot.paid {
+  background-color: var(--paid-color);
+}
+
+/* Dot color for pending */
+.badge__dot.pending {
+  background-color: var(--pending-color);
+}
+
+/* Dot color for draft */
+.badge__dot.draft {
+  background-color: var(--draft-color);
+}

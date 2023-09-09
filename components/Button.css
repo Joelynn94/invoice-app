@@ -1,0 +1,94 @@
+.btn {
+  padding: 16px 24px;
+  border-radius: 35px;
+  transition: transform 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  background-color: var(--default-btn-bg);
+  color: var(--default-btn-txt);
+  transition: all 0.3s ease;
+}
+
+.btn-default {
+  background-color: var(--default-btn-bg);
+  color: var(--default-btn-txt);
+}
+
+.btn-default:hover {
+  opacity: 0.8;
+  background-color: var(--default-btn-hover);
+}
+
+.btn-primary {
+  background-color: var(--primary-btn-bg);
+  color: var(--primary-btn-txt);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-btn-hover);
+}
+
+.btn-danger {
+  background-color: var(--danger-btn-bg);
+  color: var(--ganger-btn-txt);
+}
+
+.btn-danger:hover {
+  background-color: var(--danger-btn-hover);
+}
+
+.btn-light {
+  background-color: var(--light-btn-bg);
+  color: var(--light-btn-txt);
+}
+
+.btn-light:hover {
+  background-color: var(--light-btn-hover);
+}
+
+.btn-dark {
+  background-color: var(--dark-btn-bg);
+  color: var(--dark-btn-txt);
+}
+
+.btn-dark:hover {
+  background-color: var(--dark-btn-hover);
+}
+
+.btn-edit {
+  background-color: var(--light-btn-bg);
+  color: var(--light-btn-txt);
+}
+
+.btn-edit:hover {
+  background-color: var(--default-btn-hover);
+}
+
+[data-mode="dark"] .btn-edit {
+  background-color: var(--dark-edit-btn-bg);
+  color: var(--dark-edit-btn-txt);
+}
+
+[data-mode="dark"] .btn-edit:hover {
+  background-color: var(--dark-btn-hover);
+}
+
+.btn-icon {
+  padding: 8px 16px 8px 8px;
+}
+
+.btn-icon > div {
+  background-color: var(--light-accent);
+  margin-right: 8px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.btn-icon > div > img {
+  height: 10px;
+  width: 10px;
+}

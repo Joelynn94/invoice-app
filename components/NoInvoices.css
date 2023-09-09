@@ -1,0 +1,23 @@
+.no-invoices {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 200px;
+}
+
+.no-invoices--image {
+  margin: 0 auto;
+}
+
+.no-invoices h1 {
+  margin-top: 40px;
+}
+
+.no-invoices p {
+  margin-top: 24px;
+  color: #888eb0;
+}
+
+.no-invoices--span {
+  font-weight: bold;
+}

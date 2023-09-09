@@ -1,0 +1,99 @@
+/* .form__group */
+.form__group {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+/* .form__input */
+.form__group .form__input {
+  background: none;
+  color: var(--dark-text);
+  padding: 15px 20px;
+  display: block;
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  border: 1px solid var(--dark-text-accent);
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.form__group .form__input:-webkit-autofill {
+  -webkit-text-fill-color: var(--dark-text) !important;
+  background-color: transparent !important;
+  box-shadow: 0 0 0px 1000px transparent inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+[data-mode="dark"] .form__group .form__input {
+  color: var(--light-text);
+  background-color: var(--dark-accent);
+  border: 1px solid var(--dark-card-alt);
+}
+
+[data-mode="dark"] .form__group .form__input:-webkit-autofill {
+  -webkit-text-fill-color: var(--light-text) !important;
+}
+
+/* .form__input active state */
+.form__group .form__input:active {
+  border: 1px solid var(--primary-light) !important;
+}
+
+/* .form__input focus state */
+.form__group .form__input:focus {
+  outline: none;
+  border: 1px solid var(--primary-light) !important;
+}
+
+/* .form__input disabled state */
+.form__group .form__input:disabled {
+  background: none !important;
+  outline: none !important;
+}
+
+/* input[type='password'] */
+.form__group input[type="password"] {
+  letter-spacing: 0.3em;
+}
+
+/* input[type='number']::-webkit-inner-spin-button */
+.form__group input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+/* .form__input-label */
+.form__group .form__input-label {
+  color: var(--light-grey);
+  font-weight: normal;
+  pointer-events: none;
+  transition: 300ms ease all;
+}
+
+/* Remove default icon for WebKit (Safari and Chrome) */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: transparent;
+  background: none;
+  z-index: 1;
+  cursor: pointer;
+}
+
+/* Using custom icon for WebKit */
+input[type="date"]::before {
+  content: url("/assets/icon-calendar.svg");
+  position: absolute;
+  top: 70%; /* Adjust vertical position as needed */
+  right: 20px; /* Adjust horizontal position as needed */
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* Using custom icon for other browsers (Firefox) */
+input[type="date"]::after {
+  content: url("/assets/icon-calendar.svg");
+  position: absolute;
+  top: 70%; /* Adjust vertical position as needed */
+  right: 20px; /* Adjust horizontal position as needed */
+  transform: translateY(-50%);
+  cursor: pointer;
+}

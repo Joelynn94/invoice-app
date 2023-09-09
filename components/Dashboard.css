@@ -1,0 +1,26 @@
+.invoices-bar {
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+@media (min-width: 768px) {
+  .invoices-bar {
+    padding-top: 50px;
+  }
+}
+
+.invoices-total {
+  flex: 2;
+}
+
+.invoices-total__sub {
+  margin-top: 10px;
+  color: var(--light-text-accent);
+}
+
+a {
+  text-decoration: none;
+}

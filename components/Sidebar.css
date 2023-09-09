@@ -1,0 +1,26 @@
+.sidebar {
+  display: flex;
+  justify-content: space-between;
+  height: 72px;
+  background-color: var(--light-accent-dark);
+}
+
+@media (min-width: 1400px) {
+  .sidebar {
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    height: 100vh;
+    width: var(--sidebar-width);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+}
+
+/********************************
+  DARK THEME COLORS
+*********************************/
+
+[data-mode="dark"] .sidebar {
+  background-color: var(--dark-accent);
+}
