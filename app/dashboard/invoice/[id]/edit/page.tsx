@@ -308,7 +308,7 @@ export default function InvoiceEdit({ params }: { params: { id: string } }) {
             htmlFor={`items[${index}].total`}
             name={`items[${index}].total`}
             className="item-total"
-            value={item.total}
+            value={item.formattedTotal}
             onChange={(evt) => handleUpdateInvoiceItems(evt)}
             disabled
           />
