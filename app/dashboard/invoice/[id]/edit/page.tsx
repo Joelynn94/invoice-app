@@ -90,12 +90,12 @@ export default function InvoiceEdit({ params }: { params: { id: string } }) {
     }));
   };
 
-  const addItem = () => {
+  const addInvoiceItem = () => {
     const newItem: InvoiceItem = {
-      itemName: "",
+      name: "",
       quantity: 0,
       price: 0,
-      total: 0,
+      total: "0.00",
     };
 
     setUpdatedInvoice((prev) => ({
@@ -104,7 +104,9 @@ export default function InvoiceEdit({ params }: { params: { id: string } }) {
     }));
   };
 
-  const deleteItem = (index: number) => {
+  const deleteInvoiceItem = (index: number) => {
+    if (index < 0 || index >= updatedInvoice.items.length) return;
+
     setUpdatedInvoice((prev) => ({
       ...prev,
       items: prev.items.filter((item, idx) => idx !== index),
@@ -113,7 +115,10 @@ export default function InvoiceEdit({ params }: { params: { id: string } }) {
 
   return (
     <form onSubmit={handleFormSubmit} className="invoice-form">
-      <Heading variant="h1">Edit Invoice {params.id}</Heading>
+      <Heading variant="h1" className="mb-2">
+        Edit Invoice <span className="invoice-details--hash">#</span>
+        {params.id}
+      </Heading>
       {/* BILL FROM */}
       <Heading variant="h3">Bill From</Heading>
       <section className="bill-from">
@@ -242,11 +247,11 @@ export default function InvoiceEdit({ params }: { params: { id: string } }) {
           value={updatedInvoice.paymentTerms}
           onChange={(evt) => handleInputChange(evt)}
           options={[
-            { item: "Net 1 Day", value: "1" },
-            { item: "Net 7 Days", value: "7" },
-            { item: "Net 14 Days", value: "14" },
-            { item: "Net 30 Days", value: "30" },
-            { item: "Net 60 Days", value: "60" },
+            { item: "Net 1 Day", value: 1 },
+            { item: "Net 7 Days", value: 7 },
+            { item: "Net 14 Days", value: 14 },
+            { item: "Net 30 Days", value: 30 },
+            { item: "Net 60 Days", value: 60 },
           ]}
         />
         {/* Project description */}
@@ -270,10 +275,10 @@ export default function InvoiceEdit({ params }: { params: { id: string } }) {
           <FormInput
             type="text"
             label="Item Name"
-            htmlFor={`items[${index}].itemName`}
-            name={`items[${index}].itemName`}
+            htmlFor={`items[${index}].name`}
+            name={`items[${index}].name`}
             className="item-name"
-            value={item.itemName}
+            value={item.name}
             onChange={(evt) => handleUpdateInvoiceItems(evt)}
           />
 
@@ -309,13 +314,16 @@ export default function InvoiceEdit({ params }: { params: { id: string } }) {
           />
 
           <div className="item-delete">
-            <Button icon="delete" onClick={() => deleteItem(index)}></Button>
+            <Button
+              icon="delete"
+              onClick={() => deleteInvoiceItem(index)}
+            ></Button>
           </div>
         </section>
       ))}
 
       <div className="bill-item__button">
-        <Button variant="edit" onClick={() => addItem()}>
+        <Button variant="edit" onClick={() => addInvoiceItem()}>
           + Add New Item
         </Button>
       </div>

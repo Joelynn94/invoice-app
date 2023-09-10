@@ -8,7 +8,7 @@ interface FormSelectProps {
   value: string | number;
   icon?: string;
   className?: string;
-  options: { value: string; item: string }[];
+  options: { item: string; value: number }[];
   onChange: (evt: ChangeEvent<HTMLSelectElement>) => void;
   [key: string]: any; // Allows for any other HTML select element props
 }

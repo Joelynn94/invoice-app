@@ -9,7 +9,8 @@ import Button from "./Button";
 import "./InvoiceStatus.css";
 
 export default function InvoiceStatus({ invoice }: { invoice: Invoice }) {
-  const { markAsPaid, deleteInvoice } = useAppContext();
+  const { markInvoicePaid, markInvoicePending, deleteInvoice } =
+    useAppContext();
 
   const onDeleteClick = () => {
     deleteInvoice(invoice.id);
@@ -27,9 +28,19 @@ export default function InvoiceStatus({ invoice }: { invoice: Invoice }) {
         <Button variant="danger" onClick={onDeleteClick}>
           Delete
         </Button>
-        <Button variant="primary" onClick={() => markAsPaid(invoice.id)}>
-          Mark as Paid
-        </Button>
+        {invoice.status === "pending" && (
+          <Button variant="primary" onClick={() => markInvoicePaid(invoice.id)}>
+            Mark as Paid
+          </Button>
+        )}
+        {invoice.status === "draft" && (
+          <Button
+            variant="primary"
+            onClick={() => markInvoicePending(invoice.id)}
+          >
+            Mark as Pending
+          </Button>
+        )}
       </div>
     </div>
   );

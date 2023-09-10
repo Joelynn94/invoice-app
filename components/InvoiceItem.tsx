@@ -20,7 +20,7 @@ export default function InvoiceItem({ invoice }: { invoice: Invoice }) {
       {invoice.items.map((item, index) => (
         <div className="invoice-details__item" key={index}>
           <div className="invoice-details__item--breakdown">
-            <Heading variant="h3">{item.itemName}</Heading>
+            <Heading variant="h3">{item.name}</Heading>
             <p className="invoice-details--alt-txt">{`${
               item.quantity
             } x ${formatToCurrency(item.price)}`}</p>
@@ -29,7 +29,7 @@ export default function InvoiceItem({ invoice }: { invoice: Invoice }) {
             <Heading variant="h3">{formatToCurrency(item.total)}</Heading>
           </div>
           <div className="invoice-details__item--breakdown-lg">
-            <p className="invoice-details--alt-txt justify-start font-bold">{`${item.itemName}`}</p>
+            <p className="invoice-details--alt-txt justify-start font-bold">{`${item.name}`}</p>
             <p className="invoice-details--alt-txt justify-center font-bold">{`${item.quantity}`}</p>
             <p className="invoice-details--alt-txt justify-end font-bold">
               {formatToCurrency(item.price)}

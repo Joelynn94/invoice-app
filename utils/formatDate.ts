@@ -1,12 +1,22 @@
 export const formatDate = (
-  strDate?: string,
+  dateOrStrDate?: string | Date,
   locale: string = "en-US"
 ): string => {
-  const date = strDate ? new Date(strDate) : new Date();
+  let date;
+
+  if (typeof dateOrStrDate === "string") {
+    date = new Date(dateOrStrDate);
+  } else if (dateOrStrDate instanceof Date) {
+    date = dateOrStrDate;
+  } else {
+    date = new Date(); // Default to the current date if no valid date is provided
+  }
+
   const format = date.toLocaleString(locale, {
     day: "numeric",
     month: "short",
     year: "numeric",
   });
+
   return format.replace(/[, ]+/g, " ").trim();
 };

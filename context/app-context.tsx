@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Dispatch,
   ReactNode,
   Reducer,
   createContext,
@@ -9,26 +8,14 @@ import {
   useReducer,
 } from "react";
 
-import { Invoice } from "./app-types";
-
-// Define the context data shape
-interface AppContextState {
-  invoices: Invoice[];
-  currentInvoice: Invoice;
-  filtered: Invoice[];
-  loading: boolean;
-  editing: boolean;
-}
-
-// Define the action types
-type AppContextAction =
-  | { type: "GET_INVOICES"; payload: Invoice[] }
-  | { type: "SET_CURRENT_INVOICE"; payload: Invoice }
-  | { type: "CLEAR_CURRENT_INVOICE" }
-  | { type: "CREATE_INVOICE"; payload: Invoice }
-  | { type: "FILTER_STATUS"; payload: string[] }
-  | { type: "MARK_AS_PAID"; payload: string }
-  | { type: "DELETE_INVOICE"; payload: string };
+import {
+  Invoice,
+  InvoiceItem,
+  AppContextState,
+  AppContextAction,
+  AppContextWithActions,
+} from "./app-types";
+import { appReducer } from "./app-reducer";
 
 const initialState: AppContextState = {
   invoices: [
@@ -55,10 +42,11 @@ const initialState: AppContextState = {
       },
       items: [
         {
-          itemName: "Brand Guidelines",
+          name: "Brand Guidelines",
           quantity: 1,
           price: 1800.9,
           total: 1800.9,
+          formattedTotal: "$1,800.90",
         },
       ],
       total: 1800.9,
@@ -86,16 +74,18 @@ const initialState: AppContextState = {
       },
       items: [
         {
-          itemName: "Banner Design",
+          name: "Banner Design",
           quantity: 1,
           price: 156.0,
           total: 156.0,
+          formattedTotal: "$156.00",
         },
         {
-          itemName: "Email Design",
+          name: "Email Design",
           quantity: 2,
           price: 200.0,
           total: 400.0,
+          formattedTotal: "$400.00",
         },
       ],
       total: 556.0,
@@ -123,10 +113,11 @@ const initialState: AppContextState = {
       },
       items: [
         {
-          itemName: "Website Redesign",
+          name: "Website Redesign",
           quantity: 1,
           price: 14002.33,
           total: 14002.33,
+          formattedTotal: "$14,002.33",
         },
       ],
       total: 14002.33,
@@ -154,10 +145,11 @@ const initialState: AppContextState = {
       },
       items: [
         {
-          itemName: "Logo Sketches",
+          name: "Logo Sketches",
           quantity: 1,
           price: 102.04,
           total: 102.04,
+          formattedTotal: "$102.04",
         },
       ],
       total: 102.04,
@@ -185,16 +177,18 @@ const initialState: AppContextState = {
       },
       items: [
         {
-          itemName: "New Logo",
+          name: "New Logo",
           quantity: 1,
           price: 1532.33,
           total: 1532.33,
+          formattedTotal: "$1,532.33",
         },
         {
-          itemName: "Brand Guidelines",
+          name: "Brand Guidelines",
           quantity: 1,
           price: 2500.0,
           total: 2500.0,
+          formattedTotal: "$2,500.00",
         },
       ],
       total: 4032.33,
@@ -222,10 +216,11 @@ const initialState: AppContextState = {
       },
       items: [
         {
-          itemName: "Web Design",
+          name: "Web Design",
           quantity: 1,
           price: 6155.91,
           total: 6155.91,
+          formattedTotal: "$6,155.91",
         },
       ],
       total: 6155.91,
@@ -253,98 +248,35 @@ const initialState: AppContextState = {
       },
       items: [
         {
-          itemName: "Logo Re-design",
+          name: "Logo Re-design",
           quantity: 1,
           price: 3102.04,
           total: 3102.04,
+          formattedTotal: "$3,102.04",
         },
       ],
       total: 3102.04,
     },
   ],
-  currentInvoice: {} as Invoice,
   filtered: [],
   loading: false,
-  editing: false,
 };
 
 // Create the context
-export const AppContext = createContext<{
-  state: AppContextState;
-  getInvoices: (invoices: Invoice[]) => void;
-  setCurrentInvoice: (invoice: Invoice) => void;
-  clearCurrentInvoice: () => void;
-  createInvoice: (invoice: Invoice) => void;
-  filterInvoices: (status: string[]) => void;
-  markAsPaid: (id: string) => void;
-  deleteInvoice: (id: string) => void;
-}>({
+export const AppContext = createContext<AppContextWithActions>({
   state: initialState,
   getInvoices: () => null,
-  setCurrentInvoice: () => null,
-  clearCurrentInvoice: () => null,
   createInvoice: () => null,
+  createDraftInvoice: () => null,
+  editInvoice: () => null,
+  addInvoiceItem: () => null,
+  updateInvoiceItem: () => null,
+  deleteInvoiceItem: () => null,
   filterInvoices: () => null,
-  markAsPaid: () => null,
+  markInvoicePaid: () => null,
+  markInvoicePending: () => null,
   deleteInvoice: () => null,
 });
-
-const appReducer = (state: AppContextState, action: AppContextAction) => {
-  switch (action.type) {
-    case "GET_INVOICES":
-      return {
-        ...state,
-        invoices: action.payload,
-        loading: false,
-      };
-    case "SET_CURRENT_INVOICE":
-      return {
-        ...state,
-        currentInvoice: action.payload,
-        loading: false,
-      };
-    case "CLEAR_CURRENT_INVOICE":
-      return {
-        ...state,
-        currentInvoice: {},
-        loading: false,
-      };
-    case "CREATE_INVOICE":
-      return {
-        ...state,
-        invoices: [action.payload, ...state.invoices],
-        loading: false,
-      };
-    case "FILTER_STATUS":
-      const filteredInvoices = state.invoices.filter((invoice) =>
-        action.payload.includes(invoice.status)
-      );
-      return {
-        ...state,
-        filtered: filteredInvoices,
-      };
-    case "MARK_AS_PAID":
-      const paidId = action.payload;
-      const updatedInvoice = state.invoices.map((invoice: Invoice) => {
-        return invoice.id === paidId ? { ...invoice, status: "paid" } : invoice;
-      });
-      return {
-        ...state,
-        invoices: updatedInvoice,
-      };
-    case "DELETE_INVOICE":
-      const deleteId = action.payload;
-      const removeInvoice = state.invoices.filter((invoice: Invoice) => {
-        return invoice.id !== deleteId;
-      });
-      return {
-        ...state,
-        invoices: removeInvoice,
-      };
-    default:
-      return state;
-  }
-};
 
 export const AppContextProvider: React.FC<{ children: ReactNode }> = ({
   children,
@@ -358,24 +290,50 @@ export const AppContextProvider: React.FC<{ children: ReactNode }> = ({
     dispatch({ type: "GET_INVOICES", payload: invoices });
   };
 
-  const setCurrentInvoice = (invoice: Invoice) => {
-    dispatch({ type: "SET_CURRENT_INVOICE", payload: invoice });
-  };
-
-  const clearCurrentInvoice = () => {
-    dispatch({ type: "CLEAR_CURRENT_INVOICE" });
-  };
-
   const createInvoice = (invoice: Invoice) => {
-    dispatch({ type: "CREATE_INVOICE", payload: invoice });
+    dispatch({ type: "CREATE_NEW_INVOICE", payload: invoice });
+  };
+
+  const createDraftInvoice = (invoice: Invoice) => {
+    dispatch({ type: "CREATE_DRAFT_INVOICE", payload: invoice });
+  };
+
+  const editInvoice = (invoice: Invoice) => {
+    dispatch({ type: "EDIT_INVOICE", payload: invoice });
+  };
+
+  const addInvoiceItem = (invoiceId: string) => {
+    dispatch({ type: "ADD_INVOICE_ITEM", payload: invoiceId });
+  };
+
+  const updateInvoiceItem = (
+    invoiceId: string,
+    itemIndex: number,
+    updatedItem: InvoiceItem
+  ) => {
+    dispatch({
+      type: "UPDATE_INVOICE_ITEM",
+      payload: { invoiceId, itemIndex, updatedItem },
+    });
+  };
+
+  const deleteInvoiceItem = (invoiceId: string, itemIndex: number) => {
+    dispatch({
+      type: "DELETE_INVOICE_ITEM",
+      payload: { invoiceId, itemIndex },
+    });
   };
 
   const filterInvoices = (status: string[]) => {
     dispatch({ type: "FILTER_STATUS", payload: status });
   };
 
-  const markAsPaid = (status: string) => {
+  const markInvoicePaid = (status: string) => {
     dispatch({ type: "MARK_AS_PAID", payload: status });
+  };
+
+  const markInvoicePending = (status: string) => {
+    dispatch({ type: "MARK_AS_PENDING", payload: status });
   };
 
   const deleteInvoice = (id: string) => {
@@ -385,11 +343,15 @@ export const AppContextProvider: React.FC<{ children: ReactNode }> = ({
   const contextValue = {
     state,
     getInvoices,
-    setCurrentInvoice,
-    clearCurrentInvoice,
     createInvoice,
+    createDraftInvoice,
+    editInvoice,
+    addInvoiceItem,
+    updateInvoiceItem,
+    deleteInvoiceItem,
     filterInvoices,
-    markAsPaid,
+    markInvoicePaid,
+    markInvoicePending,
     deleteInvoice,
   };
 
@@ -401,7 +363,6 @@ export const AppContextProvider: React.FC<{ children: ReactNode }> = ({
 // Create a custom hook for using the context
 export const useAppContext = () => {
   const context = useContext(AppContext);
-  console.log(context);
   if (!context) {
     throw new Error("useAppContext must be used within an AppProvider");
   }

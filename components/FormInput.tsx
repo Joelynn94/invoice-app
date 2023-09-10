@@ -12,6 +12,7 @@ interface FormInputProps {
   value: string | number;
   disabled?: boolean;
   required?: boolean;
+  step?: string;
   onChange: (evt: ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -24,6 +25,7 @@ const FormInput: React.FC<FormInputProps> = ({
   value,
   disabled,
   required,
+  step,
   onChange,
   ...otherProps
 }: FormInputProps) => {
@@ -40,6 +42,7 @@ const FormInput: React.FC<FormInputProps> = ({
         value={value}
         disabled={disabled}
         required={required}
+        step={step}
         onChange={onChange}
         {...otherProps}
       />

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Invoice,
@@ -8,57 +8,72 @@ import {
   ClientAddress,
   InvoiceItem,
 } from "@/context/app-types";
-import generateID from "@/app/utils/generateId";
 import FormInput from "@/components/FormInput";
 import Heading from "@/components/Heading";
 import Button from "@/components/Button";
 import FormSelect from "@/components/FormSelect";
+import { calculateTotal } from "@/utils/calculateTotal";
+import { formatToCurrency } from "@/utils/formatToCurrency";
+import { useAppContext } from "@/context/app-context";
+import { isNumberValid } from "@/utils/validators";
+
+// Initialize a new invoice with default values
+const initialNewInvoice: Invoice = {
+  id: "",
+  createdAt: "",
+  paymentDue: "",
+  description: "",
+  paymentTerms: 1,
+  clientName: "",
+  clientEmail: "",
+  status: "draft",
+  senderAddress: {
+    street: "",
+    city: "",
+    postCode: "",
+    country: "",
+  },
+  clientAddress: {
+    street: "",
+    city: "",
+    postCode: "",
+    country: "",
+  },
+  items: [
+    {
+      name: "",
+      quantity: 1,
+      price: 0,
+      total: 0,
+      formattedTotal: "$0.00",
+    },
+  ],
+  total: 0,
+};
 
 export default function InvoiceCreate() {
-  // Initialize a new invoice with default values
-  const initialNewInvoice: Invoice = {
-    id: "", // You can generate a unique ID for the invoice
-    createdAt: "",
-    paymentDue: "",
-    description: "",
-    paymentTerms: "",
-    clientName: "",
-    clientEmail: "",
-    status: "draft",
-    senderAddress: {
-      street: "",
-      city: "",
-      postCode: "",
-      country: "",
-    },
-    clientAddress: {
-      street: "",
-      city: "",
-      postCode: "",
-      country: "",
-    },
-    items: [],
-    total: 0,
-  };
+  const { createInvoice } = useAppContext();
   const [newInvoice, setNewInvoice] = useState(initialNewInvoice);
-
-  const onCreateInvoice = (newInvoice: Invoice) => {
-    console.log("Creating invoice...");
-    console.log(newInvoice);
-  };
-
-  const addInvoiceId = (invoice: Invoice) => {
-    return {
-      ...invoice,
-      id: generateID(),
-    };
-  };
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const updatedInvoice = addInvoiceId(newInvoice);
-    onCreateInvoice(updatedInvoice);
+    console.log("Submitting form...");
+
+    const invoiceTotal = newInvoice.items.reduce((total, item) => {
+      if (typeof item.total === "number") {
+        return total + item.total;
+      }
+      return total;
+    }, 0);
+
+    const newInvoiceWithTotal = {
+      ...newInvoice,
+      total: invoiceTotal,
+    };
+
+    setNewInvoice(newInvoiceWithTotal);
+    createInvoice(newInvoiceWithTotal);
   };
 
   const handleInputChange = (
@@ -82,16 +97,11 @@ export default function InvoiceCreate() {
         [nameParts[0]]: {
           ...(prevInvoice[nameParts[0] as keyof Invoice] as
             | SenderAddress
-            | ClientAddress
-            | InvoiceItem),
+            | ClientAddress),
           [nameParts[1]]: value,
         },
       }));
     } else {
-      console.log("It's a top-level property");
-      console.log({
-        [name]: value,
-      });
       // It's a top-level property (e.g., clientName)
       setNewInvoice((prevInvoice) => ({
         ...prevInvoice,
@@ -105,26 +115,65 @@ export default function InvoiceCreate() {
   ) => {
     const { name, value } = event.target;
 
-    setNewInvoice((prev) => ({
-      ...prev,
-      items: prev.items.map((item, index) => {
-        if (name.includes(index.toString())) {
-          return {
+    // Custom validation to allow valid currency formats (e.g., 20.25 or 1000)
+    const currencyRegex = /^[0-9]+(\.[0-9]{1,2})?$/;
+
+    // Check if the input field is the "Price" field
+    if (name.includes("price")) {
+      // If the entered value is not a valid currency, don't update the state
+      if (!currencyRegex.test(value)) {
+        return;
+      }
+    }
+
+    setNewInvoice((prev) => {
+      // Extract the item index from the name
+      const indexMatch = name.match(/\d+/);
+
+      if (!indexMatch) {
+        // If the index is not found, return the previous state
+        return prev;
+      }
+
+      const itemIndex = parseInt(indexMatch[0], 10);
+      const updateItems = prev.items.map((item, currentIndex) => {
+        if (currentIndex === itemIndex) {
+          const updatedItem = {
             ...item,
             [name.split(".")[1]]: value,
           };
+
+          // Calculate the total based on the updated item's quantity and price
+          const quantity = Number(updatedItem.quantity);
+          const price = Number(updatedItem.price);
+
+          if (isNumberValid(quantity) && isNumberValid(price)) {
+            const total = calculateTotal(quantity, price);
+            const formattedTotal = formatToCurrency(total) || "$0.00";
+
+            return {
+              ...updatedItem,
+              total: total,
+              formattedTotal: formattedTotal,
+            };
+          } else {
+            return updatedItem;
+          }
         }
         return item;
-      }),
-    }));
+      });
+
+      return { ...prev, items: updateItems };
+    });
   };
 
-  const addItem = () => {
+  const addInvoiceItem = () => {
     const newItem: InvoiceItem = {
-      itemName: "",
+      name: "",
       quantity: 0,
       price: 0,
       total: 0,
+      formattedTotal: "$0.00",
     };
 
     setNewInvoice((prev) => ({
@@ -133,10 +182,26 @@ export default function InvoiceCreate() {
     }));
   };
 
-  const deleteItem = (index: number) => {
+  const deleteInvoiceItem = (index: number) => {
+    if (index < 0 || index >= newInvoice.items.length) return;
+
     setNewInvoice((prev) => ({
       ...prev,
       items: prev.items.filter((item, idx) => idx !== index),
+    }));
+  };
+
+  const calculateInvoiceTotal = () => {
+    const invoiceTotal = newInvoice.items.reduce((total, item) => {
+      if (typeof item.total === "number") {
+        return total + item.total;
+      }
+      return total;
+    }, 0);
+
+    setNewInvoice((prev) => ({
+      ...prev,
+      total: invoiceTotal,
     }));
   };
 
@@ -271,11 +336,11 @@ export default function InvoiceCreate() {
           value={newInvoice.paymentTerms}
           onChange={(evt) => handleInputChange(evt)}
           options={[
-            { item: "Net 1 Day", value: "1" },
-            { item: "Net 7 Days", value: "7" },
-            { item: "Net 14 Days", value: "14" },
-            { item: "Net 30 Days", value: "30" },
-            { item: "Net 60 Days", value: "60" },
+            { item: "Net 1 Day", value: 1 },
+            { item: "Net 7 Days", value: 7 },
+            { item: "Net 14 Days", value: 14 },
+            { item: "Net 30 Days", value: 30 },
+            { item: "Net 60 Days", value: 60 },
           ]}
         />
         {/* Project description */}
@@ -299,10 +364,10 @@ export default function InvoiceCreate() {
           <FormInput
             type="text"
             label="Item Name"
-            htmlFor={`items[${index}].itemName`}
-            name={`items[${index}].itemName`}
+            htmlFor={`items[${index}].name`}
+            name={`items[${index}].name`}
             className="item-name"
-            value={item.itemName}
+            value={item.name}
             onChange={(evt) => handleUpdateInvoiceItems(evt)}
           />
 
@@ -323,6 +388,7 @@ export default function InvoiceCreate() {
             name={`items[${index}].price`}
             className="item-price"
             value={item.price}
+            step="0.01"
             onChange={(evt) => handleUpdateInvoiceItems(evt)}
           />
 
@@ -332,19 +398,22 @@ export default function InvoiceCreate() {
             htmlFor={`items[${index}].total`}
             name={`items[${index}].total`}
             className="item-total"
-            value={item.total}
+            value={item.formattedTotal}
             onChange={(evt) => handleUpdateInvoiceItems(evt)}
             disabled
           />
 
           <div className="item-delete">
-            <Button icon="delete" onClick={() => deleteItem(index)}></Button>
+            <Button
+              icon="delete"
+              onClick={() => deleteInvoiceItem(index)}
+            ></Button>
           </div>
         </section>
       ))}
 
       <div className="bill-item__button">
-        <Button variant="edit" onClick={() => addItem()}>
+        <Button variant="edit" onClick={() => addInvoiceItem()}>
           + Add New Item
         </Button>
       </div>
