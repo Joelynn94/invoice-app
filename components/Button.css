@@ -20,6 +20,11 @@
   background-color: var(--default-btn-hover);
 }
 
+[data-mode="dark"] .btn-default {
+  background-color: var(--dark-edit-btn-bg);
+  color: var(--dark-btn-txt);
+}
+
 .btn-primary {
   background-color: var(--primary-btn-bg);
   color: var(--primary-btn-txt);
@@ -41,6 +46,11 @@
 .btn-light {
   background-color: var(--light-btn-bg);
   color: var(--light-btn-txt);
+}
+
+[data-mode="dark"] .btn-light {
+  background-color: var(--dark-edit-btn-bg);
+  color: var(--dark-btn-txt);
 }
 
 .btn-light:hover {
