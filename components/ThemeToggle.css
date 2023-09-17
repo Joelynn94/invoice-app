@@ -6,7 +6,7 @@
   border-right: 1px solid var(--divider);
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 1280px) {
   .themeToggle {
     flex-direction: column;
     justify-content: flex-end;

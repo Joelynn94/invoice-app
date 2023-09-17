@@ -16,7 +16,7 @@ export default function InvoiceSummary({ invoice }: { invoice: Invoice }) {
       {invoice && (
         <Link
           className="invoice-summary__link"
-          href={`dashboard/invoice/${invoice.id}/view`}
+          href={`dashboard/invoice/${invoice.id}`}
         >
           <div className="invoice-summary">
             <div className="invoice-summary__id">

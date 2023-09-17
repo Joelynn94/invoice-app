@@ -79,7 +79,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 input[type="date"]::before {
   content: url("/assets/icon-calendar.svg");
   position: absolute;
-  top: 70%; /* Adjust vertical position as needed */
+  top: 64%; /* Adjust vertical position as needed */
   right: 20px; /* Adjust horizontal position as needed */
   transform: translateY(-50%);
   cursor: pointer;
@@ -89,7 +89,7 @@ input[type="date"]::before {
 input[type="date"]::after {
   content: url("/assets/icon-calendar.svg");
   position: absolute;
-  top: 70%; /* Adjust vertical position as needed */
+  top: 64%; /* Adjust vertical position as needed */
   right: 20px; /* Adjust horizontal position as needed */
   transform: translateY(-50%);
   cursor: pointer;

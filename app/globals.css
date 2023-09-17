@@ -34,10 +34,10 @@ main {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1280px) {
   main {
     margin: 0 auto; /* Center horizontally with equal margins */
-    max-width: calc(1140px - var(--sidebar-width));
+    max-width: calc(1040px - var(--sidebar-width));
     /* margin-right: calc(var(--sidebar-width) + (1.5rem * 0.5)); */
   }
 }
