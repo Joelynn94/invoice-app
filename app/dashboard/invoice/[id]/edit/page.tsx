@@ -95,7 +95,8 @@ export default function InvoiceEdit({ params }: { params: { id: string } }) {
       name: "",
       quantity: 0,
       price: 0,
-      total: "0.00",
+      total: 0,
+      formattedTotal: "$0.00",
     };
 
     setUpdatedInvoice((prev) => ({
