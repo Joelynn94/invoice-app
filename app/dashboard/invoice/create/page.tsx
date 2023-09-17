@@ -58,8 +58,6 @@ export default function InvoiceCreate() {
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log("Submitting form...");
-
     const invoiceTotal = newInvoice.items.reduce((total, item) => {
       if (typeof item.total === "number") {
         return total + item.total;
@@ -104,12 +102,6 @@ export default function InvoiceCreate() {
     const nameParts = name.split(".");
 
     if (nameParts.length === 2) {
-      console.log("It's a nested property");
-      console.log({
-        [nameParts[0]]: {
-          [nameParts[1]]: value,
-        },
-      });
       // It's a nested property (e.g., senderAddress.street)
       setNewInvoice((prevInvoice) => ({
         ...prevInvoice,

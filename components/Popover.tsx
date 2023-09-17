@@ -23,7 +23,6 @@ export default function Popover() {
       // update state
       setStatusFilter(newCheckedArray);
       filterInvoices(newCheckedArray);
-      console.log(newCheckedArray);
     } else {
       // get the position of the item in the array
       index = newCheckedArray.indexOf(name);
@@ -32,7 +31,6 @@ export default function Popover() {
       // update state
       setStatusFilter(newCheckedArray);
       filterInvoices(newCheckedArray);
-      console.log(newCheckedArray);
     }
   };
 

@@ -9,10 +9,6 @@ import { formatToCurrency } from "./formatToCurrency";
  * @returns {number} The total price of the service formatted as currency.
  */
 export const calculateTotal = (quantity: number, price: number): number => {
-  console.log({
-    quantity,
-    price,
-  });
   if (quantity === undefined || price === undefined) {
     throw new Error("Quantity and price must be defined.");
   }
@@ -26,9 +22,9 @@ export const calculateTotal = (quantity: number, price: number): number => {
   const priceTotal = isNumberValid(convertedPrice) ? convertedPrice : 0;
   const total = quantityTotal * priceTotal;
 
-  // if (!isNumberValid(total)) {
-  //   throw new Error("Invalid total");
-  // }
+  if (!isNumberValid(total)) {
+    throw new Error("Invalid total");
+  }
 
   return total;
 };

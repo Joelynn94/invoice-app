@@ -52,12 +52,6 @@ export default function InvoiceEdit({ params }: { params: { id: string } }) {
     const nameParts = name.split(".");
 
     if (nameParts.length === 2) {
-      console.log("It's a nested property");
-      console.log({
-        [nameParts[0]]: {
-          [nameParts[1]]: value,
-        },
-      });
       // It's a nested property (e.g., senderAddress.street)
       setUpdatedInvoice((prevInvoice) => ({
         ...prevInvoice,

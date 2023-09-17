@@ -31,7 +31,6 @@ export const formatToCurrency = (
     currency: currency,
   });
 
-  console.log(typeof currencyFormatter.format(numericPrice));
   return currencyFormatter.format(numericPrice);
 };
 
