@@ -57,8 +57,9 @@ export default function InvoiceSummary({ invoice }: { invoice: Invoice }) {
               <Image
                 src="/assets/icon-arrow-right.svg"
                 alt="right arrow icon"
-                width={10}
+                width={7}
                 height={10}
+                style={{ height: "auto", width: "auto" }}
               />
             </div>
           </div>

@@ -63,6 +63,7 @@ const FormSelect: React.FC<FormSelectProps> = ({
               alt="icon"
               width={12}
               height={12}
+              style={{ height: "auto", width: "auto" }}
             />
           </span>
         )}

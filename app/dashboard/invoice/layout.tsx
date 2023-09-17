@@ -15,7 +15,7 @@ export default function InvoiceLayout({
           className="go-back__arrow"
           src="/assets/icon-arrow-left.svg"
           alt=""
-          width={10}
+          width={7}
           height={10}
           style={{ height: "auto", width: "auto" }}
         />
