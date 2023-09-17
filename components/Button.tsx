@@ -3,7 +3,14 @@ import Image from "next/image";
 import "./Button.css";
 
 type Props = {
-  variant?: "default" | "primary" | "danger" | "dark" | "light" | "edit";
+  variant?:
+    | "default"
+    | "primary"
+    | "danger"
+    | "dark"
+    | "light"
+    | "edit"
+    | "transparent";
   size?: "sm" | "md" | "lg";
   icon?:
     | "arrow-down"
@@ -58,6 +65,7 @@ export default function Button({
             alt="icon"
             width={20}
             height={20}
+            style={{ height: "auto", width: "auto" }}
           />
         </div>
       )}

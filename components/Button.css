@@ -10,6 +10,15 @@
   transition: all 0.3s ease;
 }
 
+.btn-transparent {
+  background-color: transparent;
+  color: var(--default-btn-txt);
+}
+
+.btn-transparent:hover {
+  background-color: transparent;
+}
+
 .btn-default {
   background-color: var(--default-btn-bg);
   color: var(--default-btn-txt);

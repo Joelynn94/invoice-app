@@ -356,6 +356,7 @@ export default function InvoiceEdit({ params }: { params: { id: string } }) {
           <div className="item-delete">
             <Button
               icon="delete"
+              variant="transparent"
               onClick={() => deleteInvoiceItem(index)}
             ></Button>
           </div>

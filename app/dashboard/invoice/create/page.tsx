@@ -403,6 +403,7 @@ export default function InvoiceCreate() {
           <div className="item-delete">
             <Button
               icon="delete"
+              variant="transparent"
               onClick={() => deleteInvoiceItem(index)}
             ></Button>
           </div>
