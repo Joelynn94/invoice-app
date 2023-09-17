@@ -1,4 +1,5 @@
-// FormInput.tsx
+"use client";
+
 import React, { ChangeEvent } from "react";
 
 import "./FormInput.css";

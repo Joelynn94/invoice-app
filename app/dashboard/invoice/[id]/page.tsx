@@ -1,8 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
-
 import InvoiceDetails from "@/components/InvoiceDetails";
 import InvoiceStatus from "@/components/InvoiceStatus";
 import { useAppContext } from "@/context/app-context";

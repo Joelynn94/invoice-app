@@ -1,6 +1,13 @@
-import generateID from "@/utils/generateId";
+"use client";
+
 import { Invoice, AppContextAction, AppContextState } from "./app-types";
+import generateID from "@/utils/generateId";
 import { formatDate } from "@/utils/formatDate";
+
+// Helper function to update local storage
+const updateLocalStorage = (key: string, data: any) => {
+  localStorage.setItem(key, JSON.stringify(data));
+};
 
 export const appReducer = (
   state: AppContextState,
@@ -12,31 +19,34 @@ export const appReducer = (
     }
     case "CREATE_NEW_INVOICE": {
       const newInvoice = action.payload;
-      const updateInvoice = {
+      const updateInvoices = {
         ...newInvoice,
         id: generateID(),
         status: "pending",
         createdAt: formatDate(new Date()),
       };
 
+      updateLocalStorage("invoices", updateInvoices);
+
       return {
         ...state,
-        invoices: [updateInvoice, ...state.invoices],
+        invoices: [updateInvoices, ...state.invoices],
         loading: false,
       };
     }
     case "CREATE_DRAFT_INVOICE": {
       const newInvoice = action.payload;
-      const updateInvoice = {
+      const updateInvoices = {
         ...newInvoice,
         id: generateID(),
         status: "draft",
         createdAt: formatDate(new Date()),
       };
 
+      updateLocalStorage("invoices", updateInvoices);
       return {
         ...state,
-        invoices: [updateInvoice, ...state.invoices],
+        invoices: [updateInvoices, ...state.invoices],
         loading: false,
       };
     }
@@ -46,6 +56,8 @@ export const appReducer = (
         return invoice.id === updatedInvoice.id ? updatedInvoice : invoice;
       });
 
+      updateLocalStorage("invoices", updatedInvoices);
+
       return { ...state, invoices: updatedInvoices };
     }
     case "DELETE_INVOICE": {
@@ -53,6 +65,8 @@ export const appReducer = (
       const removedInvoice = state.invoices.filter((invoice: Invoice) => {
         return invoice.id !== invoiceId;
       });
+
+      updateLocalStorage("invoices", removedInvoice);
 
       return { ...state, invoices: removedInvoice };
     }

@@ -1,5 +1,4 @@
 import { isNumberValid } from "./validators";
-import { formatToCurrency } from "./formatToCurrency";
 
 /**
  * Calculates the quantity and price totals for a given service.

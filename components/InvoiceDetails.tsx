@@ -1,3 +1,5 @@
+"use client";
+
 import { formatDate } from "@/utils/formatDate";
 import { formatToCurrency } from "@/utils/formatToCurrency";
 import { Invoice } from "@/context/app-types";

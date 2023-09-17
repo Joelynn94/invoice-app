@@ -1,3 +1,5 @@
+"use client";
+
 import React, { ReactNode, ChangeEvent } from "react";
 
 import Image from "next/image";

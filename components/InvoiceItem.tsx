@@ -1,3 +1,5 @@
+"use client";
+
 import { formatToCurrency } from "@/utils/formatToCurrency";
 import { Invoice } from "@/context/app-types";
 import Heading from "./Heading";

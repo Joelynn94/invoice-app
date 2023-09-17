@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, MouseEvent } from "react";
 import { useAppContext } from "@/context/app-context";
 

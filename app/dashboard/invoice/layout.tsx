@@ -1,8 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import "./styles.css";
-
 export default function InvoiceLayout({
   children,
 }: {

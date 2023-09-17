@@ -1,4 +1,3 @@
-import { isNumberValid } from "./validators";
 /*
  * Format a price to a currency
  *

@@ -1,3 +1,5 @@
+"use client";
+
 import { Invoice } from "@/context/app-types";
 
 import Button from "./Button";

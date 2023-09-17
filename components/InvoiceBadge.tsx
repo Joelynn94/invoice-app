@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+
 import "./InvoiceBadge.css";
 
 const STATUS = ["draft", "pending", "paid"];
