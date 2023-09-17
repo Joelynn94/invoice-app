@@ -40,6 +40,14 @@ export const appReducer = (
         loading: false,
       };
     }
+    case "UPDATE_INVOICE": {
+      const updatedInvoice = action.payload;
+      const updatedInvoices = state.invoices.map((invoice: Invoice) => {
+        return invoice.id === updatedInvoice.id ? updatedInvoice : invoice;
+      });
+
+      return { ...state, invoices: updatedInvoices };
+    }
     case "DELETE_INVOICE": {
       const invoiceId = action.payload;
       const removedInvoice = state.invoices.filter((invoice: Invoice) => {

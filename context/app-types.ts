@@ -46,7 +46,7 @@ export type AppContextAction =
   | { type: "CREATE_NEW_INVOICE"; payload: Invoice }
   | { type: "CREATE_DRAFT_INVOICE"; payload: Invoice }
   | { type: "DELETE_INVOICE"; payload: string }
-  | { type: "EDIT_INVOICE"; payload: Invoice }
+  | { type: "UPDATE_INVOICE"; payload: Invoice }
   | { type: "ADD_INVOICE_ITEM"; payload: string }
   | {
       type: "UPDATE_INVOICE_ITEM";
@@ -69,7 +69,7 @@ export interface AppContextWithActions {
   getInvoices: (invoices: Invoice[]) => void;
   createInvoice: (invoice: Invoice) => void;
   createDraftInvoice: (invoice: Invoice) => void;
-  editInvoice: (invoice: Invoice) => void;
+  updateInvoice: (invoice: Invoice) => void;
   addInvoiceItem: (id: string) => void;
   updateInvoiceItem: (
     invoiceId: string,

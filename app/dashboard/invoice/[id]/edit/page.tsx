@@ -8,6 +8,9 @@ import {
   ClientAddress,
   InvoiceItem,
 } from "@/context/app-types";
+import { calculateTotal } from "@/utils/calculateTotal";
+import { formatToCurrency } from "@/utils/formatToCurrency";
+import { isNumberValid } from "@/utils/validators";
 import { useAppContext } from "@/context/app-context";
 import Heading from "@/components/Heading";
 import Button from "@/components/Button";
@@ -15,21 +18,29 @@ import FormInput from "@/components/FormInput";
 import FormSelect from "@/components/FormSelect";
 
 export default function InvoiceEdit({ params }: { params: { id: string } }) {
-  const { state } = useAppContext();
+  const { state, updateInvoice } = useAppContext();
   const invoice = state.invoices.find(
     (invoice: Invoice) => invoice.id === params.id
   );
-
   const [updatedInvoice, setUpdatedInvoice] = useState<Invoice>(invoice!);
-  const saveUpdatedInvoice = (updatedInvoice: Invoice) => {
-    console.log("Finishing edit invoice...");
-    console.log(updatedInvoice);
-  };
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    saveUpdatedInvoice(updatedInvoice);
+    const invoiceTotal = updatedInvoice.items.reduce((total, item) => {
+      if (typeof item.total === "number") {
+        return total + item.total;
+      }
+      return total;
+    }, 0);
+
+    const newInvoiceWithTotal = {
+      ...updatedInvoice,
+      total: invoiceTotal,
+    };
+
+    updateInvoice(newInvoiceWithTotal);
+    setUpdatedInvoice(newInvoiceWithTotal);
   };
 
   const handleInputChange = (
@@ -59,10 +70,6 @@ export default function InvoiceEdit({ params }: { params: { id: string } }) {
         },
       }));
     } else {
-      console.log("It's a top-level property");
-      console.log({
-        [name]: value,
-      });
       // It's a top-level property (e.g., clientName)
       setUpdatedInvoice((prevInvoice) => ({
         ...prevInvoice,
@@ -76,24 +83,62 @@ export default function InvoiceEdit({ params }: { params: { id: string } }) {
   ) => {
     const { name, value } = event.target;
 
-    setUpdatedInvoice((prev) => ({
-      ...prev,
-      items: prev.items.map((item, index) => {
-        if (name.includes(index.toString())) {
-          return {
+    // Custom validation to allow valid currency formats (e.g., 20.25 or 1000)
+    const currencyRegex = /^[0-9]+(\.[0-9]{1,2})?$/;
+
+    // Check if the input field is the "Price" field
+    if (name.includes("price")) {
+      // If the entered value is not a valid currency, don't update the state
+      if (!currencyRegex.test(value)) {
+        return;
+      }
+    }
+
+    setUpdatedInvoice((prev) => {
+      // Extract the item index from the name
+      const indexMatch = name.match(/\d+/);
+
+      if (!indexMatch) {
+        // If the index is not found, return the previous state
+        return prev;
+      }
+
+      const itemIndex = parseInt(indexMatch[0], 10);
+      const updateItems = prev.items.map((item, currentIndex) => {
+        if (currentIndex === itemIndex) {
+          const updatedItem = {
             ...item,
             [name.split(".")[1]]: value,
           };
+
+          // Calculate the total based on the updated item's quantity and price
+          const quantity = Number(updatedItem.quantity);
+          const price = Number(updatedItem.price);
+
+          if (isNumberValid(quantity) && isNumberValid(price)) {
+            const total = calculateTotal(quantity, price);
+            const formattedTotal = formatToCurrency(total) || "$0.00";
+
+            return {
+              ...updatedItem,
+              total: total,
+              formattedTotal: formattedTotal,
+            };
+          } else {
+            return updatedItem;
+          }
         }
         return item;
-      }),
-    }));
+      });
+
+      return { ...prev, items: updateItems };
+    });
   };
 
   const addInvoiceItem = () => {
     const newItem: InvoiceItem = {
       name: "",
-      quantity: 0,
+      quantity: 1,
       price: 0,
       total: 0,
       formattedTotal: "$0.00",
@@ -331,7 +376,7 @@ export default function InvoiceEdit({ params }: { params: { id: string } }) {
       <div className="flex gap-3 justify-end">
         <Button variant="edit">Cancel</Button>
         <Button type="submit" variant="primary">
-          Save Invoice
+          Save Changes
         </Button>
       </div>
     </form>

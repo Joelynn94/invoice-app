@@ -268,7 +268,7 @@ export const AppContext = createContext<AppContextWithActions>({
   getInvoices: () => null,
   createInvoice: () => null,
   createDraftInvoice: () => null,
-  editInvoice: () => null,
+  updateInvoice: () => null,
   addInvoiceItem: () => null,
   updateInvoiceItem: () => null,
   deleteInvoiceItem: () => null,
@@ -298,8 +298,8 @@ export const AppContextProvider: React.FC<{ children: ReactNode }> = ({
     dispatch({ type: "CREATE_DRAFT_INVOICE", payload: invoice });
   };
 
-  const editInvoice = (invoice: Invoice) => {
-    dispatch({ type: "EDIT_INVOICE", payload: invoice });
+  const updateInvoice = (invoice: Invoice) => {
+    dispatch({ type: "UPDATE_INVOICE", payload: invoice });
   };
 
   const addInvoiceItem = (invoiceId: string) => {
@@ -345,7 +345,7 @@ export const AppContextProvider: React.FC<{ children: ReactNode }> = ({
     getInvoices,
     createInvoice,
     createDraftInvoice,
-    editInvoice,
+    updateInvoice,
     addInvoiceItem,
     updateInvoiceItem,
     deleteInvoiceItem,

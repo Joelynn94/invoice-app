@@ -52,7 +52,7 @@ const initialNewInvoice: Invoice = {
 };
 
 export default function InvoiceCreate() {
-  const { createInvoice } = useAppContext();
+  const { createInvoice, createDraftInvoice } = useAppContext();
   const [newInvoice, setNewInvoice] = useState(initialNewInvoice);
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -70,10 +70,29 @@ export default function InvoiceCreate() {
     const newInvoiceWithTotal = {
       ...newInvoice,
       total: invoiceTotal,
+      status: "pending",
     };
 
     setNewInvoice(newInvoiceWithTotal);
     createInvoice(newInvoiceWithTotal);
+  };
+
+  const saveInvoiceAsDraft = () => {
+    const invoiceTotal = newInvoice.items.reduce((total, item) => {
+      if (typeof item.total === "number") {
+        return total + item.total;
+      }
+      return total;
+    }, 0);
+
+    const newInvoiceWithTotal = {
+      ...newInvoice,
+      total: invoiceTotal,
+      status: "draft",
+    };
+
+    setNewInvoice(newInvoiceWithTotal);
+    createDraftInvoice(newInvoiceWithTotal);
   };
 
   const handleInputChange = (
@@ -170,7 +189,7 @@ export default function InvoiceCreate() {
   const addInvoiceItem = () => {
     const newItem: InvoiceItem = {
       name: "",
-      quantity: 0,
+      quantity: 1,
       price: 0,
       total: 0,
       formattedTotal: "$0.00",
@@ -188,20 +207,6 @@ export default function InvoiceCreate() {
     setNewInvoice((prev) => ({
       ...prev,
       items: prev.items.filter((item, idx) => idx !== index),
-    }));
-  };
-
-  const calculateInvoiceTotal = () => {
-    const invoiceTotal = newInvoice.items.reduce((total, item) => {
-      if (typeof item.total === "number") {
-        return total + item.total;
-      }
-      return total;
-    }, 0);
-
-    setNewInvoice((prev) => ({
-      ...prev,
-      total: invoiceTotal,
     }));
   };
 
@@ -418,7 +423,10 @@ export default function InvoiceCreate() {
         </Button>
       </div>
       <div className="flex gap-3 justify-end">
-        <Button variant="edit">Cancel</Button>
+        <Button variant="danger">Discard</Button>
+        <Button variant="dark" onClick={saveInvoiceAsDraft}>
+          Save as Draft
+        </Button>
         <Button type="submit" variant="primary">
           Save Invoice
         </Button>
