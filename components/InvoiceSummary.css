@@ -77,11 +77,6 @@
   display: none;
 }
 
-.invoice-summary__arrow button {
-  padding: 1em;
-  background-color: transparent;
-}
-
 @media (min-width: 768px) {
   .invoice-summary {
     grid-template-columns: 1fr 1.5fr 1.5fr 1fr 1fr 40px;
@@ -91,7 +86,6 @@
     margin-top: 0;
     display: flex;
     order: 4;
-    justify-self: end;
   }
 
   .invoice-summary__wrap {
@@ -115,5 +109,6 @@
   .invoice-summary__arrow {
     display: inline-block;
     order: 6;
+    justify-self: end;
   }
 }

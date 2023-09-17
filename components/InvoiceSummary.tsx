@@ -54,14 +54,12 @@ export default function InvoiceSummary({ invoice }: { invoice: Invoice }) {
               <InvoiceBadge status={invoice.status} />
             </div>
             <div className="invoice-summary__arrow">
-              <Button>
-                <Image
-                  src="/assets/icon-arrow-right.svg"
-                  alt="right arrow icon"
-                  width={20}
-                  height={20}
-                />
-              </Button>
+              <Image
+                src="/assets/icon-arrow-right.svg"
+                alt="right arrow icon"
+                width={10}
+                height={10}
+              />
             </div>
           </div>
         </Link>
