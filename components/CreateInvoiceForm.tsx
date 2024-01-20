@@ -219,9 +219,12 @@ export default function CreateInvoiceForm({
             onSubmit={handleFormSubmit}
             className="invoice-form mt-14 mb-8 mx-auto px-8"
           >
-            <Heading variant="h1" className="mb-8">
-              New Invoice
-            </Heading>
+            <div className="flex items-center justify-between mb-2">
+              <Heading variant="h1">New Invoice</Heading>
+              <Button variant="light" onClick={() => setIsModalOpen(false)}>
+                Cancel
+              </Button>
+            </div>
             {/* BILL FROM */}
             <Heading variant="h3" className="mb-6 text-primary-500">
               Bill From

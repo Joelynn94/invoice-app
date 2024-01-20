@@ -54,12 +54,12 @@
 
 .btn-light {
   background-color: var(--light-btn-bg);
-  color: var(--light-btn-txt);
+  color: var(--dark-btn-txt);
 }
 
 [data-mode="dark"] .btn-light {
   background-color: var(--dark-edit-btn-bg);
-  color: var(--dark-btn-txt);
+  color: var(--light-btn-txt);
 }
 
 .btn-light:hover {
