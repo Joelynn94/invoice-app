@@ -1,23 +1,21 @@
-import type { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import jsonData from "../../data.json";
+import connectDB from "@/libs/connectDB";
+import Invoice from "@/models/invoice";
 
 export async function GET(
   request: NextRequest,
   context: { params: { invoiceId: string } }
 ) {
   const { invoiceId } = context.params;
-  const invoice = jsonData.find(
-    (inv) => inv.id.toLowerCase() === invoiceId.toLowerCase()
-  );
+  await connectDB();
 
-  if (!invoice) {
-    return new Response(JSON.stringify({ error: "Invoice not found" }), {
-      status: 404,
-    });
+  const foundInvoice = await Invoice.findById(invoiceId);
+  if (!foundInvoice) {
+    return NextResponse.json({ error: "Invoice not found" }, { status: 404 });
   }
 
-  console.log(`Fetched invoice ${invoiceId}`);
-  return new Response(JSON.stringify(invoice), { status: 200 });
+  return NextResponse.json(foundInvoice, { status: 200 });
 }
 
 export async function PUT(
@@ -25,23 +23,19 @@ export async function PUT(
   context: { params: { invoiceId: string } }
 ) {
   const { invoiceId } = context.params;
-  const updatedInvoiceData = await request.json();
-  const invoiceIndex = jsonData.findIndex(
-    (inv) => inv.id.toLowerCase() === invoiceId.toLowerCase()
-  );
+  await connectDB();
 
-  if (invoiceIndex === -1) {
-    // Invoice not found
-    return new Response(JSON.stringify({ error: "Invoice not found" }), {
-      status: 404,
-    });
+  const invoiceData = await request.json();
+  const updatedInvoice = await Invoice.findByIdAndUpdate(
+    invoiceId,
+    invoiceData,
+    { new: true }
+  );
+  if (!updatedInvoice) {
+    return NextResponse.json({ error: "Invoice not found" }, { status: 404 });
   }
 
-  // Update the invoice
-  jsonData[invoiceIndex] = { ...jsonData[invoiceIndex], ...updatedInvoiceData };
-
-  console.log(`Updated invoice ${invoiceId}`);
-  return new Response(JSON.stringify(jsonData[invoiceIndex]), { status: 200 });
+  return NextResponse.json(updatedInvoice, { status: 200 });
 }
 
 export async function DELETE(
@@ -49,20 +43,15 @@ export async function DELETE(
   context: { params: { invoiceId: string } }
 ) {
   const { invoiceId } = context.params;
-  const initialLength = jsonData.length;
+  await connectDB();
 
-  // Filter out the invoice to delete
-  const updatedInvoices = jsonData.filter(
-    (inv) => inv.id.toLowerCase() !== invoiceId.toLowerCase()
-  );
-
-  if (updatedInvoices.length === initialLength) {
-    // Invoice not found
-    return new Response(JSON.stringify({ error: "Invoice not found" }), {
-      status: 404,
-    });
+  const deletedInvoice = await Invoice.findByIdAndDelete(invoiceId);
+  if (!deletedInvoice) {
+    return NextResponse.json({ error: "Invoice not found" }, { status: 404 });
   }
 
-  console.log(`Deleted invoice ${invoiceId}`);
-  return new Response(JSON.stringify(updatedInvoices), { status: 200 });
+  return NextResponse.json(
+    { message: "Invoice successfully deleted" },
+    { status: 200 }
+  );
 }

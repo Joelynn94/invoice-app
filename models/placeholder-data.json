@@ -1,0 +1,92 @@
+[
+  {
+    "createdAt": "2024-01-20T09:00:00.000Z",
+    "paymentDue": "2024-02-19T09:00:00.000Z",
+    "description": "Sample Invoice 1",
+    "paymentTerms": 30,
+    "clientName": "Client 1",
+    "clientEmail": "client1@example.com",
+    "status": "pending",
+    "senderAddress": {
+      "street": "123 Main St",
+      "city": "Cityville",
+      "postCode": "12345",
+      "country": "Sample Country"
+    },
+    "clientAddress": {
+      "street": "456 Oak St",
+      "city": "Client City",
+      "postCode": "67890",
+      "country": "Client Country"
+    },
+    "items": [
+      {
+        "name": "Item 1",
+        "quantity": 2,
+        "price": "50.00",
+        "total": "100.00"
+      }
+    ],
+    "total": "100.00"
+  },
+  {
+    "createdAt": "2024-01-20T09:00:00.000Z",
+    "paymentDue": "2024-02-19T09:00:00.000Z",
+    "description": "Web Design Service",
+    "paymentTerms": 15,
+    "clientName": "ABC Inc.",
+    "clientEmail": "abc@example.com",
+    "status": "pending",
+    "senderAddress": {
+      "street": "123 Main St",
+      "city": "Cityville",
+      "postCode": "12345",
+      "country": "Sample Country"
+    },
+    "clientAddress": {
+      "street": "456 Oak St",
+      "city": "Client City",
+      "postCode": "67890",
+      "country": "Client Country"
+    },
+    "items": [
+      {
+        "name": "Website Design",
+        "quantity": 1,
+        "price": "1200.00",
+        "total": "1200.00"
+      }
+    ],
+    "total": "1200.00"
+  },
+  {
+    "createdAt": "2024-01-20T09:00:00.000Z",
+    "paymentDue": "2024-02-19T09:00:00.000Z",
+    "description": "Logo Design Service",
+    "paymentTerms": 30,
+    "clientName": "XYZ Corp.",
+    "clientEmail": "xyz@example.com",
+    "status": "paid",
+    "senderAddress": {
+      "street": "789 Elm St",
+      "city": "Townsville",
+      "postCode": "54321",
+      "country": "Another Country"
+    },
+    "clientAddress": {
+      "street": "012 Pine St",
+      "city": "Clientville",
+      "postCode": "98765",
+      "country": "Client Country"
+    },
+    "items": [
+      {
+        "name": "Logo Design",
+        "quantity": 1,
+        "price": "800.00",
+        "total": "800.00"
+      }
+    ],
+    "total": "800.00"
+  }
+]

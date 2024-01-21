@@ -1,14 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
-import jsonData from "../data.json";
+import connectDB from "@/libs/connectDB";
+import Invoice from "@/models/invoice";
 
 export async function GET() {
-  return NextResponse.json(jsonData);
+  await connectDB();
+  const invoices = await Invoice.find();
+  return NextResponse.json(invoices);
 }
 
 export async function POST(request: NextRequest) {
-  const invoice = await request.json();
-  jsonData.push(invoice);
-  console.log(`Added invoice ${invoice.id}`);
-  console.log(jsonData);
-  return NextResponse.json(invoice, { status: 201 });
+  const invoiceData = await request.json();
+  await connectDB();
+  await Invoice.create(invoiceData);
+  return NextResponse.json(
+    { message: "Invoice successfully created" },
+    { status: 201 }
+  );
 }
