@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import { formatToCurrency } from "@/utils/formatToCurrency";
 import { formatDate } from "@/utils/formatDate";
-import { Invoice } from "@/context/app-types";
+import { Invoice } from "@/types/definitions";
 import InvoiceBadge from "./InvoiceBadge";
 import Heading from "./Heading";
 import Button from "./Button";
@@ -18,13 +18,13 @@ export default function InvoiceSummary({ invoice }: { invoice: Invoice }) {
       {invoice && (
         <Link
           className="invoice-summary__link"
-          href={`dashboard/invoice/${invoice.id}`}
+          href={`dashboard/invoice/${invoice._id}`}
         >
           <div className="invoice-summary">
             <div className="invoice-summary__id">
               <Heading variant="h3">
                 <span className="invoice-summary__hash">#</span>
-                {invoice.id}
+                {invoice._id}
               </Heading>
             </div>
             <div className="invoice-summary__client-name">

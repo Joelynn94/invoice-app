@@ -1,39 +1,42 @@
 "use client";
 
-import React, { useState, MouseEvent } from "react";
-import { useAppContext } from "@/context/app-context";
-
+import React, { useEffect, useState, MouseEvent } from "react";
 import "./Popover.css";
 
+const fetchInvoices = async (statusFilter: string[]) => {
+  const res = await fetch(`/api/invoices?status=${statusFilter.join(",")}`, {
+    cache: "no-store",
+  });
+  const invoices = await res.json();
+  // Update your state or context with the fetched invoices
+  return invoices;
+};
+
 export default function Popover() {
-  const { filterInvoices } = useAppContext();
   const [statusFilter, setStatusFilter] = useState<string[]>([]);
+
+  useEffect(() => {
+    fetchInvoices(statusFilter);
+  }, [statusFilter]);
 
   const handleCheckbox = (event: MouseEvent<HTMLInputElement>) => {
     const { name, checked } = event.currentTarget;
 
-    const newCheckedArray = [...statusFilter];
-    let index;
-
+    let newStatusFilter;
     if (checked) {
-      // check if the filter already exists in the tracking array
-      index = newCheckedArray.indexOf(name);
-      if (index === -1) {
-        //if it doesn’t, add it.
-        newCheckedArray.push(name);
-      }
-      // update state
-      setStatusFilter(newCheckedArray);
-      filterInvoices(newCheckedArray);
+      newStatusFilter = [...statusFilter, name];
     } else {
-      // get the position of the item in the array
-      index = newCheckedArray.indexOf(name);
-      // remove the item if the checkbox is not checked
-      newCheckedArray.splice(index, 1);
-      // update state
-      setStatusFilter(newCheckedArray);
-      filterInvoices(newCheckedArray);
+      newStatusFilter = statusFilter.filter((status) => status !== name);
     }
+
+    setStatusFilter(newStatusFilter);
+
+    const newUrl = new URL(window.location.href);
+    newUrl.searchParams.set("status", newStatusFilter.join(","));
+    history.pushState({}, "", newUrl.toString());
+
+    // Fetch the filtered invoices from the server
+    fetchInvoices(newStatusFilter);
   };
 
   return (

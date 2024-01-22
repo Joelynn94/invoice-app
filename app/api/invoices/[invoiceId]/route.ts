@@ -9,6 +9,7 @@ export async function GET(
 ) {
   const { invoiceId } = context.params;
   await connectDB();
+  console.log("invoiceId", invoiceId);
 
   const foundInvoice = await Invoice.findById(invoiceId);
   if (!foundInvoice) {

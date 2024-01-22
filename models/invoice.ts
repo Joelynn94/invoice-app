@@ -1,6 +1,7 @@
 import mongoose, { Document, Schema } from "mongoose";
 
 export interface IInvoice extends Document {
+  id: string;
   createdAt: Date;
   paymentDue: Date;
   description: string;

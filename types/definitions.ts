@@ -1,20 +1,13 @@
 export type Item = {
+  _id: string;
   name: string;
   quantity: number;
-  price: number;
-  total: number;
+  price: string;
+  total: string;
 };
 
-export type BillFrom = {
-  street: string;
-  city: string;
-  postCode: string;
-  country: string;
-};
-
-export type BillTo = {
-  name: string;
-  email: string;
+export type Address = {
+  _id: string;
   street: string;
   city: string;
   postCode: string;
@@ -22,16 +15,18 @@ export type BillTo = {
 };
 
 export type Invoice = {
-  id: string;
+  _id: string;
+  createdAt: string;
   status: string;
   description: string;
-  createdAt: string;
   paymentDue: string;
   paymentTerms: number;
-  billFrom: BillFrom;
-  billTo: BillTo;
+  clientName: string;
+  clientEmail: string;
+  senderAddress: Address;
+  clientAddress: Address;
   items: Item[];
-  total: number;
+  total: string;
 };
 
 export type Invoices = Invoice[];
