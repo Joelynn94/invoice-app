@@ -8,7 +8,7 @@ export default function InvoiceLayout({
 }) {
   return (
     <div className="flex flex-col">
-      <Link href="/dashboard" className="flex items-center gap-4 py-4 mt-10">
+      <Link href="/" className="flex items-center gap-4 py-4 mt-10">
         <Image
           className="go-back__arrow"
           src="/assets/icon-arrow-left.svg"

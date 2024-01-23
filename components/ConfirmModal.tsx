@@ -1,6 +1,6 @@
 "use client";
 
-import { Invoice } from "@/context/app-types";
+import { Invoice } from "@/app/lib/definitions";
 
 import Button from "./Button";
 
@@ -26,7 +26,7 @@ export default function ConfirmModal({
               </h1>
 
               <div className="text-slate-400 font-medium leading-snug">
-                Are you sure you want to delete invoice #{invoice.id}? This
+                Are you sure you want to delete invoice #{invoice._id}? This
                 action cannot be undone.
               </div>
             </div>

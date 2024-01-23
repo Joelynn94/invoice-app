@@ -3,9 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import { formatToCurrency } from "@/utils/formatToCurrency";
-import { formatDate } from "@/utils/formatDate";
-import { Invoice } from "@/types/definitions";
+import { formatCurrency, formatDateToLocal } from "@/app/lib/utils";
+import { Invoice } from "@/app/lib/definitions";
 import InvoiceBadge from "./InvoiceBadge";
 import Heading from "./Heading";
 import Button from "./Button";
@@ -18,13 +17,13 @@ export default function InvoiceSummary({ invoice }: { invoice: Invoice }) {
       {invoice && (
         <Link
           className="invoice-summary__link"
-          href={`dashboard/invoice/${invoice._id}`}
+          href={`http://localhost:3000/invoice/${invoice._id}`}
         >
           <div className="invoice-summary">
             <div className="invoice-summary__id">
               <Heading variant="h3">
                 <span className="invoice-summary__hash">#</span>
-                {invoice._id}
+                {invoice._id.substring(0, 7).toUpperCase()}
               </Heading>
             </div>
             <div className="invoice-summary__client-name">
@@ -34,23 +33,25 @@ export default function InvoiceSummary({ invoice }: { invoice: Invoice }) {
               <div className="invoice-summary__due-date">
                 <p>
                   <span className="invoice-summary__due-txt">Due</span>
-                  {formatDate(invoice.paymentDue)}
+                  {formatDateToLocal(invoice.paymentDue)}
                 </p>
               </div>
               <div className="invoice-summary__total">
                 <Heading variant="h3">
-                  {formatToCurrency(invoice.total)}
+                  {formatCurrency(Number(invoice.total))}
                 </Heading>
               </div>
             </div>
             <div className="invoice-summary__due-date">
               <p className="text-sm lg:text-base">
                 <span className="invoice-summary__due-txt">Due</span>
-                {formatDate(invoice.paymentDue)}
+                {formatDateToLocal(invoice.paymentDue)}
               </p>
             </div>
             <div className="invoice-summary__total">
-              <Heading variant="h3">{formatToCurrency(invoice.total)}</Heading>
+              <Heading variant="h3">
+                {formatCurrency(Number(invoice.total))}
+              </Heading>
             </div>
             <div className="invoice-summary__badge">
               <InvoiceBadge status={invoice.status} />

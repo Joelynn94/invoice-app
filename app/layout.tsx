@@ -1,16 +1,11 @@
-import "./globals.css";
+import Link from "next/link";
 import React, { useState } from "react";
 import type { Metadata } from "next";
 import { Inter, League_Spartan } from "next/font/google";
-import Link from "next/link";
+import Sidebar from "@/components/Sidebar";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
-const spartan = League_Spartan({
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  style: ["normal"],
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Invoice App",
@@ -25,7 +20,8 @@ export default function RootLayout({
   return (
     <html lang="en" data-mode="dark">
       <body className={`${inter.className} bg-slate-50 dark:bg-slate-900`}>
-        {children}
+        <Sidebar />
+        <main>{children}</main>
       </body>
     </html>
   );

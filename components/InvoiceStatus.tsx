@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { useAppContext } from "@/context/app-context";
-import { Invoice } from "@/context/app-types";
+import { Invoice } from "@/app/lib/definitions";
 import InvoiceBadge from "./InvoiceBadge";
 import Button from "./Button";
 
@@ -18,7 +18,7 @@ export default function InvoiceStatus({ invoice }: { invoice: Invoice }) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const onDeleteClick = () => {
-    deleteInvoice(invoice.id);
+    deleteInvoice(invoice._id);
     setIsModalOpen(false);
 
     // Redirect to dashboard after deleting invoice
@@ -44,7 +44,7 @@ export default function InvoiceStatus({ invoice }: { invoice: Invoice }) {
           {invoice.status === "pending" && (
             <Button
               variant="primary"
-              onClick={() => markInvoicePaid(invoice.id)}
+              onClick={() => markInvoicePaid(invoice._id)}
             >
               Mark as Paid
             </Button>
@@ -52,7 +52,7 @@ export default function InvoiceStatus({ invoice }: { invoice: Invoice }) {
           {invoice.status === "draft" && (
             <Button
               variant="primary"
-              onClick={() => markInvoicePending(invoice.id)}
+              onClick={() => markInvoicePending(invoice._id)}
             >
               Mark as Pending
             </Button>

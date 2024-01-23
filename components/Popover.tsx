@@ -1,42 +1,32 @@
 "use client";
 
 import React, { useEffect, useState, MouseEvent } from "react";
-import "./Popover.css";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-const fetchInvoices = async (statusFilter: string[]) => {
-  const res = await fetch(`/api/invoices?status=${statusFilter.join(",")}`, {
-    cache: "no-store",
-  });
-  const invoices = await res.json();
-  // Update your state or context with the fetched invoices
-  return invoices;
-};
+import "./Popover.css";
 
 export default function Popover() {
   const [statusFilter, setStatusFilter] = useState<string[]>([]);
-
-  useEffect(() => {
-    fetchInvoices(statusFilter);
-  }, [statusFilter]);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const handleCheckbox = (event: MouseEvent<HTMLInputElement>) => {
     const { name, checked } = event.currentTarget;
+    const params = new URLSearchParams(searchParams);
+    const statusFilter = params.get("status") || [];
 
-    let newStatusFilter;
-    if (checked) {
-      newStatusFilter = [...statusFilter, name];
-    } else {
-      newStatusFilter = statusFilter.filter((status) => status !== name);
+    if (checked && !params.has("status", name)) {
+      params.append("status", name);
+    } else if (checked && params.has("status", name)) {
+      return;
+    } else if (!checked && params.has("status", name)) {
+      params.delete("status", name);
     }
+    console.log("statusFilter", statusFilter);
 
-    setStatusFilter(newStatusFilter);
-
-    const newUrl = new URL(window.location.href);
-    newUrl.searchParams.set("status", newStatusFilter.join(","));
-    history.pushState({}, "", newUrl.toString());
-
-    // Fetch the filtered invoices from the server
-    fetchInvoices(newStatusFilter);
+    // Update the URL without navigating
+    // router.replace(`${pathname}?${params.toString()}`);
   };
 
   return (

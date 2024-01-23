@@ -2,7 +2,11 @@
 
 import { Invoice, AppContextAction, AppContextState } from "./app-types";
 import generateID from "@/utils/generateId";
-import { formatDate } from "@/utils/formatDate";
+import {
+  calculateTotal,
+  formatCurrency,
+  formatDateToLocal,
+} from "@/app/lib/utils";
 
 // Helper function to update local storage
 const updateLocalStorage = (key: string, data: any) => {
@@ -19,11 +23,12 @@ export const appReducer = (
     }
     case "CREATE_NEW_INVOICE": {
       const newInvoice = action.payload;
+      const date = new Date();
       const updateInvoices = {
         ...newInvoice,
         id: generateID(),
         status: "pending",
-        createdAt: formatDate(new Date()),
+        createdAt: formatDateToLocal(String(date)),
       };
 
       updateLocalStorage("invoices", updateInvoices);
@@ -36,11 +41,12 @@ export const appReducer = (
     }
     case "CREATE_DRAFT_INVOICE": {
       const newInvoice = action.payload;
+      const date = new Date();
       const updateInvoices = {
         ...newInvoice,
         id: generateID(),
         status: "draft",
-        createdAt: formatDate(new Date()),
+        createdAt: formatDateToLocal(String(date)),
       };
 
       updateLocalStorage("invoices", updateInvoices);

@@ -2,16 +2,17 @@
 
 import React, { useState } from "react";
 
-import { useAppContext } from "../context/app-context";
+import CreateInvoiceForm from "./CreateInvoiceForm";
+// import { useAppContext } from "../context/app-context";
+import { Invoices } from "@/app/lib/definitions";
 import InvoiceFilter from "./InvoiceFilter";
 import Heading from "./Heading";
 import Button from "./Button";
 
 import "./Dashboard.css";
-import CreateInvoiceForm from "./CreateInvoiceForm";
 
-export default function DashboardBar() {
-  const { state } = useAppContext();
+export default function DashboardBar({ invoices }: { invoices: Invoices }) {
+  // const { state } = useAppContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -19,13 +20,13 @@ export default function DashboardBar() {
       <div className="invoices-total">
         <Heading variant="h1">Invoices</Heading>
         <p className="invoices-total__sub">
-          {state.filtered.length === 0
-            ? `${state.invoices.length} total invoices`
-            : state.filtered.length === 1
-            ? `${state.filtered.length} invoice`
-            : state.filtered.length > 1
-            ? `${state.filtered.length} total invoices`
-            : "No invoices"}
+          {invoices.length === 0
+            ? `No Invoices`
+            : invoices.length === 1
+              ? `${invoices.length} invoice`
+              : invoices.length > 1
+                ? `${invoices.length} total invoices`
+                : "No invoices"}
         </p>
       </div>
       <InvoiceFilter />

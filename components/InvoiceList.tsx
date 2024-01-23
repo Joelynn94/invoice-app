@@ -1,30 +1,24 @@
+"use client";
 import InvoiceSummary from "@/components/InvoiceSummary";
 import NoInvoices from "@/components/NoInvoices";
-import { Invoices } from "@/types/definitions";
+import { Invoices } from "@/app/lib/definitions";
 
-const getInvoices = async (statusFilter: string[]): Promise<Invoices> => {
-  try {
-    const res = await fetch(`/api/invoices?status=${statusFilter.join(",")}`, {
-      cache: "no-store",
-    });
-    if (!res.ok) {
-      throw new Error("Failed to fetch data");
-    }
-
-    return res.json();
-  } catch (error) {
-    console.log(error);
-    throw new Error("Failed to fetch data");
+export default async function InvoiceList({
+  invoices,
+}: {
+  invoices: Invoices;
+}) {
+  if (invoices.length === 0) {
+    return <NoInvoices />;
   }
-};
 
-export default async function InvoiceList(searchParams: { status: string[] }) {
-  const statusFilter = searchParams.status;
-  console.log(searchParams);
-  // const invoices = await getInvoices(statusFilter);
   return (
-    <>
-      <NoInvoices />
-    </>
+    <ul className="divide-y divide-slate-200 dark:divide-slate-800">
+      {invoices.map((invoice) => (
+        <li key={invoice._id}>
+          <InvoiceSummary invoice={invoice} />
+        </li>
+      ))}
+    </ul>
   );
 }

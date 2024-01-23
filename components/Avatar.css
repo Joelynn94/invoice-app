@@ -1,5 +1,6 @@
 .avatar {
   display: flex;
+  align-self: center;
   padding: 1rem;
 }
 

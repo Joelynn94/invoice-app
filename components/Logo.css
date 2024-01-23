@@ -1,6 +1,6 @@
 .logo {
-  height: 72px;
-  width: 72px;
+  min-height: 72px;
+  min-width: 72px;
   background-color: var(--primary);
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;

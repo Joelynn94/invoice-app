@@ -12,10 +12,12 @@ import FormInput from "@/components/FormInput";
 import Heading from "@/components/Heading";
 import Button from "@/components/Button";
 import FormSelect from "@/components/FormSelect";
-import { calculateTotal } from "@/utils/calculateTotal";
-import { formatToCurrency } from "@/utils/formatToCurrency";
+import {
+  calculateTotal,
+  formatCurrency,
+  formatDateToLocal,
+} from "@/app/lib/utils";
 import { useAppContext } from "@/context/app-context";
-import { isNumberValid } from "@/utils/validators";
 
 // Initialize a new invoice with default values
 const initialNewInvoice: Invoice = {
@@ -158,9 +160,9 @@ export default function InvoiceCreate() {
           const quantity = Number(updatedItem.quantity);
           const price = Number(updatedItem.price);
 
-          if (isNumberValid(quantity) && isNumberValid(price)) {
+          if (quantity && price) {
             const total = calculateTotal(quantity, price);
-            const formattedTotal = formatToCurrency(total) || "$0.00";
+            const formattedTotal = formatCurrency(total) || "$0.00";
 
             return {
               ...updatedItem,

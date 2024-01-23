@@ -1,8 +1,11 @@
 "use client";
 
-import { formatDate } from "@/utils/formatDate";
-import { formatToCurrency } from "@/utils/formatToCurrency";
-import { Invoice } from "@/context/app-types";
+import {
+  calculateTotal,
+  formatCurrency,
+  formatDateToLocal,
+} from "@/app/lib/utils";
+import { Invoice } from "@/app/lib/definitions";
 import Heading from "./Heading";
 import InvoiceItem from "./InvoiceItem";
 
@@ -15,7 +18,7 @@ export default function InvoiceDetails({ invoice }: { invoice: Invoice }) {
         <div>
           <Heading variant="h3" className="mb-2">
             <span className="invoice-details--hash">#</span>
-            {invoice.id}
+            {invoice._id.substring(0, 7).toUpperCase()}
           </Heading>
           <Heading
             className="invoice-details--alt-txt invoice-details--desc font-medium"
@@ -43,7 +46,7 @@ export default function InvoiceDetails({ invoice }: { invoice: Invoice }) {
               Invoice Date
             </Heading>
             <Heading variant="h2" className="invoice-details--created-at">
-              {formatDate(invoice.createdAt)}
+              {formatDateToLocal(invoice.createdAt)}
             </Heading>
           </div>
           <div className="invoice-details__payment-date">
@@ -54,7 +57,7 @@ export default function InvoiceDetails({ invoice }: { invoice: Invoice }) {
               Payment Due
             </Heading>
             <Heading variant="h2" className="invoice-details--payment-due">
-              {formatDate(invoice.paymentDue)}
+              {formatDateToLocal(invoice.paymentDue)}
             </Heading>
           </div>
         </div>
@@ -89,14 +92,14 @@ export default function InvoiceDetails({ invoice }: { invoice: Invoice }) {
       </div>
 
       <div className="invoice-details__items">
-        <InvoiceItem invoice={invoice} key={invoice.id} />
+        <InvoiceItem invoice={invoice} key={invoice._id} />
       </div>
       <div className="invoice-details__grand-total">
         <Heading variant="h3" className="invoice-details--alt-txt">
           Grand Total
         </Heading>
         <Heading variant="h3" className="invoice-details--invoice-total">
-          {formatToCurrency(invoice.total)}
+          {formatCurrency(parseFloat(invoice.total))}
         </Heading>
       </div>
     </div>

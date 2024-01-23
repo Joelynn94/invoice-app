@@ -12,10 +12,12 @@ import FormInput from "@/components/FormInput";
 import Heading from "@/components/Heading";
 import Button from "@/components/Button";
 import FormSelect from "@/components/FormSelect";
-import { calculateTotal } from "@/utils/calculateTotal";
-import { formatToCurrency } from "@/utils/formatToCurrency";
+import {
+  calculateTotal,
+  formatCurrency,
+  formatDateToLocal,
+} from "@/app/lib/utils";
 import { useAppContext } from "@/context/app-context";
-import { isNumberValid } from "@/utils/validators";
 
 import "./CreateInvoiceForm.css";
 
@@ -168,9 +170,9 @@ export default function CreateInvoiceForm({
           const quantity = Number(updatedItem.quantity);
           const price = Number(updatedItem.price);
 
-          if (isNumberValid(quantity) && isNumberValid(price)) {
+          if (quantity && price) {
             const total = calculateTotal(quantity, price);
-            const formattedTotal = formatToCurrency(total) || "$0.00";
+            const formattedTotal = formatCurrency(total) || "$0.00";
 
             return {
               ...updatedItem,
@@ -212,7 +214,7 @@ export default function CreateInvoiceForm({
     }));
   };
   return (
-    <div className="fixed left-0 top-0 flex h-full w-full justify-center xl:justify-start bg-black bg-opacity-50 z-50">
+    <div className="fixed left-0 top-0 flex h-full w-full justify-center xl:justify-start bg-black bg-opacity-50 z-10">
       <div className="max-h-full w-full xl:max-w-4xl overflow-y-auto xl:rounded-2xl bg-slate-50 dark:bg-slate-900 xl:ps-24">
         <div className="w-full">
           <form
