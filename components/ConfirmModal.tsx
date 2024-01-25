@@ -26,8 +26,9 @@ export default function ConfirmModal({
               </h1>
 
               <div className="text-slate-400 font-medium leading-snug">
-                Are you sure you want to delete invoice #{invoice._id}? This
-                action cannot be undone.
+                Are you sure you want to delete invoice #
+                {invoice._id.substring(0, 7).toUpperCase()}? This action cannot
+                be undone.
               </div>
             </div>
             <div className="flex justify-end gap-4">

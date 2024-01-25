@@ -214,8 +214,8 @@ export default function CreateInvoiceForm({
     }));
   };
   return (
-    <div className="fixed left-0 top-0 flex h-full w-full justify-center xl:justify-start bg-black bg-opacity-50 z-10">
-      <div className="max-h-full w-full xl:max-w-4xl overflow-y-auto xl:rounded-2xl bg-slate-50 dark:bg-slate-900 xl:ps-24">
+    <div className="fixed left-0 top-0 flex h-full w-full justify-center lg:justify-start bg-black bg-opacity-50 z-10">
+      <div className="max-h-full w-full lg:max-w-4xl overflow-y-auto lg:rounded-2xl bg-slate-50 dark:bg-slate-900 lg:ps-24">
         <div className="w-full">
           <form
             onSubmit={handleFormSubmit}

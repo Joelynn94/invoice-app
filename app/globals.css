@@ -34,11 +34,12 @@ main {
   }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1024px) {
   main {
     margin: 0 auto; /* Center horizontally with equal margins */
-    max-width: calc(1040px - var(--sidebar-width));
+    max-width: calc(900px - var(--sidebar-width));
     /* margin-right: calc(var(--sidebar-width) + (1.5rem * 0.5)); */
+    padding-left: calc(1.5rem * 2.5);
   }
 }
 

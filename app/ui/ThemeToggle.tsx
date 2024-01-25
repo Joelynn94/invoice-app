@@ -26,7 +26,7 @@ export default function ThemeToggle(props: Props) {
   };
 
   return (
-    <div className="flex-[2] flex justify-end border-r-1 border-r border-solid border-[var(--divider)] pr-4 xl:flex-col xl:justify-end xl:border-b-1 xl:border-r-0 xl:border-b xl:border-solid; xl:w-full xl:pr-0 xl:pb-3 ">
+    <div className="flex-[2] flex justify-end border-r-1 border-r border-solid border-[var(--divider)] pr-4 lg:flex-col lg:justify-end lg:border-b-1 lg:border-r-0 lg:border-b lg:border-solid; lg:w-full lg:pr-0 lg:pb-3 ">
       <button className="self-center justify-center p-4" onClick={toggleTheme}>
         {theme === "light" ? (
           <Image

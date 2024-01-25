@@ -49,18 +49,23 @@ export default function EditInvoiceForm({
   const formattedDate = date.toISOString().split("T")[0];
 
   return (
-    <div className="fixed left-0 top-0 flex h-full w-full justify-center xl:justify-start bg-black bg-opacity-50 z-50">
-      <div className="max-h-full w-full xl:max-w-4xl overflow-y-auto xl:rounded-2xl bg-slate-50 dark:bg-slate-900 xl:ps-24">
+    <div className="fixed left-0 top-0 flex h-full w-full justify-center lg:justify-start bg-black bg-opacity-50 z-50">
+      <div className="max-h-full w-full lg:max-w-4xl overflow-y-auto lg:rounded-2xl bg-slate-50 dark:bg-slate-900 lg:ps-24">
         <div className="w-full">
           <form
             action={formAction}
             className="invoice-form mt-14 mb-8 mx-auto px-8"
           >
             <input type="hidden" name="_id" value={invoice._id} />
-            <Heading variant="h1" className="mb-8">
-              Edit Invoice <span className="invoice-details--hash">#</span>
-              {invoice._id}
-            </Heading>
+            <div className="flex items-center justify-between mb-2">
+              <Heading variant="h1">
+                Edit Invoice <span className="invoice-details--hash">#</span>
+                {invoice._id.substring(0, 7).toUpperCase()}
+              </Heading>
+              <Button variant="light" onClick={() => setIsModalOpen(false)}>
+                Cancel
+              </Button>
+            </div>
             {/* BILL FROM */}
             <Heading variant="h3" className="mb-6 text-primary-500">
               Bill From
