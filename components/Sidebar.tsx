@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import Avatar from "./Avatar";
-import Logo from "./Logo";
-import ThemeToggle from "./ThemeToggle";
+import Avatar from "@/app/ui/Avatar";
+import Logo from "@/app/ui/Logo";
+import ThemeToggle from "@/app/ui/ThemeToggle";
 
 import "./Sidebar.css";
 

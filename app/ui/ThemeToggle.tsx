@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import React from "react";
 
-import "./ThemeToggle.css";
-
 type Props = {};
 
 export default function ThemeToggle(props: Props) {
@@ -28,8 +26,8 @@ export default function ThemeToggle(props: Props) {
   };
 
   return (
-    <div className="themeToggle">
-      <button className="themeToggle__btn" onClick={toggleTheme}>
+    <div className="flex-[2] flex justify-end border-r-1 border-r border-solid border-[var(--divider)] pr-4 xl:flex-col xl:justify-end xl:border-b-1 xl:border-r-0 xl:border-b xl:border-solid; xl:w-full xl:pr-0 xl:pb-3 ">
+      <button className="self-center justify-center p-4" onClick={toggleTheme}>
         {theme === "light" ? (
           <Image
             src="/assets/icon-moon.svg"
